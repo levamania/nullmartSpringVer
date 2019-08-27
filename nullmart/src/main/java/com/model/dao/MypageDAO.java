@@ -2,10 +2,12 @@ package com.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.dto.EvalDTO;
 import com.dto.MemberDTO;
@@ -13,7 +15,7 @@ import com.dto.OrderDTO;
 import com.dto.OrderEvalListDTO;
 import com.dto.RegAddrDTO;
 
-
+@Repository
 public class MypageDAO {
 	@Autowired
 	private SqlSessionTemplate template;
@@ -42,11 +44,12 @@ public class MypageDAO {
 		template.delete("myPage.deleteDelivnos",delivnos);
 	}
 
-	public int searchPwdById(SqlSession session, HashMap<String, String> map) {
+	public int searchPwdById(Map<String, String> map) {
 		return template.selectOne("myPage.searchPwdById", map);
 	}
 	
-	public MemberDTO searchMemberById(SqlSession session,String userid) {
+	public MemberDTO searchMemberById(String userid) {
+		System.out.println(userid);
 		return template.selectOne("myPage.searchMemberById", userid);
 	}
 
@@ -54,7 +57,7 @@ public class MypageDAO {
 		template.update("myPage.modifyAccountInfo", member);
 	}
 
-	public List<OrderDTO> getOrderList(SqlSession session, HashMap<String, String> map) {
+	public List<OrderDTO> getOrderList(HashMap<String, String> map) {
 		return template.selectList("myPage.getOrderList", map);
 	}
 

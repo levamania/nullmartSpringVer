@@ -2,7 +2,7 @@ package com.dto;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("MemberDTO")
+@Alias("ManagerDTO")
 public class ManagerDTO {
 
 	private String masteruserid;
