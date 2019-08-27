@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.config.MySqlSessionFactory;
 import com.dto.EvalDTO;
@@ -15,6 +16,7 @@ import com.exception.ModifyUserInfoException;
 import com.model.dao.MypageDAO;
 
 public class MyPageService {
+	@Autowired
 	private MypageDAO mypageDAO;
 	public MyPageService() {
 		mypageDAO = new MypageDAO();

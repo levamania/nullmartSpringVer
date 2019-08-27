@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:if test="${empty login}">
 	<%
-		response.sendRedirect("/null/LoginUIServlet");
+		response.sendRedirect("/loginForm");
 	%>
 </c:if>
 <!DOCTYPE html>

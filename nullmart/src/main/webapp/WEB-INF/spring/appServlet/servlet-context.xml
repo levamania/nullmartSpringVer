@@ -20,6 +20,10 @@
 				<mapping path="/order/*"/>
 				<beans:ref bean="loginChecker"/>
 			</interceptor>
+			<interceptor>
+				<mapping path="/mypage/*"/>
+				<beans:ref bean="myPageLoginCheck"/>
+			</interceptor>
 		</interceptors>
 		
 	<annotation-driven/>
@@ -37,13 +41,6 @@
 		<jsp prefix="" suffix=".jsp"/>
 	</view-resolvers>
 
-	<view-controller path=""  view-name="/Conetent/test.jsp"/>
-
-
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<context:component-scan base-package="com" />
-	
-
-	
-
+	<context:component-scan base-package="com" /> 
 </beans:beans>
