@@ -10,23 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@Component
 public class ConfigGuide {
 	
 	private static Logger logger = LoggerFactory.getLogger(ConfigGuide.class);
-	
 
-	public static void setPath(ServletRequest request) {
+	public static void setPath(ServletContext application) {
 		
 		//config 설정
-		ServletContext application = request.getServletContext();
-		
-		HashMap<String, Object> config_map = 
-				MapParamInputer.set("deploy_path",application.getRealPath(""));
+		HashMap<String, Object> config_map = MapParamInputer.set("deploy_path",application.getRealPath(""));
 		
 		//배포 경로 기록
 		ObjectMapper mapper = new ObjectMapper();		

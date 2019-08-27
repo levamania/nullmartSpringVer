@@ -1,8 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- 1.jdbc.properties -->
+	<context:property-placeholder	location="classpath:com/config/Data.properties" />
+
+	<!-- 2.DataBaseConnectionPool2 regit -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="nullpjt" />
+		<property name="password" value="nullpjt" />
+	</bean>
+
+	<!-- 3.sqlSessionFactoryBean regit -->
+	<bean id="sessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- mapper regit -->
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/config/AdminMapper.xml</value>
+				<value>classpath:com/config/CartMapper.xml</value>
+				<value>classpath:com/config/ManagerMapper.xml</value>
+				<value>classpath:com/config/MemberMapper.xml</value>
+				<value>classpath:com/config/myPageMapper.xml</value>
+				<value>classpath:com/config/ProductMapper.xml</value>
+				<value>classpath:com/config/RankingMapper.xml</value>
+				<value>classpath:com/config/OrderMapper.xml</value>
+			</list>
+		</property>
+		<!-- alias regit -->
+	 		<property name="typeAliases"> 
+	 			<list>
+	 				<value>com.dto.EvalDTO</value>
+	 				<value>com.dto.ManagerDTO</value>
+	 				<value>com.dto.MemberDTO</value>
+	 				<value>com.dto.OrderDTO</value>
+	 				<value>com.dto.OrderEvalListDTO</value>
+	 				<value>com.dto.ProductDTO</value>
+	 				<value>com.dto.RegAddrDTO</value>
+	 				<value>com.dto.StockDTO</value>
+	 			</list>
+ 			</property>
+	</bean>
+
+	<!-- 4.SqlSessionTemplate -->
+	<bean id="" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sessionFactory" />
+	</bean>
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<!-- transaction manager config -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	
+	<!-- DAO -->
+
+	
+
 </beans>

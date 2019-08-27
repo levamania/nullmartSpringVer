@@ -56,6 +56,7 @@ public class ComparatorFactory {
 		Comparator<HashMap<String, Object>> comparator = null;
 		
 		comparator = (h1,h2)->{
+			
 			Object alpha = h1.get(order_criteria);
 			Object beta = h2.get(order_criteria);
 			

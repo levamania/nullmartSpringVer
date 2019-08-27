@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +25,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dto.ProductDTO;
 import com.dto.StockDTO;
@@ -34,13 +37,15 @@ import com.model.service.ProductService;
 import com.util.QueryUtil;
 import com.util.MapParamInputer;
 
-@WebServlet("/ProductServlet")
+@Controller
 public class ProductServlet extends HttpServlet {
 	private Logger logger = LoggerFactory.getLogger(ProductServlet.class);
 	private String key;
+	@Autowired
+	private ProductService service;
 	
 	private static int serial = 0;
-	
+	@RequestMapping(value = "/ProductServlet", method = RequestMethod.GET)
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//셋팅
 		response.setContentType("text/html;charset=utf-8");
@@ -58,7 +63,6 @@ public class ProductServlet extends HttpServlet {
 		QueryUtil query = new QueryUtil();
 
 		//with model
-		ProductService service = new ProductService();				
 		List<HashMap<String, Object>> stock_list = service.selectProduct_info(reposit);
 		logger.debug("mesg{"+stock_list+"}","debug");
 			//색깔별로 사이즈, 수량 , 가격 맵핑
@@ -123,7 +127,7 @@ public class ProductServlet extends HttpServlet {
 				dis.forward(request, response);
 		}
 	}
-
+	@RequestMapping(value = "/ProductServlet", method = RequestMethod.POST)
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

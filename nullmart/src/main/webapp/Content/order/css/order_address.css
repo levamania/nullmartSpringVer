@@ -1,0 +1,231 @@
+@charset "UTF-8";
+/*font-library*/
+@import url("/null/Content/configuration/font/fonts.css");
+
+/* 큰 컨테이너 설정 */
+*{box-sizing: border-box;}
+
+.box{
+	display:flex;
+	flex-wrap:wrap;
+	align-content:center;
+	
+	margin-top:10px;
+	margin-bottom:30px;
+				
+	font-size: 13px;
+}
+.box>.boxer{
+	display:inline-flex;
+	align-items:center;
+	
+	width:100%;
+	min-height:30px;
+	
+	border-bottom: 1px solid gray;
+}
+.box>.boxer>.head{
+	display:flex;
+	align-items:center;
+	
+	height:100%;
+	min-width:130px;
+	width:130px;
+	padding: 10px;
+	padding-left:20px;
+	
+	background-color:#ff000005;
+}
+.box>.boxer>.context{
+	width:auto;
+	padding: 10px;
+}
+
+/*공통설정*/
+.star{
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	
+	margin-right:5px;
+	
+	transform:translateY(20%);
+	
+	color:red;	
+	
+}
+.body>span{
+	margin: 10px;
+	
+	font-size: 14px;
+	font-weight: bold;
+	
+}
+
+input[type='text']{
+	-webkit-appearance:none;
+	border: 1px solid gray;
+}
+input[type='text']:focus{
+	outline-color: #8585ad;
+}
+
+input[type='text'], select{
+	padding: 3px;
+}
+
+
+/*개별설정*/
+
+#customer{
+	width:100%; min-height:50px;
+	margin-bottom: 30px;
+	
+	border-top:1px solid black;
+}
+#address{
+	width:100%; min-height:200px;
+	margin-bottom: 30px;
+
+	border-top:1px solid black;
+}
+
+	/* 고객정보설정 */
+	#customer .boxer:nth-child(n+2) {width:50%;}
+		/* 휴대폰 번호 */
+	#customer .boxer:nth-child(2) input, #customer .boxer:nth-child(2) select{
+		width: 25%;
+	}
+	#customer .boxer:nth-child(2) select:focus{outline-color: gray;}
+	
+		/* 이메일 */
+	#customer .boxer:nth-child(3) input{
+		width: 40%;
+	}
+	
+	/* 배송지 설정 */
+	#address .boxer:nth-child(3), #address .boxer:nth-child(4){width:50%;}
+	
+		/*배송 방법 선택*/
+		#address>.boxer:first-child>.context{
+			width: 90%;
+		}
+		
+		#address>.boxer:first-child>.context>span{
+			padding: 0 10px 0;
+		}
+		
+		#address>.boxer:first-child>.context>span::before{
+			content:'';
+			
+			position:relative;
+			
+			padding: 10px 30px 10px;
+			margin: 5px 0 5px;
+			
+			font-size:20px;
+			background-image: url("/null/Content/img/order/deliver.jpg");
+			background-size: auto 80%;
+			background-position: center center;
+			background-repeat: no-repeat;		
+		}
+		#address>.boxer:first-child>.context>span:nth-child(2)::before{
+			background-image: url("/null/Content/img/order/deliver.jpg");
+		}
+		#address>.boxer:first-child>.context>span:nth-child(4)::before{
+			background-image: url("/null/Content/img/order/shop.png");
+		}
+		
+		/*이름*/
+		#address>.name>.context{width:90%;}
+		#address #book{
+			padding: 5px;
+			margin-left: 5px;
+			border:1px solid gray;
+			
+			cursor: pointer;
+		}
+		#address #book:hover{
+			color:red;
+			border: 1px solid red;
+		}
+
+		/*휴대폰 번호, 전화 번호*/
+		#address .boxer:nth-child(3) input, #address .boxer:nth-child(4) input,
+		#address .boxer:nth-child(3) select, #address .boxer:nth-child(4) select
+		{width:25%;}
+	
+		/*주소*/
+		#address>.address>.context{width:90%}
+		
+		#address>.address input{
+			margin:0 10px 0 0;	
+			height: 24px;
+		}
+		
+		
+		#address>.address>.context>div{
+			display:inline-flex;
+			transform:translateY(-10%);
+				
+			padding:5px;
+			margin-bottom:3px;	
+			border: 1px solid gray;
+			
+			font-size:12px;
+			
+			cursor: pointer;
+		}
+		#address>.address>.context>div:hover{
+			color:red;
+			border:1px solid red;
+		}
+	
+		/*배송시 요청사항*/
+		#address>.request>.context{width: 90%;}
+		#address>.request>.context>input{
+			padding:8px;
+			width: 100%;
+		}
+	
+		
+	
+	
+	/*결제수단 선택*/
+	#payment>.boxer{
+		padding: 5px;
+		padding-left:2%;
+		border-top: 1px solid black; 
+		border-bottom: 1px solid gray;
+	}
+	#payment>.boxer>span{
+		margin: 0 10px 0;
+	}
+	
+	/*결제하기*/
+	#decision{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		
+		width: 100%;
+		height: 50px;	
+	}
+	#decision>div{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		
+		width:10%;
+		height:80%;		
+		border:1px solid red;
+		
+		background-color:red;
+		
+		font-size: 18px;
+		font-weight:bold;
+		color:white;
+		
+		cursor: pointer;
+		
+	}

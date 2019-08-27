@@ -6,22 +6,22 @@
 		$("#logout").on("click",()=>location.href="/null/LogoutServlet");
 		$("#signup").on("click",()=>location.href="/null/Content/account/signup_first.jsp");
 		$("#mypage").on("click",()=>location.href="/null/OrderInfoServlet");
-		$("#cart").on("click",()=>location.href="/null/CartServlet");
-		$("#order").on("click",()=>location.href="/null/CartServlet");
+		$("#cart").on("click",()=>location.href="/null/Cart/UI");
+		$("#order").on("click",()=>location.href="/null/Cart/UI");
 	});
 
 // top - search & logo
 	$().ready(function(){
 		// logo event -> main page
 		$("#search>#logo").on("click",()=>{
-										location.href = "/null/MainServlet"
+										location.href = "/null/main"
 									  });
 
 		function inspector(){
 			  var searchedWord = $("#search input").val().trim();
 			  var regEx = /^\S{2,15}/;
 			  if(regEx.test(searchedWord)){
-				  location.href = "/null/ProductListingServlet?source=input&searchedWord="+searchedWord;
+				  location.href = "/null/ProductListing/work?source=input&searchedWord="+searchedWord;
 			  }else{
 					  alert("2글자 이상 입력해주세요");
 			  }
@@ -130,9 +130,8 @@
 										.children("a").css({"color":"black"});
 									});
 		//style mid - anchor setting
-		
 		$("#horizentalBar a").each(function(){
-											var href = "/null/ProductListingServlet?source=menu&searchedWord=" + $(this).text();  
+											var href = "/null/ProductListing/work?source=menu&searchedWord=" + $(this).text();  
 											$(this).attr("href",href);
 										})
 });

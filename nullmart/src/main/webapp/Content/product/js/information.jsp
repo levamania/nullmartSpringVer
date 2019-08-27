@@ -209,7 +209,7 @@ $().ready(()=>{
 			fuc();
 		}else{
 			alert("로그인이 필요합니다");
-			location.href="/null/LoginServlet";	
+			location.href="/null/LoginUIServlet";	
 		}
 	}
 	
@@ -235,7 +235,7 @@ $().ready(()=>{
 							$.ajax({
 								//전달셋팅
 								method:"post",
-								url:"/null/StackProductServlet",
+								url:"/null/Cart/stackProduct",
 								data: {
 									list:JSON.stringify(info)
 								},
@@ -278,8 +278,8 @@ $().ready(()=>{
 		//리다이렉트
 		.end().find("#redirector>div:nth-child(2)")
 				.on("click",function(){
-				location.href="/null/CartServlet";
-			  })
+				location.href="/null/CartServlet/UI";
+			 })
 			
 			  
 })

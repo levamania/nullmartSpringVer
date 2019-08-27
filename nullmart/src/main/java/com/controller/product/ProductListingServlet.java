@@ -19,8 +19,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +30,10 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.exception.CustomException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,12 +48,68 @@ import com.util.WordInspector;
 
 
 
-@WebServlet("/ProductListingServlet")
-public class ProductListingServlet extends HttpServlet {
+@Controller
+@RequestMapping(value = "/ProductListing")
+public class ProductListingServlet  {
+	@Autowired
+	private ServletContext context;
+	@Autowired
+	private ProductService pService;
+
+	@RequestMapping(value = "/specificFilter")
+	protected void filterCondition(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String selected_atoms = request.getParameter("selected_atoms");
+		//유틸 셋팅
+		WordInspector inspector = new WordInspector(new File(context.getRealPath("/Content/configuration/subsitution_dictionary.json")));
+		
+		//검색단어 가공 - json 파싱
+		ObjectMapper mapper = new ObjectMapper();
+		String transed = inspector.render(selected_atoms, Language.English);
+		HashMap<String, Object> atom_lists = mapper.readValue(transed, HashMap.class);
+			//루핑용 카피
+		HashMap<String, Object> copy = (HashMap<String, Object>)atom_lists.clone();
+
+		HttpSession session = request.getSession();
+			//클릭된 셋팅저장
+			if(session.getAttribute("clicked")!=null)session.removeAttribute("clicked");
+			session.setAttribute("clicked", copy);
+			//이전 스택
+		HashMap<String, Object> prev_stack = (HashMap<String,Object>)session.getAttribute("prev_stack");
+			//갈무리된 검색 조건
+		HashMap<String, Object> established =  null;
+		if(session.getAttribute("basic_setup")==null) {
+			HashMap<String, Object> set_up = (HashMap<String, Object>)prev_stack.get("listing_setup"); //기존 셋업과 합쳐야한다.
+			established = set_up;
+			session.setAttribute("basic_setup",  (HashMap<String, Object>)set_up.clone());
+		}else {
+			established = (HashMap<String, Object>)session.getAttribute("basic_setup");
+		}
+		
+		//합치기
+		for(String key : copy.keySet()) {
+			for(String infe : established.keySet()) {
+				if(established.get(infe)!=null) {
+					List<String> lit_main  = (List<String>)atom_lists.get(key);
+					List<String> lit_sub  = (List<String>)established.get(infe);
+					if(key.equals(infe)) {
+						if(!lit_main.get(0).equals(lit_sub.get(0)))lit_main.addAll(lit_sub);				
+					}else {
+						atom_lists.put(infe, lit_sub);
+					}
+				}
+			}
+		}
+		prev_stack.remove("listing_setup"); //기존 셋업삭제
+		prev_stack.put("listing_setup", atom_lists);//셋팅 재설정 완료
+		
+		//디스패치
+		RequestDispatcher dis = request.getRequestDispatcher("/ProductListing/work");
+		dis.forward(request, response);
+	}
 	
 	private static Logger logger = LoggerFactory.getLogger(ProductListingServlet.class);
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping(value = "/work")
+	public  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//세션 처리
 		HttpSession session = request.getSession();
 		HashMap<String, Object> prev_stack = 
@@ -89,16 +149,15 @@ public class ProductListingServlet extends HttpServlet {
 		HashMap<String, List<String>> words_map = null;
 		List<HashMap<String, Object>> pList = null;
 		
-		WordInspector inspector =	new WordInspector(new File(ConfigGuide.getPath()+"Content/configuration/subsitution_dictionary.json"));
+		WordInspector inspector =	new WordInspector(new File(context.getRealPath("Content/configuration/subsitution_dictionary.json")));
 		HashMap<String,Object> reposit = null;	
 		try {
-			ProductService service = new ProductService();
 			
 			if(!back_word.equals(searchedWord)) {
 				//검증되고 번역된 단어얻기
 				words_map = inspector.translate(searchedWord);
 				//repository of category or name
-				reposit = inspector.auto_categorize(service,words_map.get("searching"),Arrays.asList(new String[]{"PRODUCT"}));
+				reposit = inspector.auto_categorize(pService,words_map.get("searching"),Arrays.asList(new String[]{"PRODUCT"}));
 				
 				//기본 셋팅 삭제하기
 				if(session.getAttribute("basic_setup")!=null)session.removeAttribute("basic_setup");					
@@ -120,7 +179,7 @@ public class ProductListingServlet extends HttpServlet {
 			}
 			
 			if(empty_locator) { //유효한 검색어가 없을시동작안함
-				List<HashMap<String, Object>> raw_list = service.selectProductList(reposit);
+				List<HashMap<String, Object>> raw_list = pService.selectProductList(reposit);
 				//중복 제거
 				QueryUtil query = new QueryUtil();
 				raw_list = query.unoverlap(raw_list, "PCODE");
@@ -140,7 +199,7 @@ public class ProductListingServlet extends HttpServlet {
 				//extract column
 				List<HashMap<String, Object>> repo = new ArrayList<HashMap<String,Object>>();
 				for(HashMap<String, Object> indiv :raw_list) {
-					repo.addAll(service.selectProduct_info(indiv));
+					repo.addAll(pService.selectProduct_info(indiv));
 				}
 					//조건
 				if(session.getAttribute("basic")!=null) {
@@ -209,10 +268,6 @@ public class ProductListingServlet extends HttpServlet {
 			//shooting
 			dis.forward(request, response);
 		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }

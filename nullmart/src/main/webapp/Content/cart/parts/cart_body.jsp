@@ -50,12 +50,12 @@
 		</div>
 		<c:set var="TOTAL" value="0" />
 		<c:forEach var="ITEM" items="${KEY_SET}">
-			<div class="content">
+			<div class="content product">
 				<div>
 					<input type="checkbox" class="selection">
 				</div>
 				<div class="item">
-					<span>${ITEM}.</span>
+					<span>${ITEM}</span>
 					<span class="pname"></span>
 					<div class="revision">변경</div>
 				</div>
@@ -152,8 +152,8 @@
 		</div>
 		<div class="content">
 			<div>계속 쇼핑하기</div>
-			<div>선택상품 주문하기</div>
-			<div>전체상품 주문하기</div>
+			<div id="selectable">선택상품 주문하기</div>
+			<div id="entire">전체상품 주문하기</div>
 		</div>
 	</div>
 </div>

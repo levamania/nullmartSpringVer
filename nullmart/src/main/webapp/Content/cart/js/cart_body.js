@@ -128,7 +128,7 @@ $().ready(()=>{
 	
 		//상품이름 설정
 	$(".content").each(function(){
-		$(this).find(".pname").text($(this).find(".name").eq(0).text());
+		$(this).find(".pname").text("."+$(this).find(".name").eq(0).text());
 	})
 	
 	//chief checkbox 설정
@@ -274,12 +274,32 @@ $().ready(()=>{
 		
 	})
 	
-
-	
-
-
-
-
+	//선택적 상품 주문 함수
+	$("#selectable").on("click",function(){
+		var pcodes = "";
+		$(".product").each(function(){
+			if($(this).find("input").prop("checked")){
+				pcodes +=$(this).find(".item>span:eq(0)").text() +":";
+			}
+		})
+		if(pcodes){
+			location.href="/null/order/ui?pcodes="+pcodes.substr(0,pcodes.length-1);			
+		}else{
+			alert("선택하신 상품이 없습니다.");
+		}
+	})
+	//전체 상품 주문 함수
+	$("#entire").on("click",function(){
+		var pcodes = [];
+		$(".product").each(function(){
+			pcodes +=$(this).find(".item>span:eq(0)").text() +":";
+		})
+		if(pcodes){
+			location.href="/null/order/ui?pcodes="+pcodes.substr(0,pcodes.length-1);					
+		}else{
+			alert("선택하신 상품이 없습니다.");
+		}
+	})
 
 
 
