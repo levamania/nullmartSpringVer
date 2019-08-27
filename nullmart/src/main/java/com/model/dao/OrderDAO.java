@@ -13,6 +13,17 @@ public class OrderDAO {
 	private SqlSessionTemplate session;
 
 	public List<HashMap<String, Object>> selectBook(HashMap<Object, Object> reposit) {
-		return session.selectList("selectBook", reposit);
+		String table = reposit.get("TABLE").toString();
+		List<HashMap<String, Object>> result = null;
+		if(table.equals("DELIVINFO")) {
+			result = session.selectList("selectBook", reposit);			
+		}else if(table.equals("ORDERTABLE")) {
+			result = session.selectList("selectBook_recent", reposit);
+		}
+		return result;
+	}
+
+	public int insertOrder(HashMap<String, Object> reposit) {
+		return session.insert("insertOrder", reposit);
 	}
 }

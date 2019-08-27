@@ -21,8 +21,6 @@ public class CartService {
 
 	// SELECT CARTLIST
 	public List<HashMap<String, Object>> selectCartList(HashMap<Object, Object> reposit) {
-		System.out.println(dao);
-		System.out.println("Am i null?");
 		return dao.selectCartList(reposit);
 	}
 
