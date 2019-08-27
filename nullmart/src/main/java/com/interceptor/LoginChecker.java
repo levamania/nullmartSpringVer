@@ -22,7 +22,7 @@ public class LoginChecker implements HandlerInterceptor{
 			result=false;
 			response.sendRedirect("/null/LoginUIServlet");
 		}else {
-			member.setUsername( "호도요");
+			member.setUsername( "고명진");
 			member.setPhone1( "010");
 			member.setPhone2("9938");
 			member.setPhone3("2134");
