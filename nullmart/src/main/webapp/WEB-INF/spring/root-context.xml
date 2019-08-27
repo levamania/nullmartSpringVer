@@ -51,6 +51,7 @@
 	 				<value>com.dto.ProductDTO</value>
 	 				<value>com.dto.RegAddrDTO</value>
 	 				<value>com.dto.StockDTO</value>
+	 				<value>com.dto.StockJoinProductDTO</value>
 	 			</list>
  			</property>
 	</bean>

@@ -1,7 +1,10 @@
 package com.dto;
 
+import org.apache.ibatis.type.Alias;
+
 import com.util.CreatePaging;
 
+@Alias("StockJoinProductDTO")
 public class StockJoinProductDTO {
 	public String sCode;
 	public String pCode;

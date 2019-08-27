@@ -1,5 +1,8 @@
 package com.dto;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("RegAddr")
 public class RegAddrDTO {
 	private int delivno;
 	private String delivname;

@@ -1,5 +1,8 @@
 package com.dto;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("stock")
 public class StockDTO {
 	public String sCode;
 	public String pCode;

@@ -1,5 +1,8 @@
 package com.dto;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("EvalDTO")
 public class EvalDTO {
 	private String evalno;
 	private int orderscore;

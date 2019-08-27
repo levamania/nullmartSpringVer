@@ -1,5 +1,8 @@
 package com.dto;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("OrderEvalListDTO")
 public class OrderEvalListDTO {
 	private String order_date;
 	private String ono;
