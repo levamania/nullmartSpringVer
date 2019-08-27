@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+/* 공통 대분류 설정 */
+.body#featured{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:flex-start;
+	
+	height: 1000px; 
+	
+	border: 1px solid red;
+}
+
+.body#info_desk{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:flex-start;
+	
+	height: 500px; 
+	
+	border: 1px solid red;
+}
+
+
+
+
+/* main 물품 홍보창 */
+.body.main.advertise{
+	position:relative;
+	widht:100%;
+	height: 560px;
+}
+	/*홍보물 이미지 설정*/
+	.main>#ad_img{
+		position:relative;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+        overflow:hidden;
+	}
+	/* 이미지리스트 */
+	.main>#ad_img ul{
+        position: absolute;
+        width:3000px;
+        padding:0;
+        top:0;
+        left:-1000px;
+        font-size: 0;
+        
+        z-index: -9;
+      }
+	/*개별 이미지 */
+      .main>#ad_img ul li{
+        display: inline-block;
+      }
+	/* 덮어쓸 이미지  */
+      .main>#ad_img>img{
+     	position: absolute;
+     	left: 0;
+     	top: 0;
+     	
+       	padding:0;
+       	
+     	z-index: -10;
+      }
+      
+	/* 이벤트 버튼 설정 */
+	.main>.button.right{
+		position:absolute;
+		height: 30%;
+		top:35%;
+		width:20%;
+		right:-20%;
+		
+		background-image: url("/null/Content/img/advertise/icon/arrow_right.png");
+		background-size: 50% 80%;
+		background-position: 20% center;
+		background-repeat: no-repeat;
+		
+		cursor: pointer;
+	}
+	.main>.button.left{
+		position:absolute;
+		height: 30%;
+		top:35%;
+		width:20%;
+		left:-20%;
+		
+		background-image: url("/null/Content/img/advertise/icon/arrow_left.png");
+		background-size: 50% 80%;
+		background-position: 80% center;
+		background-repeat: no-repeat;		
+		
+		cursor: pointer;
+	}

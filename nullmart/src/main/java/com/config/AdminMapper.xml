@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dto.Admin" >
+	
+	<select id="searchPcodeByPname" parameterType="string" resultType="string">
+		select pcode from product where pname = #{pname}
+	</select>
+	
+	<select id="searchPnameByPcode" parameterType="string" resultType="string">
+		select pname from product where pcode = #{pcode}
+	</select>
+	
+	<insert id="insertStock" parameterType="stock" >
+		insert into stock (scode,pcode,psize,pcolor,pprice,pamount,deliverfee_yn)
+		values (#{sCode},#{pCode},#{pSize},#{pColor},#{pPrice},#{pAmount},#{deliverFee_YN})
+	</insert>
+	
+	<select id="searchSCode" parameterType="string" resultType="int">
+		select count(*) from stock where sCode=#{sCode}
+	</select>
+	
+	<update id="updateStock" parameterType="stock">
+		update stock set pamount = (pamount+#{pAmount}) where scode = #{sCode}
+	</update>
+	
+	<select id="searchStyleTop" resultType="string">
+		select distinct styletop from product group by styletop
+	</select>
+	
+	<select id="searchStyleMid" resultType="string">
+		select distinct stylemid from product group by stylemid
+	</select>
+	
+	<select id="searchStyleBot" resultType="string">
+		select distinct stylebot from product group by stylebot
+	</select>
+	
+	<select id="searchPname" resultType="string">
+		select distinct pname from product
+	</select>
+	
+	<select id="searchProduct" resultType="product">
+		select * from product where pname= #{pname}
+	</select>
+	
+	<select id="searchStock" parameterType="hashmap" resultType="StockJoinProductDTO">
+		select sCode, pCode ,pSize, pColor, pPrice, pAmount,
+		deliverFee_YN, styleTop, styleMid, styleBot, pName, pImage, pRegitDate
+		from stock join product
+		using(pCode)
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="pname!=null">
+				pname = #{pname}
+			</if>
+			<if test="pname==null">
+				<if test="styletop!=null">
+					and styletop=#{styletop}
+				</if>
+				<if test="stylemid!=null">
+					and stylemid=#{stylemid}
+				</if>
+				<if test="stylebot!=null">
+					and stylebot=#{stylebot}
+				</if>
+			</if>
+			<if test="start!=null">
+				and pregitdate between #{start} and #{end}
+			</if>
+			<if test="start==null">
+				<if test="end!=null">
+					and pregitdate = #{end}
+				</if>
+				
+			</if>
+		</trim>
+		order by pRegitDate, sCode
+	</select>
+	
+	<select id="searchCount" parameterType="hashmap" resultType="int">
+		select count(*)
+		from stock join product
+		using(pCode)
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="pname!=null">
+				pname = #{pname}
+			</if>
+			<if test="pname==null">
+				<if test="styletop!=null">
+					and styletop=#{styletop}
+				</if>
+				<if test="stylemid!=null">
+					and stylemid=#{stylemid}
+				</if>
+				<if test="stylebot!=null">
+					and stylebot=#{stylebot}
+				</if>
+			</if>
+			<if test="start!=null">
+				and pregitdate between #{start} and #{end}
+			</if>
+			<if test="start==null">
+				<if test="end!=null">
+					and pregitdate = #{end}
+				</if>
+				
+			</if>
+		</trim>
+	</select>
+</mapper>

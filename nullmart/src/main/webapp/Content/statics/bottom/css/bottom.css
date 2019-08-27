@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/* 하단 고정 정보 */
+.body.bottom{
+	height:250px;
+}
+/* 개인정보 약관 */
+.body.bottom>#promise{
+	position:absolute;
+	height: 10%;
+	left: 10%;
+	top: 5%;
+	
+	font-size: 13px;
+	font-weight:bold;
+	text-decoration:none;
+	color: gray;
+}
+	/* 단어 간격 벌리기 */
+.body.bottom>#promise>a::after{
+	content: '    ';
+	margin:30px;
+}
+/* 사업자정보 */
+.body.bottom>#corp_info{
+	position:relative;
+	height: 60%;
+	top:25%;;
+	left: 50px;
+	
+	font-size: 13px;
+	font-family: "Lucida Console", "fantasy" ;
+	color: #404040;
+}
+	/* 로고 이미지 */
+	.body.bottom>#corp_info img{
+		width: 200px;
+		height: auto;
+		margin-bottom: 10px;
+	}
+
+	/* 사업자정보 버튼 */
+	.body.bottom>#corp_info #specific_info{
+		border: 1px gray solid;
+		margin-left:10px;
+		padding: 2px;
+		font-size: 10px;
+		font-weight: bold;
+		cursor:pointer;
+	}
+

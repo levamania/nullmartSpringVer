@@ -1,0 +1,244 @@
+@charset "UTF-8";
+
+/* 카테고리 사이징 */
+
+.category_option{
+	display:inline-flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	
+	align-items:center;
+	
+	width:100%; box-sizing: border-box;
+	
+}
+.category_option#styletop{height:20%;width:50%;}
+.category_option#min_price{height:20%;width:30%;}
+.category_option#max_price{height:20%;width:20%;}
+.category_option#stylemid{height:25%}
+.category_option#psize{height:20%}
+.category_option#pcolor{height:20%}
+.category_option#collection{height:15%}
+
+/* 카테고리 경계선 */
+.category_option:nth-child(1){border-top:1px solid black;border-bottom:1px dashed #bfbfbf;}
+.category_option:nth-child(2){border-top:1px solid black;border-bottom:1px dashed #bfbfbf;}
+.category_option:nth-child(3){border-top:1px solid black;border-bottom:1px dashed #bfbfbf;}
+.category_option:nth-child(n+3){border-bottom:1px dashed #bfbfbf;}
+.category_option:last-child{border-bottom:1px solid black;}
+
+	/*헤드 공통 설정 */
+	.category_option .head{
+		width:30%;
+		text-align: center;
+	}
+	.category_option:nth-child(n+3) .head{width:15%;}
+	/* 밸류 공통 설정 */
+	.category_option .value{
+		display: inline-flex;
+		flex-direction:row;
+		flex-wrap:wrap;	
+		align-items:center;
+		align-content:center;
+		
+		width:70%;
+		height:100%;
+				
+		font-size: 13px;
+	}
+	.category_option .value>div{
+		display:inline-flex;
+		align-items:center;
+		align-content:center;
+		justify-content:center;
+	
+		width: 60px;
+		height: 20px;
+		
+		margin: 0 3px 0;
+		
+		border: 1px solid #bfbfbf;
+		
+		color:gray;
+		
+		cursor: pointer;
+
+	}
+	.category_option .value>div:hover{
+		border: 1px solid red;		
+		color:red;
+	}
+	.category_option .value>div.pushed{
+		border: 1px solid red;		
+		color: red;
+		background-color: #ffe6e6;		
+	}
+/* 테마 설정 */
+#styletop>.head {  }
+#styletop>.value {  }
+
+/* 가격설정 */
+
+.price>.value>div{
+	height:auto;
+	width:100%;
+	
+	border: none;
+	cursor: default;
+}
+
+.price>.value>div:hover{border:none;color:gray;}
+.price>.value>div>input{
+	width: 60%;
+	height:100%;
+
+	-webkit-appearance: none;
+	border: 1px solid #cccccc;
+	
+	text-align: center;
+}
+.price>.value>div>input:focus{
+	outline: none;
+}
+
+
+#max_price>.value{width:100%}
+
+.price .shame{display: none;}
+
+
+/* 스타일 설정 */
+#stylemid .value>div{
+	margin-top: 0;
+}
+#stylemid .value>div.overed{
+	color:#009999;
+	border:1px solid  #009999;
+	background-color: white;
+}
+
+
+#stylemid .value>div:nth-child(2n){
+	width: 15px;
+	height: 15px;
+	
+	margin-left:0;
+	margin-right:0;
+	
+	border:none;
+	
+	background-image: url("/null/Content/img/common/small_plus.png") ;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+}
+#stylemid .deeper{
+	display:none;
+	align-items:center;
+	justify-content:flex-start;
+	
+	width:60%;
+	height: 30px;
+	
+	margin: 5px 40% 5px 0% ; 
+	
+	border:none;
+	border-top: 1.5px dashed #6699ff;
+	border-bottom: 1.5px dashed #6699ff;
+	
+	background-color: #e6eeff;
+	
+	cursor: default;
+	
+	color: #008fb3;	
+}
+#stylemid .deeper:hover{
+	color: #008fb3;	
+}
+#stylemid .deeper>div{
+	display: inline-flex;
+	align-items: center;
+	justify-content:center;
+	
+	width: 13%;
+	height:60%;
+	
+	margin-left:10px;
+	
+	border: 1px solid #80aaff; 
+	
+	font-size: 12px;
+	font-color: #80aaff;
+	
+	cursor: pointer;
+}
+#stylemid .deeper>div:hover{
+	color:  #000080;
+	border:1px solid  #000080;
+}
+#stylemid .deeper>div.pushed{
+	background-color:  #b3ccff;
+}
+/* 선택한 조건 설정 */
+#collection>.value>.optical{
+	width:auto;
+	margin: 0 6px 0 ;
+	border:none;
+}
+#collection>.value>.optical>div:first-child{
+	line-height:100%;
+	width:90%;
+	
+	font-size: 12px;
+	text-align: center;
+}
+#collection>.value>.optical>div:last-child{
+	position:relative;
+	top:50%;right:-10%;
+	transform:translateY(-110%);
+	
+	height:5px;
+	width:5px;
+	padding: 1px;
+	
+	border: 1px solid gray;
+	
+	background-image: url("/null/Content/img/common/big_x.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;	
+}
+
+	/* 전체해제 */
+	#collection>#purge{
+		padding: 4px;
+		
+		border:1px solid gray;
+		
+		font-size: 12px;
+		color: gray;
+
+		cursor: pointer;
+	}
+	
+	/* 	검색버튼 */
+	#find{
+		display:flex;
+		align-items: center;
+		justify-content:center;
+		
+		position: absolute;
+		right: 4.5%;
+		top: 102%;
+		
+		width: 100px;
+		height: 30px;
+		
+		color:white;
+		font-size:20px;
+		
+		background-color:red;
+		border: 1px solid red;
+		
+		cursor: pointer;
+	}

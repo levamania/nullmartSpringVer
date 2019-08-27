@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="com/config/Data.properties"></properties>
+	<typeAliases>
+		<typeAlias type="com.dto.ProductDTO" alias="product"/>
+		<typeAlias type="com.dto.StockDTO" alias="stock"/>
+		<typeAlias type="com.dto.RegAddrDTO" alias="RegAddr"/>
+		<typeAlias type="com.dto.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="com.dto.OrderDTO" alias="OrderDTO"/>
+		<typeAlias type="com.dto.OrderEvalListDTO" alias="OrderEvalListDTO"/>
+		<typeAlias type="com.dto.EvalDTO" alias="EvalDTO"/>
+		<typeAlias type="com.dto.ManagerDTO" alias="ManagerDTO"/>
+		<typeAlias type="com.dto.StockJoinProductDTO" alias="StockJoinProductDTO"/>
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/config/ProductMapper.xml" />
+		<mapper resource="com/config/RankingMapper.xml" />
+		<mapper resource="com/config/myPageMapper.xml"/>
+		<mapper resource="com/config/MemberMapper.xml"/>
+		<mapper resource="com/config/CartMapper.xml"/>
+		<mapper resource="com/config/ManagerMapper.xml"/>
+		<mapper resource="com/config/AdminMapper.xml"/>
+	</mappers>
+</configuration>

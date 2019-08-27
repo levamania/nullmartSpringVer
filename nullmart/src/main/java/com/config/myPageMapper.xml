@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myPage">
+	<select id="regAddrTotal" resultType="int">
+		select count(*) from delivinfo
+	</select>
+	
+	<insert id="insertAddr" parameterType="RegAddr">
+		insert into delivinfo 
+		(delivno, delivname, delivperson, phone1,phone2,post
+		,address1,address2,userid) 
+		values (delivno_seq.nextval,#{delivname},#{delivperson},#{phone1},#{phone2},
+		#{post},#{address1},#{address2},#{userid})
+	</insert>
+	
+	<select id="getAddrList" parameterType="string" resultType="RegAddr">
+		select * from delivinfo
+		where userid = #{userid}
+		order by delivno
+	</select>
+	
+	<select id="searchByNo" parameterType="string" resultType="RegAddr">
+		select delivno, delivname, delivperson, phone1, phone2,
+		post, address1, address2, userid
+		from delivinfo
+		where delivno=#{delivno}
+	</select>
+	
+	<insert id="modifyAddr" parameterType="RegAddr">
+		update delivinfo set delivname=#{delivname}, delivperson=#{delivperson},
+		phone1 = #{phone1}, phone2 = #{phone2}, address1 = #{address1}, address2 = #{address2}
+		where delivno = #{delivno}
+	</insert>
+	
+	<delete id="deleteDelivnos" parameterType="list">
+		delete from delivinfo 
+		where delivno in 
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="searchPwdById" parameterType="hashmap" resultType="int">
+		select count(*) from account
+		where userid = #{userid}
+		and passwd = #{password}
+	</select>
+	
+	<select id="searchMemberById" resultType="MemberDTO">
+		select * from account where userid = #{userid}
+	</select>
+	
+	<update id="modifyAccountInfo" parameterType="hashmap">
+		update account set phone1=#{phone1}, phone2=#{phone2}, phone3=#{phone3},
+		email1=#{email1}, email2=#{email2}, addr1=#{addr1},addr2=#{addr2},addr3=#{addr3}
+		where userid = #{userid}
+	</update>
+	
+	<select id="getOrderList" parameterType="hashmap" resultType="OrderDTO">
+		select * from ordertable where userid=#{userid}
+		<if test="end!=null">
+		and
+			<if test="start==null">
+				order_date=#{end}
+			</if>
+			<if test="start!=null">
+				order_date between #{start} and #{end}
+			</if>
+		</if>
+		order by order_date desc
+	</select>
+	
+	<select id="getOrderEvalList" resultType="OrderEvalListDTO" parameterType="string">
+		select order_date, ono, ordername, evalno
+		from ordertable
+		left outer join eval
+		using(ono)
+		where userid=#{userid}
+	</select>
+	
+	<insert id="addEval" parameterType="EvalDTO">
+		insert into eval(evalno, orderscore, fastdelivery,ordersatis,evalcontent,ono)
+		values(#{evalno},#{orderscore},#{fastdelivery},#{ordersatis},#{evalcontent},#{ono})
+	</insert>
+	
+	<select id="searchEvalByOno" resultType="EvalDTO" parameterType="string">
+		select * from eval where ono = #{ono}
+	</select>
+	
+	<select id="searchOrdernameByOno" parameterType="string" resultType="string">
+		select ordername from ordertable where ono=#{ono}
+	</select>
+	
+	<update id="updateEval" parameterType="EvalDTO">
+		update eval set 
+		orderscore = #{orderscore}, fastdelivery=#{fastdelivery}, ordersatis=#{ordersatis}, 
+		evalcontent = #{evalcontent}
+		where evalno = #{evalno}
+	</update>
+	
+	<select id="searchPassword" parameterType="string" resultType="string">
+		select passwd from account where userid=#{userid}
+	</select>
+	
+	<update id="updatePwd" parameterType="hashmap">
+		update account set passwd = #{passwd}
+		where userid = #{userid}
+	</update>
+</mapper>

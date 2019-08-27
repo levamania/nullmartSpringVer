@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.shoes.RankingMapper">
+	<!-- 검색단어리스트 -->
+	<select id="selectRankingInfoServlet" resultType="string">
+		select sword
+		from searchedWord
+		order by searchedCnt desc
+	</select>
+	<!-- 	새로운 단어 랭킹 추가 -->
+	<insert id="insertRanking" parameterType="string">
+		insert into searchedWord values(seq_searchedWord.nextval, #{string}, 1)
+	</insert>
+	<!-- 	 랭킹 업데이트 -->
+	<update id="updateRanking" parameterType="string">
+		update searchedWord 
+		set searchedCnt = searchedCnt+1
+		where  sword = #{string}
+	</update>
+</mapper>

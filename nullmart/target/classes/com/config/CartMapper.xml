@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.shoes.RankingMapper">
+	<!-- QUERY -->
+	<select id="selectCartList" parameterType="hashmap" resultType="hashmap">
+		select cno, pcode, pname, psize, pcolor, pprice, pamount
+		from cart
+		where userid = #{USERID}
+		order by pcode, pcolor
+	</select>
+
+	<!-- 	DML -->
+	<insert id="stackProduct" parameterType="list">
+		merge into cart c
+ 		using
+ 		  	<foreach collection="list" item="item"  open="(" close=")" separator="union"> 
+ 		  		select #{item.USERID } USERID ,#{item.PCODE } PCODE,#{item.PNAME } PNAME, #{item.PSIZE } PSIZE,
+ 		  				  #{item.PCOLOR } PCOLOR,#{item.PPRICE } PPRICE, #{item.PAMOUNT } PAMOUNT, #{item.SCODE} SCODE
+ 		  				  from DUAL
+            </foreach>	 s
+        on (c.userid = s.userid and c.scode = s.scode) 
+		when  matched then
+			update set c.pamount  = c.pamount + s.pamount
+		when not matched	then 
+			insert (cno, userid, pcode, pname, psize, pcolor, pprice, pamount,scode) 
+			values(car(), s.userid, s.pcode, s.pname, s.psize, s.pcolor, s.pprice, s.pamount, s.scode)       
+	</insert>
+	
+	<update id="updateCart" parameterType="list">
+		merge into cart c
+		using 
+			<foreach collection="list" item="item"  open="(" close=")" separator="union">
+				select #{item.USERID} userid, #{item.SCODE} scode, #{item.PAMOUNT} pamount from dual
+			</foreach> s
+		on (c.userid = s.userid and c.scode = s.scode) 
+		when  matched then
+		update set c.pamount  = s.pamount	
+	</update>
+	
+	<delete id="deleteCart" parameterType="list">
+		delete from cart
+		where cno in
+		<foreach collection="list" item="ITEM" open="(" close=")" separator=",">
+			#{ITEM.CNO}
+		</foreach>
+	</delete>
+</mapper>

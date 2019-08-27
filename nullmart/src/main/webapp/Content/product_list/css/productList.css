@@ -1,0 +1,217 @@
+@charset "UTF-8";
+*{
+	box-sizing: content-box;
+}
+@import url("/null/Content/configuration/font/fonts.css");
+
+/* 바디 설정 */
+body{margin: 0;}
+.body {height: auto;margin: auto;}
+/* 검색결과 */
+.body.result{position:relative; border: 1px solid blue;height: 360px;}
+/* 상세검색옵션 */
+.body.searching_option{
+	display:flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	align-items:center;	
+	justify-content:center;
+	
+	position:relative; 
+	height: 360px;
+	
+	margin-top: 40px ;
+	margin-bottom: 50px;
+	
+}
+/* 검색된 상품 */
+.body.searched_product{position:relative; border: 1px solid red;height: auto;}
+
+
+/* 	결과 내부 텍스트 설정 */
+.result.word{color:rgba(255, 0, 0, 0.8); font-size: 40px; font-weight: bold;}
+#result>#string1{font-size:25px;font-weight: bold;}
+
+.result.quantity{	color:rgba(255, 0, 0, 0.8);font-size: 20px;}
+#result>#string2{font-size: 14px;}
+
+/* 결과 박스 모델 설정 */
+#result{
+	position: absolute;
+	border: 1px red solid;
+	top:30%;
+	height: 40%;
+	
+	width:80%;
+	left:10%;
+	text-align: center;
+	
+	z-index: 3;
+	
+}
+
+
+/* 상세검색 옵션 */
+
+
+
+
+
+/* 상품 리스트 */
+
+	/* 정렬 옵션 바 */
+	
+	.body.searched_product>#order_info{
+		position:relative;
+		width:100%;
+		height:100%;
+		border: 2px pink solid;
+		display:flex;
+		align-items:center;
+		
+		font-family: Maplestroy;
+		font-size: 12px;
+	}
+	.body.searched_product>	#order_info>span{position:relative;}
+	.body.searched_product>	#order_info>span:first-child::before{content:'';margin-left:580px;}
+	.body.searched_product>	#order_info>span::after{
+		content:'' ;
+		margin-right: 20px; 
+		background-color: red;
+	}
+	
+	/* 	히든 밸류	 */
+	#order_info>.order span{display:none;}
+	#order_info>.order{cursor:pointer;}
+	#order_info>.order.active{
+		color: red;
+		font-weight: bolder;
+		cursor: default;
+	}
+	
+	.body.searched_product>	#order_info>select{
+    -webkit-appearance: none; /*기본 외형 바꾸기, default:menulist*/
+	
+	width:100px;
+	font-family:inherit;
+	border: 1px solid black ;
+	border-radius:3px;
+    color: black;
+    text-indent: 15%;
+    
+    cursor:pointer;
+    
+/*     letter-spacing: normal; */
+/*     word-spacing: normal; */
+
+	}
+	
+	
+	/* other information */
+	.body.searched_product>#other_info{
+		height: 35px;
+		border: 2px pink solid;
+	}
+	
+	
+	/* 상품 리스트 진열 */
+		
+		/* 	없을경우 */
+		#null{
+			display: flex;
+			align-items: center;
+			justify-content:center;
+		
+			font-size: 25px;
+		}
+	
+	.body.searched_product>#searched_list{
+		position: relative;
+		padding: 4%;
+	}
+		/*개별 상품*/
+		.body.searched_product>#searched_list .product{
+			position: relative;
+			width: 19%;
+			height: auto;
+			
+			margin-top: 30px;
+			display: inline-block;
+			
+			font-family: Maplestroy;
+		}
+		/* 	이미지 */
+		.body.searched_product>#searched_list .product>img{
+			position: relative;
+			left:10%;
+			width: 80%;
+			height: auto;
+		}
+		/* 문자열 */
+		.body.searched_product>#searched_list .product>div.item{
+			position: relative;
+			width: 100%;
+			
+			text-align: center;
+			font-size: 14px;
+			font-weight: bold;
+		}
+		.product>div.item.name{
+			cursor: pointer;
+		
+			/* css transition */ 
+			transition-property: color; 
+			transition-duration: 0s; 
+			transition-timing-function: linear; 
+			transition-delay: 0s; 
+		}
+		.product>div.item.name:hover{
+			color:#ff3333;		
+		}
+		
+		/*사이즈정보*/
+		.body.searched_product>#searched_list .product>div.size_info{
+			position: relative;
+			left: 25%;
+			width: 50%;
+			line-height: 17px;
+			margin: 0;
+			
+			text-align: center;
+			font-size: 10px;
+			color:white;
+			background-color: gray;
+			
+			cursor:pointer;
+		}
+			/*사이즈 팝업*/
+		.body.searched_product>#searched_list .product>div.size_info .spec:last-child{}	
+			
+		/* 페이징  */
+		.body.searched_product>#paging{
+			position: relative;
+			line-height: 30px; width:100%;
+			margin-bottom: 50px;
+			text-align: center;
+			
+			font-size: 12px;
+			font-family: Maplestory;
+		}
+		
+		#paging .page{
+			display: inline-block;
+			line-height:15px; width: 15px;
+			padding:4px;
+		
+			cursor:pointer;			
+			border: 1px solid black;
+			background-color: white;	
+			color:black;
+		}	
+		#paging .page.active{
+			cursor:default;
+			border: 1px solid red;
+			background-color: red;
+			color: white;
+		}
+			
