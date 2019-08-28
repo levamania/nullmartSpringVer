@@ -26,4 +26,11 @@ public class MemberService {
 	
  }
 
+
+
+	public int IdPwCheck(Map<String, String> map) {
+		int n = dao.IdPwCheck(map);
+		return n;
+	}
+
 }

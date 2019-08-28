@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-<select id="masterLogin" parameterType="map" resultType="ManagerDTO">
+<select id="managerLogin" parameterType="map" resultType="ManagerDTO">
 select * from Manager where masteruserid=#{masteruserid} and masterpasswd=#{masterpasswd}
 
 </select>

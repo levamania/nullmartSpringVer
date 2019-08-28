@@ -34,7 +34,7 @@
 			
 				$.ajax({
 					type : "get",
-					url : "/null/IdPwCheckServlet",
+					url : "/null/IdPwCheck",
 					data : {
 						userid : id.val(),
 						passwd : pw.val()
@@ -44,19 +44,18 @@
 					
 					
 					success : function(data, status, xhr) {
-						
+
+						console.log(data)
 						if (data == 0) {
 							alert("아이디또는 비밀번호가 일치하지 않습니다.");
-							
+							console.log(data)
 
 							$("#userid").focus();
 							return false;
-						} else {
+						} else if(data==1){
 							alert("로그인이 되었습니다.")
-							
+							console.log(data)
 							$("#userid").focus();
-
-							
 
 						}
 					},
@@ -240,7 +239,7 @@
 	</div>
 	</form>
 	<div id="tabs-2">
-   <form name="masterLogin" action="/null/ManagerLoginServlet" method="get" id="masterLogin">
+   <form name="masterLogin" action="/null/managerLogin" method="get" id="masterLogin">
 		 <div id="tabs-1">
 		<div align="center" style="font-size: 200%">
 			<br> <br> <b>관리자 로그인</b>

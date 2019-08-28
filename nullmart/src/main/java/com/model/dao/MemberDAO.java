@@ -21,6 +21,11 @@ SqlSessionTemplate template;
 		return dto;
 	}
 
+	public int IdPwCheck(Map<String, String> map) {
+		int n = template.selectOne("MemberMapper.IdPwCheck", map);
+		return n;
+	}
+
 
 
 }
