@@ -7,7 +7,7 @@ $(document).ready(function(){
 	});
 	
 	$("#goorderlist").on("click",function(){
-		$(location).attr("href","/null/OrderInfoServlet");
+		$(location).attr("href","/null/mypage/orderInfo");
 	});
 	$("#goordereval").on("click",function(){
 		$(location).attr("href","/null/OrderEvalListServelt");
