@@ -24,7 +24,7 @@ public class LoginController {
 		MemberDTO dto = service.login(map);
 		
 		if(dto!=null) {
-			session.setAttribute("login",map);
+			session.setAttribute("login",dto);
 					return "redirect:/main";
 					
 		}else {
