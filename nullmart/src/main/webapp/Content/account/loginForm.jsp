@@ -201,7 +201,7 @@
   
   </ul>
  
-	<form name="memberLogin" action="/null/LoginServlet" method="get" id="memberLogin">
+	<form name="memberLogin" action="/null/login" method="get" id="memberLogin">
 		 <div id="tabs-1">
 		<div align="center" style="font-size: 200%">
 			<br> <br> <b >회원 로그인</b>
