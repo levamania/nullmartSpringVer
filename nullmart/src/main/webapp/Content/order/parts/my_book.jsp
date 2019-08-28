@@ -9,14 +9,14 @@
 <script type="text/javascript">
 $().ready(()=>{
 
-//전환 설정
-		//z-index조정
+	//전환 설정
 		$(".head").on("click",function(){
 			let id = $(this).attr("id"); 
 			//border 변경
 			$(this).toggleClass("chief");
 			$(this).siblings(".head").removeClass("chief");
 			$(this).next("bor")
+			//z-index조정
 			$.each($(".layout"),function(){
 				$(this).css({"z-index":"0"});
 				if($(this).attr("id").endsWith(id)){
@@ -24,8 +24,34 @@ $().ready(()=>{
 				}
 			})
 		})
+		$(".head#1").trigger("click");
 		
-		
+	//주소록 레코드 선택
+	$(".group>.decision").on("click",function(){
+		let record = {};
+		let count = 0;
+		$(this).siblings().each(function(){
+			let clas = $(this).attr("class")
+			if(clas.endsWith("hide")){
+				clas = clas.substr(0, clas.length-4).trim();
+				console.log(clas);
+			}
+			if(clas.includes("phone")){
+				let separated = $(this).text().split("-");
+				for(var index in separated ){
+					record[clas+(Number.parseInt(index)+1)] = separated[index];
+				}
+			}else{
+				record[clas] = $(this).text();
+			}
+		})
+		window.opener.postMessage(record,"http://localhost:8090");
+		window.close();
+	})
+
+	
+	
+	
 })
 </script>
 <style type="text/css">
@@ -33,6 +59,8 @@ $().ready(()=>{
 	
 	*{box-sizing: border-box;} 
  	.head{box-sizing: border-box;} 
+ 	
+ 	
 	
 	html{
 		overflow-x: hidden;
@@ -78,7 +106,7 @@ $().ready(()=>{
 		width:90vw;
 		min-width:500px;
 		height: 80vh;
-		min-height:400px;
+		min-height:300px;
 		
 		margin: 5vh 5vw 5vh;
 	
@@ -140,13 +168,15 @@ $().ready(()=>{
 		white-space:nowrap; 
 		text-overflow: ellipsis;
 	}
+	.layout>.record div.hide{display: none;}
 	
 	.layout>.record .alias{flex:10; margin-left: 10px;}
-	.layout>.record .receiver{flex:10;}
-	.layout>.record .telephone{flex:20;}
-	.layout>.record .phone{flex:20;}
-	.layout>.record .address{flex:45;} 
-		.layout>.content .address{justify-content: flex-start;}
+	.layout>.record .order_name{flex:10;}
+	.layout>.record .order_telephone{flex:20;}
+	.layout>.record .order_phone{flex:20;}
+	.layout>.record .order_address1{flex:45;} 
+		.layout>.content .order_address1{justify-content: flex-start;}
+	.layout>.record .order_postcode{display: none;}	
 	.layout>.record .decision{flex:10;margin-right: 10px;}
 	
 	.layout>.index{	
@@ -214,19 +244,22 @@ $().ready(()=>{
 		<div class="head" id="2">주소록</div>
 		<div id="lay1" class="layout">
 			<div class="index record">
-				<div class="receiver">수령인</div>
-				<div class="telephone">전화번호</div>
-				<div class="phone">핸드폰</div>
-				<div class="address">배송지 주소</div>
+				<div class="order_name">수령인</div>
+				<div class="order_telephone">전화번호</div>
+				<div class="order_phone">핸드폰</div>
+				<div class="order_address1">배송지 주소</div>
 				<div class="decision">선택</div>
 			</div>
 			<div class="content record">
-				<c:forEach var="RECORD" items="${BOOK}">
+				<c:forEach var="RECORD" items="${BOOK_RECENT}">
 					<div class="group">
-						<div class="receiver">${RECORD.DELIVPERSON}</div>
-						<div class="telephone">${RECORD.PHONE1}</div>
-						<div class="phone">${RECORD.PHONE2}</div>
-						<div class="address">${RECORD.ADDRESS1}</div>
+						<div class="order_name">${RECORD.ORDER_NAME}</div>
+						<div class="order_telephone">${RECORD.PHONE2}</div>
+						<div class="order_phone">${RECORD.PHONE1}</div>
+						<div class="order_address1">${RECORD.ADDR1}</div>
+						<div class="order_address2 hide">${RECORD.ADDR2}</div>
+						<div class="order_address3 hide">${RECORD.ADDR3}</div>
+						<div class="order_postcode">${RECORD.POST}</div>
 						<div class="decision">선택</div>
 					</div>
 				</c:forEach>
@@ -235,20 +268,22 @@ $().ready(()=>{
 		<div id="lay2" class="layout">
 			<div class="index record">
 				<div class="alias">주소명</div>
-				<div class="receiver">수령인</div>
-				<div class="telephone">전화번호</div>
-				<div class="phone">핸드폰</div>
-				<div class="address">배송지 주소</div>
+				<div class="order_name">수령인</div>
+				<div class="order_telephone">전화번호</div>
+				<div class="order_phone">핸드폰</div>
+				<div class="order_address1">배송지 주소</div>
 				<div class="decision">선택</div>
 			</div>
 			<div class="content record">
 				<c:forEach var="RECORD" items="${BOOK}">
 					<div class="group">
 						<div class="alias">${RECORD.DELIVNAME}</div>
-						<div class="receiver">${RECORD.DELIVPERSON}</div>
-						<div class="telephone">${RECORD.PHONE1}</div>
-						<div class="phone">${RECORD.PHONE2}</div>
-						<div class="address">${RECORD.ADDRESS1}</div>
+						<div class="order_name">${RECORD.DELIVPERSON}</div>
+						<div class="order_telephone">${RECORD.PHONE2}</div>
+						<div class="order_phone">${RECORD.PHONE1}</div>
+						<div class="order_address1">${RECORD.ADDRESS1}</div>
+						<div class="order_address2 hide">${RECORD.ADDRESS2}</div>
+						<div class="order_postcode">${RECORD.POST}</div>
 						<div class="decision">선택</div>
 					</div>
 				</c:forEach>

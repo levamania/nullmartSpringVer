@@ -124,7 +124,6 @@ input[type='text'], select{
 			margin: 5px 0 5px;
 			
 			font-size:20px;
-			background-image: url("/null/Content/img/order/deliver.jpg");
 			background-size: auto 80%;
 			background-position: center center;
 			background-repeat: no-repeat;		
@@ -133,7 +132,7 @@ input[type='text'], select{
 			background-image: url("/null/Content/img/order/deliver.jpg");
 		}
 		#address>.boxer:first-child>.context>span:nth-child(4)::before{
-			background-image: url("/null/Content/img/order/shop.png");
+			background-image: url("/null/Content/img/order/fast_deliver.jpg");
 		}
 		
 		/*이름*/

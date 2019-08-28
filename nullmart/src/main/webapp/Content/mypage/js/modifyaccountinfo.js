@@ -118,13 +118,13 @@ $(document).ready(function() {
 				addr3: 	addr3.val()
 		}
 		
-		$.post("/null/ModifyAccountConfirmServlet",accountInfo,function(data,textStatus,req){
+		$.post("/null/mypage/modifyAccountConfirm",accountInfo,function(data,textStatus,req){
 			if(data==0){
 				alert("변경이 완료 되었습니다.");
-				$(location).attr("href","/null/MainServlet");
+				$(location).attr("href","/null/main");
 			}else{
 				alert("변경 실패");
-				$(location).attr("href","/null/ModifyAccountInfo?userid="+userid.val());
+				$(location).attr("href","/null/mypage/modifyAccount?userid="+userid.val());
 			}
 		}).fail(function(xhr,status,e) {
 			console.log("erorr",e);

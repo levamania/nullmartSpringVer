@@ -38,7 +38,7 @@ function deleteList(cno,pamount,scode){
 	//ajax
 	$.ajax({
 		method:"post",
-		url: "/null/CartDeleteServlet",
+		url: "/null/cart/delete",
 		async:false,
 		data: {
 			CNO : cno,
@@ -147,11 +147,17 @@ $().ready(()=>{
 		})
 	})
 	
+		//content 구매
+	$(".decision>div:nth-child(1)").on("click",function(){
+		$(this).parents(".content").find(".selection").trigger("click");
+		$("#selectable").trigger("click");
+	})	
+
 		//content 삭제
 	$(".decision>div:nth-child(2)").on("click",function(){
 		//
 		$(this).parents(".content").find(".quak").trigger("click")
-				  .end().remove();
+				      .end().remove();
 	})
 	
 	//개별 상품 삭제버튼 기능 추가
@@ -278,7 +284,7 @@ $().ready(()=>{
 	$("#selectable").on("click",function(){
 		var pcodes = "";
 		$(".product").each(function(){
-			if($(this).find("input").prop("checked")){
+			if($(this).find(".selection").prop("checked")){
 				pcodes +=$(this).find(".item>span:eq(0)").text() +":";
 			}
 		})

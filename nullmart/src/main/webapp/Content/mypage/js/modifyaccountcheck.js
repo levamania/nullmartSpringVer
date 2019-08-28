@@ -10,14 +10,14 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		$.post("/null/CheckPasswordServlet", {pwd:password.val(),userid:id.val()}, function(data, textStatus, req) {
-			if(data==0){
+		$.post("/null/mypage/checkpassword", {password:password.val(),userid:id.val()}, function(data, textStatus, req) {
+			if(data=="failure"){
 				alert("비밀번호가 틀립니다.")
 				password.val("");
 				password.focus();
 				return ;
 			}else{
-				$(location).attr("href","/null/ModifyAccountInfo?userid="+id.val());
+				$(location).attr("href","/null/mypage/modifyAccount?userid="+id.val());
 			}
 		}).fail(function(xhr,status,e) {
 			console.log("erorr",e);

@@ -60,6 +60,7 @@ body {
 	
 	display: flex;
 	align-items: center;
+
 }
 
 #search>#logo {
@@ -84,6 +85,10 @@ body {
 
 	margin-left: 5%;
 }
+#search>#input>input:focus{
+	outline: none;
+}
+
 #search #icon {
 	position: relative;
 	left:-40px;
@@ -334,7 +339,7 @@ body {
 /*  	그리드 넘버 원 */
 .style-mid_menu>.active>div>#grid>#one{
 	width: 50%;
-	margin 0;
+	margin: 0;
 	
 	text-align: center;
 	font-weight: bolder;
@@ -343,5 +348,5 @@ body {
 /*  	그리드 넘버 투 */
 .style-mid_menu>.active>div>#grid>#two{
 	width: 48%;
-	margin 0;
+	margin: 0;
 }

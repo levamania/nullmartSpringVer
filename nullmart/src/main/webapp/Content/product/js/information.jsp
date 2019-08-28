@@ -235,7 +235,7 @@ $().ready(()=>{
 							$.ajax({
 								//전달셋팅
 								method:"post",
-								url:"/null/Cart/stackProduct",
+								url:"/null/cart/stackProduct",
 								data: {
 									list:JSON.stringify(info)
 								},
@@ -278,7 +278,7 @@ $().ready(()=>{
 		//리다이렉트
 		.end().find("#redirector>div:nth-child(2)")
 				.on("click",function(){
-				location.href="/null/CartServlet/UI";
+				location.href="/null/cart/UI";
 			 })
 			
 			  

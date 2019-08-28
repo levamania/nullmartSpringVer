@@ -4,6 +4,7 @@ import java.io.IOException;
 
 
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -26,30 +27,33 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dto.ProductDTO;
 import com.dto.StockDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.service.ProductService;
 import com.util.QueryUtil;
 import com.util.MapParamInputer;
 
 @Controller
-public class ProductServlet extends HttpServlet {
-	private Logger logger = LoggerFactory.getLogger(ProductServlet.class);
+@RequestMapping("/product")
+public class ProductController extends HttpServlet {
+	private Logger logger = LoggerFactory.getLogger(ProductController.class);
 	private String key;
 	@Autowired
 	private ProductService service;
 	
-	private static int serial = 0;
-	@RequestMapping(value = "/ProductServlet", method = RequestMethod.GET)
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping(value = "/UI")
+	public String displayUI(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		//셋팅
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
 
 		//propriating
 		String source = request.getParameter("source");
@@ -62,7 +66,7 @@ public class ProductServlet extends HttpServlet {
 		//set util
 		QueryUtil query = new QueryUtil();
 
-		//with model
+		//with model	
 		List<HashMap<String, Object>> stock_list = service.selectProduct_info(reposit);
 		logger.debug("mesg{"+stock_list+"}","debug");
 			//색깔별로 사이즈, 수량 , 가격 맵핑
@@ -73,7 +77,8 @@ public class ProductServlet extends HttpServlet {
 		
 		if(source.equals("item_size")) {
 			logger.debug("mesg: stock_list"+stock_list+"","debug");
-			out.print(json);//ajax 응답
+			request.setAttribute("item_sizes", json);
+			return "forward:/product/provide_size";
 		}else if(source.equals("item_text")){
 			//정렬된 컬럼별 리스트 Get & Stack
 			HashMap<String, Object> colums =  query.extractColumn(stock_list, request);
@@ -92,6 +97,7 @@ public class ProductServlet extends HttpServlet {
 			Cookie[] cookies = request.getCookies();
 			for(Cookie c : cookies) {
 				if(c.getName().contains("Product")) {
+					System.out.println(c.getName());
 					cook.add(c);
 					HashMap<String,String> tep = mapper.readValue(URLDecoder.decode(c.getValue() , "utf-8"), HashMap.class) ;
 					if(tep.get("PCODE").equals(product.get("PCODE")))reiteration = true;
@@ -113,23 +119,25 @@ public class ProductServlet extends HttpServlet {
 						MapParamInputer.set("STYLEMID",product.get("STYLEMID"),"STYLEBOT",product.get("STYLEBOT"),
 														  "PIMAGE",product.get("PIMAGE"),"PNAME",product.get("PNAME"),
 														  "PCODE",product.get("PCODE"));
-				Cookie cookie  = new Cookie("Product"+(++serial), URLEncoder.encode(mapper.writeValueAsString(rio), "utf-8")); 				
+				Cookie cookie  = new Cookie("Product"+System.currentTimeMillis(), URLEncoder.encode(mapper.writeValueAsString(rio), "utf-8")); 				
 				cookie.setPath("/");
 				response.addCookie(cookie);
 			}
 				
 			//WITH JSP
-			RequestDispatcher dis = request.getRequestDispatcher("/Content/product/product.jsp");
-				//정보저장
-				request.setAttribute("product", product);
-				request.setAttribute("json", json);
-				//사출
-				dis.forward(request, response);
+			model.addAttribute("product", product);
+			model.addAttribute("json", json);
+				
+			return "/Content/product/product";
+		}else {
+			return "/main";
 		}
-	}
-	@RequestMapping(value = "/ProductServlet", method = RequestMethod.POST)
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+	}//end display UI
 
+	
+	@ResponseBody
+	@RequestMapping("/provide_size")
+	public String provide_size(HttpServletRequest request){
+		return request.getAttribute("item_sizes").toString();
+	}
 }

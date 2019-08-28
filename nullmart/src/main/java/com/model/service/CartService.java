@@ -18,11 +18,11 @@ import com.util.MapParamInputer;
 public class CartService {
 	@Autowired
 	 CartDAO dao ;
+	@Autowired
+	ProductService pser;
 
 	// SELECT CARTLIST
 	public List<HashMap<String, Object>> selectCartList(HashMap<Object, Object> reposit) {
-		System.out.println(dao);
-		System.out.println("Am i null?");
 		return dao.selectCartList(reposit);
 	}
 
@@ -30,24 +30,28 @@ public class CartService {
 	@Transactional
 	public int stackProduct(List<HashMap<String, Object>> reposits) {
 		int result = dao.stackProduct(reposits);
-		ProductService service = new ProductService();
-		service.updateProducts(MapParamInputer.set("list", reposits, "direction", "minus"));
+		pser.updateProducts(MapParamInputer.set("list", reposits, "direction", "minus"));
 		return result;
 	}
 
 	@Transactional
 	public int deleteCart(List<HashMap<String, Object>> list) {
 		int result = dao.deleteCart(list);
-		ProductService service = new ProductService();
-		service.updateProducts(MapParamInputer.set("list", list, "direction", "plus"));
+		pser.updateProducts(MapParamInputer.set("list", list, "direction", "plus"));
+		return result;
+	}
+	public int deleteCart(List<HashMap<String, Object>> list ,Boolean cascade) {
+		int result = 0;
+		if(cascade) {
+			result = dao.deleteCart(list);		
+		}
 		return result;
 	}
 
 	@Transactional
 	public int updateCart(List<HashMap<String, Object>> list) {
 		int result = dao.upadateCart(list);
-		ProductService service = new ProductService();
-		if (result != service.updateProducts(MapParamInputer.set("list", list, "direction", "plus")))result = 0;
+		if (result != pser.updateProducts(MapParamInputer.set("list", list, "direction", "plus")))result = 0;
 		return result;
 	}
 

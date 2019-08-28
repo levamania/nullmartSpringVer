@@ -37,10 +37,10 @@ import com.util.MapParamInputer;
 import com.util.QueryUtil;
 
 @Controller("CartServlet")
-@RequestMapping(value = "/Cart")
-public class CartServlet {
+@RequestMapping(value = "/cart")
+public class CartController {
 
-	private  Logger logger = LoggerFactory.getLogger(StackProductServlet.class);
+	private  Logger logger = LoggerFactory.getLogger(CartController.class);
 	@Autowired
 	private CartService cser;
 	@Autowired

@@ -68,7 +68,7 @@
 <jsp:include page="top.jsp"></jsp:include>
 <div id="body">
 <div style="height: 30px; margin-top: 4px; font-weight: bold;">개인정보수정<p>기본정보</p></div>
-<form action="/null/ModifyAccountConfirmServlet" method="post">
+<form action="/null/mypage/modifyAccountConfirm" method="post">
 <div id="body_content">
 	<input type="hidden" id="phone1_selected" value="${member.phone1}">
 	<div class="info_line"><span class="info_title">이름</span><span class="info_content">${member.username}</span></div>
@@ -135,6 +135,6 @@
 </div>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="/null/Content/mypage/js/addressAPI.js"></script>
-<script src="/null/Content/mypage/js/modifyaccountinfo.js"></script>
+<script src="/null/Content/mypage/js/modifyaccountinfo.js?ver=1"></script>
 </body>
 </html>

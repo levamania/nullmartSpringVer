@@ -1,3 +1,4 @@
+
 $().ready(()=>{
 	//주문자 변경
 		//기존 유저정보
@@ -17,7 +18,6 @@ $().ready(()=>{
 								"email2": $("#customer input[name='user_email2']").val()
 		
 							}
-	console.log(user_info);
 		//attr설정
 	$("#customer input[type='text']").prop("readonly",true);	
 	$("#customer select").prop("disabled",true);	
@@ -57,18 +57,42 @@ $().ready(()=>{
 	//배송정보 초기화
 	$("#new_radio").on("click",function(){
 		order_name.val("");
-		order_phone1.children(":contains('"+"010"+"')").prop("selected", true);
-		order_phone2.val("");
-		order_phone3.val("");
+		$("#address input, #address select").filter(function(){
+			var result = false;
+			if($(this).attr("name").includes("phone"))result = true;
+			return result;
+		}).each(function(){
+			var tagname = $(this).prop("tagName").toLowerCase();
+			if(tagname=="select"){
+				$(this).val("010");
+			}else{
+				$(this).val("");
+			}
+		});
 	});
 	
 	//내 주소록 설정
 	$("#book").on("click",function(){
-		console.log("click");
-		window.open("http://localhost:8090/null/order/book", "주소록", "width=300px, height=500px");
+		window.open("http://localhost:8090/null/order/book","", "width=700px, height=400px");
 	})
 
-	
+	//Fetching opener return 
+	$(window).on("message",function(){
+		var record = event.data;
+		if(event.origin=="http://localhost:8090"){
+			$("#address input, #address select").each(function(){
+				var name = $(this).attr("name");
+				var me = $(this);
+				$.each(record, function(key,value){
+					if(name==key){
+						me.val(value);
+					}
+					
+				})
+			})	
+
+		}
+	})
 	
 	
 	/*************유효성 검사***************/
@@ -89,14 +113,18 @@ $().ready(()=>{
 	var emailingEx1 = /^[a-z][a-z0-9]{4,15}$/;
 	var emailingEx2 = /^[a-z][a-z]{4,10}[.](com|co.kr|org|net)$/;
 	
-	var messagingEx = /([a-zA-z가-힣]|[* - . \\ /]){0,40}/;
-	
-	
+	var messagingEx = /^([a-zA-z가-힣]|[* - . /]){0,40}$/;
 	
 	//결제
 	$("#decision").on("click",function(){
 		var form = document.form1;
-		form.action = "/null/OrderServlet";
+		form.action = "/null/order/pay";
+
+		var cnos = "";
+		$("input[name='cno']").each(function(){cnos += $(this).val()+","})
+		cnos = cnos.substr(0, cnos.length-1);
+		$("#cnos").val(cnos);
+
 		try{
 			//주문고객
 			check($("#customer #user"), namingEx, "고객 이름을 확인하세요");

@@ -23,14 +23,14 @@
    		  if(scope==undefined)scope = $(".searched_product");
 	  	  html += "<form name='product_form' action=' ' method='get' style='display:none'>";
 	  	  switch(destination){
-	  	  	 case "ProductListingServlet":{ 
+	  	  	 case "productListing/work":{ 
 	  	  		 data ={
 			  	  		    	"searchedWord" : "${searchedWord}",
 			    		 	     "cur_page" : $("#paging>.page.active").text(),
 						     	 "ordering_info" : $("#order_info>.order.active").children().text()
 			   			   };break;
 	  	  		 }
-	  	  	 case "ProductServlet":{
+	  	  	 case "product/UI":{
 	  	  		 data = {	"pCode":scope.find("input[name='pCode']").val().trim()   }
 	  	  	 }break;
 	  	  }
@@ -58,7 +58,7 @@
   											  $(this).on("click",function(){
   												$(this).toggleClass("active");  
   												$(this).siblings(".active").toggleClass("active");  
-  												form_generator("ProductListingServlet");
+  												form_generator("productListing/work");
   											  });
   										  }
   								   	  })
@@ -70,7 +70,7 @@
 												}		
   											 })
 		  									 .end().on("change",function(){
-		  										form_generator("ProductListingServlet");
+		  										form_generator("productListing/work");
 		  									 });			
   							 
   	// 페이징 버튼
@@ -78,13 +78,13 @@
     							  if(!$(this).hasClass("active")){
 	  				  				  $(this).toggleClass("active");
 	  								  $(this).siblings(".active").toggleClass("active");
-	  								  form_generator("ProductListingServlet");
+	  								  form_generator("productListing/work");
 	    						  }
   							  });
 
   	//개별 상품 셋팅
   		//상세 페이지 이동
-  	$(".product>div.item.name").on("click",function(){	form_generator("ProductServlet",$(this).parent());});
+  	$(".product>div.item.name").on("click",function(){	form_generator("product/UI",$(this).parent());});
   	
   	
 	//재고 있는 사이즈 정보
@@ -97,7 +97,7 @@
 								
 								$.ajax({
 									type: "post", 
-									url: "/null/ProductServlet",
+									url: "/null/product/UI",
 									data: {
 										pCode: pCode,
 										source: "item_size"

@@ -86,7 +86,7 @@ $(document).ready(function() {
 		console.log(searchDate.val());
 		console.log(date1Value.val());
 		if(searchDate.val()){
-			$(location).attr("href","/null/OrderInfoServlet?day="+searchDate.val());
+			$(location).attr("href","/null/mypage/orderInfo?day="+searchDate.val());
 		}else if(date1Value.val()+date2Value.val()){
 			if(date1Value.val()==0){
 				alert("첫번째 날짜를 입력하세요.");
@@ -97,7 +97,7 @@ $(document).ready(function() {
 			}else if(date1Value.val()>date2Value.val()){
 				alert("두번째 범위 날짜는 첫번재 범위 날짜보다 낮을 수 없습니다.")
 			}else{
-				$(location).attr("href","/null/OrderInfoServlet?day="+date1Value.val()+":"+date2Value.val());
+				$(location).attr("href","/null/mypage/orderInfo?day="+date1Value.val()+":"+date2Value.val());
 			}
 		}else{
 			alert("날짜 입력이 필요합니다.!!!");
