@@ -61,15 +61,7 @@ public class MyPageOrderController {
 		System.out.println(map);
 		List<OrderDTO> list = service.getOrderList(map);
 		System.out.println(list);
-		/*
-		 * //가성의 로그인 세션 생성 String userid1="asd123"; String passwd="asd123"; String
-		 * username="이쑤신"; String sex="XY"; String email1="asd123"; String
-		 * email2="naver.com"; String post="06097"; String addr1="서울 강남구 광평로 61 (일원동)";
-		 * String addr2="서울 강남구 일원동 722-1"; String addr3="222호"; String phone1="010";
-		 * String phone2="7845"; String phone3="5433"; MemberDTO dto = new
-		 * MemberDTO(userid1, passwd, username, sex, email1, email2, post, addr1, addr2,
-		 * addr3, phone1, phone2, phone3); session.setAttribute("login", dto);
-		 */
+		
 		session.setAttribute("orderlist", list);
 		session.setAttribute("selectDays", selectDays);
 		

@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <c:if test="${empty login}">
 	<%
-		response.sendRedirect("/null/LoginUIServlet");
+		response.sendRedirect("/null/loginForm");
 	%>
 </c:if>
 <!DOCTYPE html>
@@ -84,6 +84,6 @@
 </div>
 </div>
 
-<script src="js/addrlist.js"></script>
+<script src="/null/Content/mypage/js/addrlist.js"></script>
 </body>
 </html>

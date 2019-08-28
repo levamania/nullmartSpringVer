@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.dto.MemberDTO;
 import com.dto.OrderDTO;
+import com.dto.RegAddrDTO;
 import com.exception.ModifyUserInfoException;
 import com.model.service.MyPageService;
 
@@ -63,6 +65,38 @@ public class MyPageAccountController {
 			System.out.println(e.getMessage());
 			return "1";
 		}
+	}
+	
+	/*
+	 * modifypassword.jsp로 가기전에
+	 * id로 패스워드 확인하여 전송
+	 * */
+	@RequestMapping(value = "/mypage/modifyPassword",method = RequestMethod.GET)
+	public String goModifyPassWord(HttpSession session,HttpServletRequest request) {
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		String userid = login.getUserid();
+		String pwd = service.searchPassword(userid);
+		request.setAttribute("pwd", pwd);
+		return "/Content/mypage/modifypassword";
+	}
+	
+	/*
+	 * 패스워드 변경
+	 *logout 요청
+	 * */
+	@RequestMapping(value = "/mypage/modifyPassword",method = RequestMethod.POST)
+	public String goLogout(@RequestParam Map<String, String> map) {
+		int num = service.updatePwd(map);
+		return "redirect:/logout";
+	}
+	
+	@RequestMapping(value = "/mypage/addrList",method = RequestMethod.GET)
+	public String goAddrList(HttpSession session) {
+		MemberDTO member = (MemberDTO)session.getAttribute("login");
+		String userid = member.getUserid();
+		List<RegAddrDTO> regAddrDTOs = service.getAddrList(userid);
+		session.setAttribute("addrList", regAddrDTOs);
+		return "/Content/mypage/addrlist";
 	}
 	
 	//임시 개인정보 이동 페이지 

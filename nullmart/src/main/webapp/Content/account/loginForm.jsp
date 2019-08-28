@@ -124,7 +124,7 @@
 			$("#memberLogin").on("submit", function(event) {
 
 				var re = /^[a-zA-Z0-9]{4,12}$/
-				var re1 = /^[a-zA-Z0-9~!;:]{4,12}$/
+				var re1 = /^[a-zA-Z0-9~!;:@#]{4,12}$/
 
 				var id = $("#userid");
 				var pw = $("#passwd");
@@ -156,7 +156,7 @@
 			$("#masterLogin").on("submit", function(event) {
 
 				var mre = /^[a-zA-Z0-9]{4,12}$/
-				var mre1 = /^[a-zA-Z0-9~!;:]{4,12}$/
+				var mre1 = /^[a-zA-Z0-9~!;:@#]{4,12}$/
 
 				var mid = $("#masteruserid");
 				var mpw = $("#masterpasswd");

@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="end!=null">
 		and
 			<if test="start==null">
-				order_date=to_char(#{end},'yyyy-MM-dd')
+				order_date=#{end}
 			</if>
 			<if test="start!=null">
 				order_date between #{start} and #{end}

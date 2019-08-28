@@ -50,7 +50,7 @@ if(!check(re,pw,"패스워드는 숫자, 특문 각 1회 이상, 영문은 2개 
 		</div>
 	</div>
 	<input type="hidden" id="pwd" value="${pwd}">
-	<form action="/null/ModifyPasswordServlet" method="post">
+	<form action="/null/mypage/modifyPassword" method="post">
 	<input type="hidden" name="userid" value="${login.userid}">
 	<div id="body_middle">
 		<div class="body_middle_content">
