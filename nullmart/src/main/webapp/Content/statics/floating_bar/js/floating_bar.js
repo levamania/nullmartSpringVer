@@ -33,7 +33,7 @@ $().ready(()=>{
 	//바디 이미지 설정
 	$("#floating_bar>#body img").on("click",function(){
 		var address = $(this).siblings("span").text();
-		location.href="/null/ProductServlet?pCode="+address;
+		location.href="/null/product/UI?pCode="+address;
 	})
 	
 	

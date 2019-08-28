@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	 ${result}
 	 결제 성공
 </body>
 </html>

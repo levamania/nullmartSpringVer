@@ -57,9 +57,18 @@ $().ready(()=>{
 	//배송정보 초기화
 	$("#new_radio").on("click",function(){
 		order_name.val("");
-		order_phone1.children(":contains('"+"010"+"')").prop("selected", true);
-		order_phone2.val("");
-		order_phone3.val("");
+		$("#address input, #address select").filter(function(){
+			var result = false;
+			if($(this).attr("name").includes("phone"))result = true;
+			return result;
+		}).each(function(){
+			var tagname = $(this).prop("tagName").toLowerCase();
+			if(tagname=="select"){
+				$(this).val("010");
+			}else{
+				$(this).val("");
+			}
+		});
 	});
 	
 	//내 주소록 설정
@@ -104,9 +113,7 @@ $().ready(()=>{
 	var emailingEx1 = /^[a-z][a-z0-9]{4,15}$/;
 	var emailingEx2 = /^[a-z][a-z]{4,10}[.](com|co.kr|org|net)$/;
 	
-	var messagingEx = /([a-zA-z가-힣]|[* - . \\ /]){0,40}/;
-	
-	
+	var messagingEx = /^([a-zA-z가-힣]|[* - . /]){0,40}$/;
 	
 	//결제
 	$("#decision").on("click",function(){

@@ -48,14 +48,14 @@
 			<div class="head">배송방법</div>
 			<div class="context">
 				<input type="radio" name="order_deliver" checked="checked" value="post"> <span>일반택배</span>
-				<input type="radio" name="order_deliver" value="manual"> <span>매장수령</span>
+				<input type="radio" name="order_deliver" value="manual"> <span>신속 택배</span>
 				</div>
 		</div>
 		<div class="boxer name">
 			<div class="head"><div class="star">*</div>이름</div>
 			<div class="context">
 				<input type="text"  name="order_name" style="width:10%;" >
-				<input type="radio" name="copy" id="same_radio"> 주문자와 동일 <input type="radio" name="copy" checked="checked" id="new_radio"> 신규 입력 <input type="radio" name="copy"> 최근 배송지
+				<input type="radio" name="copy" id="same_radio"> 주문자와 동일 <input type="radio" name="copy" checked="checked" id="new_radio"> 신규 입력 
 				<span id="book">내 주소록</span>
 			</div>
 		</div>
@@ -102,7 +102,7 @@
 		        new daum.Postcode({
 		            oncomplete: function(data) {
 		                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-		
+						
 		                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
 		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 		                var addr = data.roadAddress; // 도로명 주소 변수
@@ -125,6 +125,7 @@
 		                document.getElementById('order_postcode').value = data.zonecode;
 		                document.getElementById("order_address1").value = addr;
 		                document.getElementById("order_address2").value = data.jibunAddress;
+		                console.log(document.getElementById("order_address2").value);  
 		                
 		                var guideTextBox = document.getElementById("guide");
 		                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.

@@ -20,7 +20,7 @@ public class LoginChecker implements HandlerInterceptor{
 		MemberDTO member = (MemberDTO)session.getAttribute("login");
 		if(member==null) {
 			result=false;
-			response.sendRedirect("/null/LoginUIServlet");
+			response.sendRedirect("/null/main");
 		}else {
 			member.setUsername( "고명진");
 			member.setPhone1( "010");

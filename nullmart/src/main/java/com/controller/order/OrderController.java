@@ -3,6 +3,7 @@ package com.controller.order;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -89,11 +90,15 @@ public class OrderController {
 		// 세션 처리
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
 		String userid = member.getUserid();
+		//유틸
+		QueryUtil query = new QueryUtil();
 		
 		//with model
 		List<HashMap<String, Object>> book = oser.selectBook(MapParamInputer.set("USERID", userid, "TABLE","DELIVINFO"));
 		book = book.stream().sorted(ComparatorFactory.generate("DELIVNAME")).collect(Collectors.toList());
 		List<HashMap<String, Object>> book_recent = oser.selectBook(MapParamInputer.set("USERID", userid, "TABLE","ORDERTABLE"));
+		book_recent = query.unoverlap(query.unoverlap(book_recent, "ORDER_DATE").stream().sorted(ComparatorFactory.generate("POST")).collect(Collectors.toList()), "POST")
+									.stream().limit(5).collect(Collectors.toList());
 		
 		//with jsp
 		model.addAttribute("BOOK", book);
@@ -104,22 +109,29 @@ public class OrderController {
 	}
 
 	@RequestMapping("/pay")
-	public String payOrder(@RequestParam HashMap<String, Object> reposit) {
-		System.out.println(reposit);
+	public String payOrder(@RequestParam HashMap<String, Object> reposit, Model model, HttpSession session) {
+		//세션 처리
+		MemberDTO member = (MemberDTO)session.getAttribute("login");
+		String userid = member.getUserid();
+		//수용
+		List<String> cnos = Arrays.asList(reposit.get("cnos").toString().split(","));
 		
-		/*
-		cnos
-		user=고명진, user_phone1=010, user_phone2=9938, user_phone3=2134, 
-		user_email1=broth59, user_email2=naver.com, order_deliver=post, order_name=이수신, 
-		copy=on, order_phone1=011, order_phone2=1122, order_phone3=3345, 
-		order_telephone1=02, order_telephone2=1234, order_telephone3=5678, 
-		order_postcode=13524, order_address1=경기 성남시 분당구 대왕판교로606번길 45 (삼평동), order_address2=경기 성남시 분당구 삼평동 653, order_address3=, 
-		order_mesg=, payment=credit}
-		*/
-		reposit.replace("cnos", Arrays.asList(reposit.get("cnos").toString().split(",")));
-		System.out.println(reposit.get("cnos"));
+		reposit.replace("cnos", cnos);
+		reposit.put("user_phone", reposit.get("user_phone1")+"-"+reposit.get("user_phone2")+"-"+reposit.get("user_phone3"));
+		reposit.put("order_phone", reposit.get("order_phone1")+"-"+reposit.get("order_phone2")+"-"+reposit.get("order_phone3") );
+		reposit.put("order_telephone", reposit.get("order_telephone1")+"-"+reposit.get("order_telephone2")+"-"+reposit.get("order_telephone3"));
+		reposit.put("userid", userid);
 		
-		oser.insertOrder(reposit);
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
+		for(String cno : cnos){list.add(MapParamInputer.set("CNO",cno));};
+		
+		int result = 0;
+		int order_result = oser.insertOrder(reposit);
+		int cart_result = cser.deleteCart(list,true);
+		if(order_result==cart_result)result=1;
+		
+		model.addAttribute("result", result);
+		
 		return "/Content/order/order_complete";
 	}
 }

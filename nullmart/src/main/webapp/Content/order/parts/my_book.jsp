@@ -33,9 +33,10 @@ $().ready(()=>{
 		$(this).siblings().each(function(){
 			let clas = $(this).attr("class")
 			if(clas.endsWith("hide")){
-				clas = clas.substring(0, clas.length-4).trim();
+				clas = clas.substr(0, clas.length-4).trim();
+				console.log(clas);
 			}
-			if($(this).text().includes("-")){
+			if(clas.includes("phone")){
 				let separated = $(this).text().split("-");
 				for(var index in separated ){
 					record[clas+(Number.parseInt(index)+1)] = separated[index];
@@ -44,7 +45,6 @@ $().ready(()=>{
 				record[clas] = $(this).text();
 			}
 		})
-
 		window.opener.postMessage(record,"http://localhost:8090");
 		window.close();
 	})
@@ -247,15 +247,15 @@ $().ready(()=>{
 				<div class="order_name">수령인</div>
 				<div class="order_telephone">전화번호</div>
 				<div class="order_phone">핸드폰</div>
-				<div class="order_address">배송지 주소</div>
+				<div class="order_address1">배송지 주소</div>
 				<div class="decision">선택</div>
 			</div>
 			<div class="content record">
 				<c:forEach var="RECORD" items="${BOOK_RECENT}">
 					<div class="group">
-						<div class="order_name">${RECORD.ORDERNAME}</div>
-						<div class="order_telephone">${RECORD.PHONE1}</div>
-						<div class="order_phone">${RECORD.PHONE2}</div>
+						<div class="order_name">${RECORD.ORDER_NAME}</div>
+						<div class="order_telephone">${RECORD.PHONE2}</div>
+						<div class="order_phone">${RECORD.PHONE1}</div>
 						<div class="order_address1">${RECORD.ADDR1}</div>
 						<div class="order_address2 hide">${RECORD.ADDR2}</div>
 						<div class="order_address3 hide">${RECORD.ADDR3}</div>
@@ -271,7 +271,7 @@ $().ready(()=>{
 				<div class="order_name">수령인</div>
 				<div class="order_telephone">전화번호</div>
 				<div class="order_phone">핸드폰</div>
-				<div class="order_address">배송지 주소</div>
+				<div class="order_address1">배송지 주소</div>
 				<div class="decision">선택</div>
 			</div>
 			<div class="content record">
@@ -279,8 +279,8 @@ $().ready(()=>{
 					<div class="group">
 						<div class="alias">${RECORD.DELIVNAME}</div>
 						<div class="order_name">${RECORD.DELIVPERSON}</div>
-						<div class="order_telephone">${RECORD.PHONE1}</div>
-						<div class="order_phone">${RECORD.PHONE2}</div>
+						<div class="order_telephone">${RECORD.PHONE2}</div>
+						<div class="order_phone">${RECORD.PHONE1}</div>
 						<div class="order_address1">${RECORD.ADDRESS1}</div>
 						<div class="order_address2 hide">${RECORD.ADDRESS2}</div>
 						<div class="order_postcode">${RECORD.POST}</div>

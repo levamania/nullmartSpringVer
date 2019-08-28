@@ -49,8 +49,9 @@ import com.util.WordInspector;
 
 
 @Controller
-@RequestMapping(value = "/ProductListing")
-public class ProductListingServlet  {
+@RequestMapping(value = "/productListing")
+@SuppressWarnings("unchecked")
+public class ProductListingController  {
 	@Autowired
 	private ServletContext context;
 	@Autowired
@@ -107,7 +108,7 @@ public class ProductListingServlet  {
 		dis.forward(request, response);
 	}
 	
-	private static Logger logger = LoggerFactory.getLogger(ProductListingServlet.class);
+	private static Logger logger = LoggerFactory.getLogger(ProductListingController.class);
 	@RequestMapping(value = "/work")
 	public  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//세션 처리
@@ -187,10 +188,9 @@ public class ProductListingServlet  {
 				//정렬 기준 선택
 				String order_criteria = ordering_info.split(":")[0];
 				String direction = ordering_info.split(":")[1];
-				Comparator<HashMap<String, Object>> comparator = ComparatorFactory.generate(order_criteria, direction);
-			
+					
 				//페이징 처리
-				pList = raw_list.stream().sorted(comparator) //정렬
+				pList = raw_list.stream().sorted(ComparatorFactory.generate(order_criteria, direction)) //정렬
 						   .skip((cur_page-1)*paging_quantity).limit(paging_quantity).collect(Collectors.toList()); //페이징->리스트
 				//페이지 갯수 저장
 				request.setAttribute("page_size", Math.round((raw_list.size()/paging_quantity)+1));
@@ -247,7 +247,7 @@ public class ProductListingServlet  {
 			System.out.println("경고: 파일이 없데요!");
 			e.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("너 또 왜!");
+			System.out.println("너 또 왜!: " + e.getMessage());
 			e.printStackTrace();
 		}
 		//with jsp
