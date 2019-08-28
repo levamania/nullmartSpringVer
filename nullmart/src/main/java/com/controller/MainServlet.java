@@ -32,10 +32,9 @@ public class MainServlet {
 	Logger logger = LoggerFactory.getLogger(MainServlet.class);
 	
 	@RequestMapping(value = "/main")
-	public String Main(HttpServletRequest request, HttpSession session )  {
+	public String Main(HttpSession session )  {
 		MemberDTO member = new MemberDTO();
 		member.setUserid("broth59");
-		session.setAttribute("login", member);
 		//with model
 		ProductService service = new ProductService();
 		//with jsp

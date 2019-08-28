@@ -17,6 +17,11 @@ public class OrderService {
 	public List<HashMap<String, Object>> selectBook(HashMap<Object, Object> reposit) {
 		return dao.selectBook(reposit);
 	}
+
+	public int insertOrder(HashMap<String, Object> reposit) {
+		return dao.insertOrder(reposit);
+	}
+
 	
 	
 	

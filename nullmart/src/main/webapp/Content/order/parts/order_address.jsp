@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" style="text/css" href="/null/Content/order/css/order_address.css">
 <script src="/null/Content/order/js/order_address.js"></script>
-	
 <div class="body" >
 	<form name="form1">
+	<c:forEach var="CNO" items="${CNO_LIST}" varStatus="REF">
+		<input type="hidden" name="cno" value="${CNO}">
+	</c:forEach>
+	<input type="hidden" id="cnos" name="cnos" value="">
+	
 	<span class="title">주문 고객 정보</span>
 	<div id="customer" class="box">
 		<div class="boxer name">
@@ -43,14 +48,14 @@
 			<div class="head">배송방법</div>
 			<div class="context">
 				<input type="radio" name="order_deliver" checked="checked" value="post"> <span>일반택배</span>
-				<input type="radio" name="order_deliver" value="manual"> <span>매장수령</span>
+				<input type="radio" name="order_deliver" value="manual"> <span>신속 택배</span>
 				</div>
 		</div>
 		<div class="boxer name">
 			<div class="head"><div class="star">*</div>이름</div>
 			<div class="context">
 				<input type="text"  name="order_name" style="width:10%;" >
-				<input type="radio" name="copy" id="same_radio"> 주문자와 동일 <input type="radio" name="copy" checked="checked" id="new_radio"> 신규 입력 <input type="radio" name="copy"> 최근 배송지
+				<input type="radio" name="copy" id="same_radio"> 주문자와 동일 <input type="radio" name="copy" checked="checked" id="new_radio"> 신규 입력 
 				<span id="book">내 주소록</span>
 			</div>
 		</div>
@@ -84,9 +89,10 @@
 			<div class="context">
 				<input type="text" id="order_postcode" name="order_postcode" placeholder="우편번호" style="width: 15%;" readonly>
 				<div onclick="execDaumPostcode()">우편번호 찾기</div><br>
-				<input type="text" id="order_address" name="order_address" style="width: 30%;" readonly >
+				<input type="text" id="order_address1" name="order_address1" style="width: 30%;" readonly >
+				<input type="hidden" id="order_address2" name="order_address2">
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="order_detailAddress" name="order_detailAddress"  placeholder="상세주소" style="width: 25%;">
+				<input type="text" id="order_address3" name="order_address3"  placeholder="상세주소" style="width: 25%;">
 			</div>
 		</div>
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -96,38 +102,30 @@
 		        new daum.Postcode({
 		            oncomplete: function(data) {
 		                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-		
+						
 		                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
 		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		                var addr = ''; // 도로명 주소 변수
+		                var addr = data.roadAddress; // 도로명 주소 변수
 		                var extraAddr = ''; // 참고 항목 변수
-		
-		             	//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-		                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-		                    addr = data.roadAddress;
-		                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-		                    addr = data.jibunAddress;
-		                }
-		                
-		                if (data.userSelectedType === 'R'){
 		                	
-		                	 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-		               		 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-		                	if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-		                   		 extraAddr += data.bname;
-		               		 }
-		               		 // 건물명이 있고, 공동주택일 경우 추가한다.
-		               		 if(data.buildingName !== '' && data.apartment === 'Y'){
-		                   		extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-		                	}
-		                } else{
-		   	             // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-			                extraAddr = ' (' + extraAddr + ')';
-		                }
+		                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+		               	 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+		                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                   	 extraAddr += data.bname;
+		               	 }
+		               	 // 건물명이 있고, 공동주택일 경우 추가한다.
+		               	 if(data.buildingName !== '' && data.apartment === 'Y'){
+		                   	extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		               	}
+		       
+		   	            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+			             extraAddr = ' (' + extraAddr + ')';
 		
 		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 		                document.getElementById('order_postcode').value = data.zonecode;
-		                document.getElementById("order_address").value = addr;
+		                document.getElementById("order_address1").value = addr;
+		                document.getElementById("order_address2").value = data.jibunAddress;
+		                console.log(document.getElementById("order_address2").value);  
 		                
 		                var guideTextBox = document.getElementById("guide");
 		                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.

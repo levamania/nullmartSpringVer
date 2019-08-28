@@ -6,8 +6,9 @@
 		$("#logout").on("click",()=>location.href="/null/LogoutServlet");
 		$("#signup").on("click",()=>location.href="/null/Content/account/signup_first.jsp");
 		$("#mypage").on("click",()=>location.href="/null/mypage/orderInfo");
-		$("#cart").on("click",()=>location.href="/null/Cart/UI");
-		$("#order").on("click",()=>location.href="/null/Cart/UI");
+		$("#cart").on("click",()=>location.href="/null/cart/UI");
+		$("#order").on("click",()=>location.href="/null/cart/UI");
+
 	});
 
 // top - search & logo
@@ -21,7 +22,7 @@
 			  var searchedWord = $("#search input").val().trim();
 			  var regEx = /^\S{2,15}/;
 			  if(regEx.test(searchedWord)){
-				  location.href = "/null/ProductListing/work?source=input&searchedWord="+searchedWord;
+				  location.href = "/null/productListing/work?source=input&searchedWord="+searchedWord;
 			  }else{
 					  alert("2글자 이상 입력해주세요");
 			  }
@@ -43,7 +44,8 @@
 				dataType:"text",
 				success:function(data,status,xhr){
 					ranking_list = data.split(":");
-					$("#search>#searched>span").text(ranking_list[0]);
+					$("#search>#searched>span").text(1+" "+ranking_list[0]);
+					ranking_trigger();
 				},
 				error:function(error){
 					console.log(error);
@@ -58,7 +60,7 @@
 														if(ranking==10||ranking==ranking_list.length)ranking = 0;
 								   				}, setting);
 			}
-			ranking_trigger();
+			
 		//탭전환시 animation  제거
 		$("html").on("mouseenter",function(){
 							if(ranking_animation==null)ranking_trigger();
@@ -84,7 +86,7 @@
 													for(var idx in ranking_list){
 														var rank = Number.parseInt(idx)+1;
 														string += "<div style='margin:0 0 0 10px;'>"+
-																			"<a href='/null/ProductListingServlet?searchedWord="+ranking_list[idx]+"' style='font-size:12px;color:gray;text-decoration:none'>"+
+																			"<a href='/null/productListing/work?searchedWord="+ranking_list[idx]+"' style='font-size:12px;color:gray;text-decoration:none'>"+
 																				rank+"  "+ranking_list[idx]+
 																			"</a>" +
 																		"</div>"
@@ -131,7 +133,7 @@
 									});
 		//style mid - anchor setting
 		$("#horizentalBar a").each(function(){
-											var href = "/null/ProductListing/work?source=menu&searchedWord=" + $(this).text();  
+											var href = "/null/productListing/work?source=menu&searchedWord=" + $(this).text();  
 											$(this).attr("href",href);
 										})
 });

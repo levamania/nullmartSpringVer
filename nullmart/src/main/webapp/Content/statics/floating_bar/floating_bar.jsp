@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.util.stream.Collectors"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Comparator"%>
@@ -29,7 +31,9 @@
 		Collections.sort(temp, new Comparator<Cookie>() {
 			@Override
 			public int compare(Cookie o1, Cookie o2) {
-				return o1.getName().compareTo(o2.getName()) * -1;
+					String alpha_time = o1.getName().substring(7);
+					String beta_time = o2.getName().substring(7);
+				return alpha_time.compareTo(beta_time)*-1;
 			}
 		});
 
