@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dto.EvalDTO;
 import com.dto.MemberDTO;
@@ -88,21 +89,18 @@ public class MyPageService {
 		MemberDTO member =mypageDAO.searchMemberById(userid);
 		return member;
 	}
-//	public void modifyAccountInfo(HashMap<String, String> member) throws ModifyUserInfoException {
-//		SqlSession session = MySqlSessionFactory.getSession();
-//		try {
-//			mypageDAO.modifyAccountInfo(session,member);
-//			session.commit();
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			session.rollback();
-//			String errorMesg = getClass().getSimpleName()+": "+"modifyAccountInfo method Error";
-//			throw new ModifyUserInfoException(errorMesg);
-//		}finally {
-//			session.close();
-//		}
-//	}
-//	
+	
+	@Transactional
+	public void modifyAccountInfo(Map<String, String> member) throws ModifyUserInfoException {
+		try {
+			mypageDAO.modifyAccountInfo(member);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			String errorMesg = getClass().getSimpleName()+": "+"modifyAccountInfo method Error";
+			throw new ModifyUserInfoException(errorMesg);
+		}
+	}
+	
 	public List<OrderDTO> getOrderList(HashMap<String, String> map) {
 		List<OrderDTO> list = mypageDAO.getOrderList(map);
 		return list;

@@ -53,7 +53,7 @@ public class MypageDAO {
 		return template.selectOne("myPage.searchMemberById", userid);
 	}
 
-	public void modifyAccountInfo(SqlSession session, HashMap<String, String> member) {
+	public void modifyAccountInfo(Map<String, String> member) {
 		template.update("myPage.modifyAccountInfo", member);
 	}
 

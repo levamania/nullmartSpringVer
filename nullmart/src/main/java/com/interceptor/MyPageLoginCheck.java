@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -16,7 +17,10 @@ public class MyPageLoginCheck extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("mypage interceptor");
+		HandlerMethod method = (HandlerMethod)handler;
+		String className = method.getBeanType().getName();
+		String methodName = method.getMethod().getName();
+		System.out.println("mypage preHandle:"+className+":"+methodName);
 		boolean flag = true;
 		HttpSession session  = request.getSession();
 		
