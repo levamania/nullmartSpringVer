@@ -1,0 +1,87 @@
+@charset "UTF-8";
+@import url("/null/Content/configuration/font/fonts.css");
+
+
+#result{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	height: 600px;
+
+	font-family: maplestroy;
+}
+#result *{box-sizing: border-box;}
+
+#title{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 50%;
+	height: 10%;
+
+	margin-top: 5%;
+
+	border: 1px solid gray;
+	
+	font-size: 20px;
+}
+#order_statement{
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	
+	height: 60%;
+	width: 50%;
+
+	border: 1px solid black;
+	border-top-width: 0;
+	border-bottom-width: 0;
+}
+#order_statement>div{
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	border-bottom: 1px dashed gray;
+}
+
+#order_statement>div:nth-child(n){width: 40%;height: 25%;}
+#order_statement>div:nth-child(2n){width: 60%;}
+
+
+#redirector{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+
+	height: 10%;
+	width:40%;
+
+	margin-top: 3%;
+}
+
+#redirector>div{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	height: 80%;
+	width: 40%;
+
+	font-size: 17px;
+	font-weight: bolder;
+
+	cursor: pointer;
+}
+#redirector>#mypage{
+	color:gray;
+	background-color: white;
+	border: 2px solid gray;
+}
+#redirector>#mainpage{
+	color:red;
+	background-color: white;
+	border: 2px solid red;	
+}

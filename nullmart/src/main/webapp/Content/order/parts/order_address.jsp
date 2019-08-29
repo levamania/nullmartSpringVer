@@ -5,7 +5,7 @@
 <link rel="stylesheet" style="text/css" href="/null/Content/order/css/order_address.css">
 <script src="/null/Content/order/js/order_address.js"></script>
 <div class="body" >
-	<form name="form1">
+	
 	<c:forEach var="CNO" items="${CNO_LIST}" varStatus="REF">
 		<input type="hidden" name="cno" value="${CNO}">
 	</c:forEach>
@@ -164,5 +164,5 @@
 	<div id="decision" class="box">
 		<div>결제하기</div>
 	</div>
-	</form>	
 </div>
+</form>	

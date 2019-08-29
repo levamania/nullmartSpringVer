@@ -44,7 +44,7 @@ import com.util.MapParamInputer;
 
 @Controller
 @RequestMapping("/product")
-public class ProductController extends HttpServlet {
+public class ProductController {
 	private Logger logger = LoggerFactory.getLogger(ProductController.class);
 	private String key;
 	@Autowired
@@ -70,7 +70,7 @@ public class ProductController extends HttpServlet {
 		List<HashMap<String, Object>> stock_list = service.selectProduct_info(reposit);
 		logger.debug("mesg{"+stock_list+"}","debug");
 			//색깔별로 사이즈, 수량 , 가격 맵핑
-		HashMap<String, Object> color_mapped =  query.bind(stock_list, "PCOLOR", new String[]{"PSIZE","PAMOUNT","PPRICE"});
+		HashMap<String, Object> color_mapped =  query.bind(stock_list, "PCOLOR", new String[]{"PSIZE","PAMOUNT","PPRICE", "DELIVERFEE_YN"});
 			//map TO JSON으로 파싱하기
 		JSONObject json = new JSONObject(color_mapped);
 		logger.debug("mesg{json:"+json+"}");

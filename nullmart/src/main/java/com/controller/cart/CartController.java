@@ -2,6 +2,7 @@ package com.controller.cart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSessionException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,8 +25,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dto.MemberDTO;
 import com.exception.CustomException;
@@ -76,30 +80,25 @@ public class CartController {
 	}
 	
 	//CART UPDATE
-	@RequestMapping(value = "/update")
-	protected void updateCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		
+	@RequestMapping(value = "/update", produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String updateCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String out = "success";
 		//수용
 		String temp = request.getParameter("list");
 		ObjectMapper mapper = new ObjectMapper();
 		List<HashMap<String, Object>> list = mapper.readValue(temp, new TypeReference<List<HashMap<String, Object>>>() {});
-		System.out.println(list);
 		//with model
-		int result = cser.updateCart(list);
-		if(list.size()==result) {
-			out.print("success");
-		}else {
-			out.print("fail");
-		}
+		cser.updateCart(list);
+		
+		return out;
 	}//end upadate
 	
 	//DELETE PRODUCT
 	@RequestMapping(value = "/delete")
-	protected void deleteCart(HttpServletRequest request, HttpServletResponse response)
+	@ResponseBody
+	public String deleteCart(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// setting
-		PrintWriter out = response.getWriter();
 		// 수용
 		HashMap<String, Object> reposit = MapParamInputer.set("CNO", request.getParameter("CNO"), "PAMOUNT",
 				request.getParameter("PAMOUNT"), "SCODE", request.getParameter("SCODE"));
@@ -110,13 +109,9 @@ public class CartController {
 
 		// with model
 		// 삭제와 동시에 재고에 다시 쌓기
-		int result = cser.deleteCart(list);
-
-		if (result == list.size()) {
-			out.print("success");
-		} else {
-			out.print("fail");
-		}
+		cser.deleteCart(list);
+		
+		return "success";
 	}//end delete
 	
 	//STACK PRODUCT
@@ -197,5 +192,10 @@ public class CartController {
 	    }
 	}//end stack
 
+	@ExceptionHandler(value = {SQLException.class})
+	@ResponseBody
+	public String deatWith(Exception e) {
+		return "수량이 부족합니다.";
+	}
 
 }//end class

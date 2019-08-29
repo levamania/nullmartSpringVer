@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,6 +24,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dto.MemberDTO;
 import com.exception.CustomException;
@@ -109,7 +112,8 @@ public class OrderController {
 	}
 
 	@RequestMapping("/pay")
-	public String payOrder(@RequestParam HashMap<String, Object> reposit, Model model, HttpSession session) {
+	public String payOrder(@RequestParam HashMap<String, Object> reposit, HttpSession session,
+												   Model model, HttpServletRequest request) {
 		//세션 처리
 		MemberDTO member = (MemberDTO)session.getAttribute("login");
 		String userid = member.getUserid();
@@ -120,18 +124,16 @@ public class OrderController {
 		reposit.put("user_phone", reposit.get("user_phone1")+"-"+reposit.get("user_phone2")+"-"+reposit.get("user_phone3"));
 		reposit.put("order_phone", reposit.get("order_phone1")+"-"+reposit.get("order_phone2")+"-"+reposit.get("order_phone3") );
 		reposit.put("order_telephone", reposit.get("order_telephone1")+"-"+reposit.get("order_telephone2")+"-"+reposit.get("order_telephone3"));
-		reposit.put("userid", userid);
+		reposit.put("USERID", userid);
 		
 		List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
 		for(String cno : cnos){list.add(MapParamInputer.set("CNO",cno));};
 		
-		int result = 0;
-		int order_result = oser.insertOrder(reposit);
-		int cart_result = cser.deleteCart(list,true);
-		if(order_result==cart_result)result=1;
-		
-		model.addAttribute("result", result);
+		String order_serial = oser.insertOrder(reposit, list);
+		reposit.put("order_serial", order_serial);
+		model.addAttribute("completed", reposit);
 		
 		return "/Content/order/order_complete";
 	}
+	
 }

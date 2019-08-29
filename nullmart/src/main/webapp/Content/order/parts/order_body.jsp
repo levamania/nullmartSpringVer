@@ -4,7 +4,7 @@
 <link rel="stylesheet" style="text/css"
 	href="/null/Content/order/css/order_body.css">
 <script src="/null/Content/order/js/order_body.js"></script>
-
+<form name="form1" method="post">
 <div class="body cart">
 	<div class="container" id="cart_logo">
 		<div class="content">
@@ -46,6 +46,7 @@
 			</div>
 		</div>
 		<c:set var="TOTAL" value="0" />
+		<c:set var="DELIVER_FEE" value="2500"/>
 		<c:forEach var="ITEM" items="${KEY_SET}">
 			<div class="content">
 				<div class="item">
@@ -58,6 +59,9 @@
 					<c:set var="COLOR" value="INITIAL" />
 
 					<c:forEach var="ATOM" items="${PCODE_MAPPED[ITEM]}" 	varStatus="stat">
+						<c:if test="${ATOM.DELIVERFEE_YN=='N'}">
+							<c:set var="DELIVER_FEE" value="0" />
+						</c:if>
 						<div class="group">
 							<div class="option">
 								<c:choose>
@@ -113,18 +117,21 @@
 		<div class="content">
 			<div>
 				<div>주문금액</div>
-				<div id="temp" class="num">${TOTAL}</div>
+				<div id="temp" class="num">${TOTAL}</div>			
 				<div></div>
 			</div>
 			<div>
 				<div>배송비</div>
-				<div>2,500원</div>
+				<div>${(DELIVER_FEE==2500)?'2,500원':'무료배송'}</div>		
 				<div></div>
 			</div>
 			<div>
 				<div>결정예정금액</div>
-				<div id="final" class="num">${TOTAL + 2500}</div>
+				<div id="final" class="num">${TOTAL + DELIVER_FEE}</div>
 			</div>
+			<input type="hidden" name="order_price" value="${TOTAL}">
+			<input type="hidden" name="deliver_fee" value="${DELIVER_FEE}">
+			<input type="hidden" name="total_price" value="${TOTAL+DELIVER_FEE}">
 		</div>
 	</div>
 </div>
