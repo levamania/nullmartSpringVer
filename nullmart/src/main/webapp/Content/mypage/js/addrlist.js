@@ -14,15 +14,13 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+	var num = 0;
 	var checks = $(".checks");
 	$("#allcheck").on("click",function(){
+		num+=1;
 		checks.each(function(idx,check){
-			if($(this).prop("checked")){
-				$(this).removeAttr("checked");
-			}else{
-				$(this).attr("checked","checked");
-			}
 			
+			$(this).prop("checked",true);
 		});
 	});
 	$("#delete").on("click",function(){

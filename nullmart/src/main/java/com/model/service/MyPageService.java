@@ -37,17 +37,10 @@ public class MyPageService {
 //			session.close();
 //		}
 //	}
-//	public List<RegAddrDTO> getAddrList(String userid) {
-//		List<RegAddrDTO> list= null;
-//		SqlSession session = MySqlSessionFactory.getSession();
-//		try {
-//			list = mypageDAO.getAddrList(session,userid);
-//		} finally {
-//			session.close();
-//		}
-//		return list;
-//	}
-//	public RegAddrDTO searchByNo(String delivno) {
+	public List<RegAddrDTO> getAddrList(String userid) {
+		List<RegAddrDTO> list= mypageDAO.getAddrList(userid);
+		return list;
+	}
 //		RegAddrDTO dto =null;
 //		SqlSession session = MySqlSessionFactory.getSession();
 //		try {
@@ -163,30 +156,20 @@ public class MyPageService {
 //		}
 //		return num;
 //	}
-//	public String searchPassword(String userid) {
-//		String pwd=null;
-//		SqlSession session = MySqlSessionFactory.getSession();
-//		try {
-//			pwd=mypageDAO.searchPassword(session,userid);
-//		} finally {
-//			session.close();
-//		}
-//		return pwd;
-//	}
-//	public int updatePwd(HashMap<String, String> map) {
-//		
-//		SqlSession session = MySqlSessionFactory.getSession();
-//		int num =0;
-//		try {
-//			num = mypageDAO.updatePwd(session, map);
-//			session.commit();
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			session.rollback();
-//		}finally {
-//			session.close();
-//		}
-//		return num;
-//	}
+	public String searchPassword(String userid) {
+		String pwd=mypageDAO.searchPassword(userid);
+		return pwd;
+	}
+	
+	@Transactional
+	public int updatePwd(Map<String, String> map) {
+		int num =0;
+		try {
+			num = mypageDAO.updatePwd(map);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return num;
+	}
 	
 }

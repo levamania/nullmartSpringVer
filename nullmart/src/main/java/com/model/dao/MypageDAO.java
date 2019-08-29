@@ -28,7 +28,7 @@ public class MypageDAO {
 		template.insert("myPage.insertAddr", dto);
 	}
 
-	public List<RegAddrDTO> getAddrList(SqlSession session, String userid) {
+	public List<RegAddrDTO> getAddrList(String userid) {
 		return template.selectList("myPage.getAddrList", userid);
 	}
 
@@ -81,11 +81,11 @@ public class MypageDAO {
 		return template.update("myPage.updateEval", eval);
 	}
 
-	public String searchPassword(SqlSession session, String userid) {
+	public String searchPassword(String userid) {
 		return template.selectOne("myPage.searchPassword", userid);
 	}
 
-	public int updatePwd(SqlSession session, HashMap<String, String> map) {
+	public int updatePwd(Map<String, String> map) {
 		return template.update("myPage.updatePwd", map);
 	}
 

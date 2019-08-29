@@ -28,7 +28,7 @@ public class MyPageLoginCheck extends HandlerInterceptorAdapter{
 		
 		if(login==null) {
 			flag = false;
-			response.sendRedirect("/loginForm");
+			response.sendRedirect("/null/loginForm");
 		}
 		return flag;
 	}

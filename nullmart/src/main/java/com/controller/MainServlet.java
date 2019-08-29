@@ -33,11 +33,11 @@ public class MainServlet {
 	
 	@RequestMapping(value = "/main")
 	public String Main(HttpSession session )  {
-		MemberDTO member = new MemberDTO();
-		member.setUserid("broth59");
-		//with model
+		//MemberDTO member = new MemberDTO();
+		//member.setUserid("broth59");
+		//session.setAttribute("login", member);
 		ProductService service = new ProductService();
-		//with jsp
+	
 		return "/Content/main/main";
 	}
 
