@@ -78,5 +78,7 @@ public class EvalDTO {
 		return "EvalDTO [evalno=" + evalno + ", orderscore=" + orderscore + ", fastdelivery=" + fastdelivery
 				+ ", ordersatis=" + ordersatis + ", evalcontent=" + evalcontent + ", ono=" + ono + "]";
 	}
+
+	
 	
 }

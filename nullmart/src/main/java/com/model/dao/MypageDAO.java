@@ -60,23 +60,23 @@ public class MypageDAO {
 		return template.selectList("myPage.getOrderList", map);
 	}
 
-	public List<OrderEvalListDTO> getOrderEvalList(SqlSession session, String userid) {
+	public List<OrderEvalListDTO> getOrderEvalList(String userid) {
 		return template.selectList("myPage.getOrderEvalList", userid);
 	}
 
-	public int addEval(SqlSession session, EvalDTO eval) {
+	public int addEval(EvalDTO eval) {
 		return template.insert("myPage.addEval", eval);
 	}
 
-	public EvalDTO searchEvalByOno(SqlSession session, String ono) {
+	public EvalDTO searchEvalByOno(String ono) {
 		return template.selectOne("myPage.searchEvalByOno", ono);
 	}
 
-	public String searchOrdernameByOno(SqlSession session, String ono) {
-		return template.selectOne("myPage.searchOrdernameByOno",ono);
+	public String searchScodeByOno(String ono) {
+		return template.selectOne("myPage.searchScodeByOno",ono);
 	}
 
-	public int updateEval(SqlSession session, EvalDTO eval) {
+	public int updateEval(EvalDTO eval) {
 		return template.update("myPage.updateEval", eval);
 	}
 

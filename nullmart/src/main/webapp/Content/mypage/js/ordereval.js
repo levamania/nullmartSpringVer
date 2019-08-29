@@ -17,7 +17,7 @@ $(document).ready(function(){
 	});
 
 	$("#cancel").on("click",function(){
-		$(location).attr("href","/null/OrderEvalListServelt");
+		$(location).attr("href","/null/mypage/orderEvalList");
 	});
 
 });

@@ -4,11 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:if test="${empty login}">
 	<%
-		response.sendRedirect("/null/LoginUIServlet");
+	response.sendRedirect("/null/loginForm");
 	%>
 </c:if>
 <%
-	String ordername = request.getParameter("ordername");
+	String scode = request.getParameter("scode");
 	String ono = request.getParameter("ono");
 %>
 <!DOCTYPE html>
@@ -23,13 +23,13 @@
 <jsp:include page="top.jsp"></jsp:include>
 <input type="hidden" name="ono" value="">
 <div id="body">
-	<form action="/null/OrderEvalServlet" method="post">
+	<form action="/null/mypage/orderEval" method="post">
 	<div id="eval_title">나의상품후기작성</div>
 	<div id="eval_body">
 		<div class="eval_item">
 			<div class="eval_head">상품이름&nbsp;&nbsp;</div>
 			<div class="eval_content">
-				<%=ordername%>
+				<%=scode%>
 			</div>
 		</div>
 		<div class="eval_item">

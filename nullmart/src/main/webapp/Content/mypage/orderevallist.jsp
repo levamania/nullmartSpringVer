@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
  <c:if test="${empty login}">
 	<%
-		response.sendRedirect("/null/LoginUIServlet");
+	response.sendRedirect("/null/loginForm");
 	%>
 </c:if> 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
 		<div class="body_contentblock">
 			<span class="body_contentinner">${ordereval.order_date}</span>
 			<span class="body_contentinner">${ordereval.ono}</span><input type="hidden" value="${ordereval.ono}">
-			<span class="body_contentinner">${ordereval.ordername}</span><input type="hidden" value="${ordereval.ordername}">
+			<span class="body_contentinner">${ordereval.scode}</span><input type="hidden" value="${ordereval.scode}">
 			<span class="body_contentinner"><input type="button" class="evalbtns" value="수정"><input type="hidden" value="${ordereval.evalno}"></span>
 		</div>
 		</c:forEach>
@@ -59,6 +59,6 @@
 	</div>
 	
 </div>
-<script src="/null/Content/mypage/js/orderevallist.js?ver=1"></script>
+<script src="/null/Content/mypage/js/orderevallist.js?ver=3"></script>
 </body>
 </html>

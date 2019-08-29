@@ -10,7 +10,7 @@ $(document).ready(function(){
 		$(location).attr("href","/null/mypage/orderInfo");
 	});
 	$("#goordereval").on("click",function(){
-		$(location).attr("href","/null/OrderEvalListServelt");
+		$(location).attr("href","/null/mypage/orderEvalList");
 	});
 });
 

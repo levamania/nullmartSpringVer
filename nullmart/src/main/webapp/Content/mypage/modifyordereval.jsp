@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:if test="${empty login}">
 	<%
-		response.sendRedirect("/null/LoginUIServlet");
+	response.sendRedirect("/null/loginForm");
 	%>
 </c:if>
 
@@ -20,13 +20,13 @@
 <jsp:include page="top.jsp"></jsp:include>
 <input type="hidden" name="ono" value="">
 <div id="body">
-	<form action="/null/ModifyOrderEvalServlet" method="post">
+	<form action="/null/mypage/modifyOrderEval" method="post">
 	<div id="eval_title">나의상품후기수정</div>
 	<div id="eval_body">
 		<div class="eval_item">
 			<div class="eval_head">상품이름&nbsp;&nbsp;</div>
 			<div class="eval_content">
-				${ordername}
+				${scode}
 			</div>
 		</div>
 		<div class="eval_item">
@@ -84,7 +84,7 @@
 	</div>
 	</form>
 </div>
-<script src="/null/Content/mypage/js/modifyordereval.js?ver=1"></script>
+<script src="/null/Content/mypage/js/modifyordereval.js?ver=2"></script>
 <script src="/null/Content/mypage/js/jquery-1.11.3.min.js"></script>
 </body>
 </html>
