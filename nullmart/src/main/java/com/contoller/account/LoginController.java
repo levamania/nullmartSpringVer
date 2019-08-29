@@ -28,9 +28,9 @@ public class LoginController {
 	@RequestMapping(value = "/IdPwCheck")
 	@ResponseBody
 	public int idPwCheck(@RequestParam Map<String, String> map) {
-		
+		System.out.println(map);
 		int num = service.IdPwCheck(map);
-		
+		System.out.println(num);
 		return num;
 	}
 	

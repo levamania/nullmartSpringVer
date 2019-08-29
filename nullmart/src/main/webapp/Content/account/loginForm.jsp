@@ -29,9 +29,6 @@
 				
 				var id = $("#userid");
 				var pw = $("#passwd");
-
-			
-			
 				$.ajax({
 					type : "get",
 					url : "/null/IdPwCheck",
@@ -40,23 +37,17 @@
 						passwd : pw.val()
 					},
 					dataType : "text",
-					
-					
-					
 					success : function(data, status, xhr) {
-
-						console.log(data)
-						if (data == 0) {
+						if (data==0) {
 							alert("아이디또는 비밀번호가 일치하지 않습니다.");
-							console.log(data)
+							console.log(data);
 
 							$("#userid").focus();
-							return false;
+							
 						} else if(data==1){
-							alert("로그인이 되었습니다.")
-							console.log(data)
-							$("#userid").focus();
-
+							alert("로그인이 되었습니다.");
+							console.log(data);
+							$("#userid").focus();							
 						}
 					},
 					error : function(xhr, status, e) {
@@ -268,7 +259,7 @@
 					<br>
 				</tr>
 			</table>
-			<br> <input type="submit" value="  로그인 " class="test_btn1" id=""
+			<br> <input type="button" value="  로그인 " class="test_btn1" id=""
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
 			<input type="reset" value="다시입력" class="test_btn1"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">
