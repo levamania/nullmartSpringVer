@@ -18,14 +18,16 @@
 <div id="top_body" >
 
 	
-<a id="/null/MainServlet" href="/null/MainServlet"><img src="/null/Content/img/account/NULL-Mart(LOGO).PNG"></a>
+<a id="/null/MainServlet" href="/null/Main"><img src="/null/Content/img/account/NULL-Mart(LOGO).PNG"></a>
 
 <div style="display: inline; position: fixed; right: 0; top: 70px;">
 	<a>係員のページ&nbsp;&nbsp;&nbsp;</a>
 </div>
 
 
-
+</div>
+<div align="right">
+<a href="/null/mgrLogout" style="font-size: 70%;text-decoration:none;color:black">Logout</a>
 </div>
 
 

@@ -28,9 +28,12 @@ public class MemberService {
 
 
 
-	public int selectById(String userid) {
+	public int idPwCheck(String userid) {
 		
-		return dao.selectById(userid);
+		return dao.idPwCheck(userid);
 	}
+
+
+
 
 }

@@ -21,8 +21,8 @@ SqlSessionTemplate template;
 		return dto;
 	}
 
-	public int selectById(String userid) {
-		return template.selectOne("MemberMapper.selectById", userid);
+	public int idPwCheck(String userid) {
+		return template.selectOne("MemberMapper.idPwCheck", userid);
 	}
 
 
