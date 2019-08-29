@@ -8,7 +8,6 @@
 		$("#mypage").on("click",()=>location.href="/null/mypage/orderInfo");
 		$("#cart").on("click",()=>location.href="/null/cart/UI");
 		$("#order").on("click",()=>location.href="/null/cart/UI");
-
 	});
 
 // top - search & logo
@@ -40,7 +39,7 @@
 			// ranking_info
 			$.ajax({
 				tyep:"post",
-				url:"/null/RankingInfoServlet",
+				url:"/null/ranking/info",
 				dataType:"text",
 				success:function(data,status,xhr){
 					ranking_list = data.split(":");
@@ -133,7 +132,7 @@
 									});
 		//style mid - anchor setting
 		$("#horizentalBar a").each(function(){
-											var href = "/null/productListing/work?source=menu&searchedWord=" + $(this).text();  
+											var href = "/null/productListing/work?source=menu&searchedWord=" + $(this).text()+"&refresh=true";  
 											$(this).attr("href",href);
 										})
 });

@@ -4,7 +4,7 @@
 <link rel="stylesheet" style="text/css"
 	href="/null/Content/cart/css/cart_body.css">
 <script src="/null/Content/cart/js/cart_body.js"></script>
-
+<c:set var="DELIVER_FEE" value="0"/>
 <div class="body cart">
 	<div class="container" id="cart_logo">
 		<div class="content">
@@ -63,8 +63,10 @@
 					<!-- 변수설정 -->
 					<c:set var="SUM" value="0" />
 					<c:set var="COLOR" value="INITIAL" />
-
 					<c:forEach var="ATOM" items="${PCODE_MAPPED[ITEM]}" 	varStatus="stat">
+						<c:if test="${ATOM.DELIVERFEE_YN=='Y'}">
+							<c:set var="DELIVER_FEE" value="2500" />
+						</c:if>
 						<div class="group">
 							<div class="option">
 								<c:choose>
@@ -108,6 +110,7 @@
 							<c:set var="SUM" value="${SUM+ATOM.PPRICE * ATOM.PAMOUNT}" />
 							<div class="math multi">X</div>
 							<div class="math equal">=</div>
+							<span style="display: none" class="deliver">${ATOM.DELIVERFEE_YN }</span>
 						</div>
 					</c:forEach>
 				</div>
@@ -142,12 +145,12 @@
 			</div>
 			<div>
 				<div>배송비</div>
-				<div>2,500원</div>
+				<div id="deliver_fee">${(DELIVER_FEE==2500)?'2,500':'0'} 원</div>
 				<div></div>
 			</div>
 			<div>
 				<div>결정예정금액</div>
-				<div id="final" class="num">${TOTAL + 2500}</div>
+				<div id="final" class="num">${TOTAL + DELIVER_FEE}</div>
 			</div>
 		</div>
 		<div class="content">

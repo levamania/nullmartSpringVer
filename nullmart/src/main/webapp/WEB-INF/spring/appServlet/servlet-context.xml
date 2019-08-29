@@ -18,7 +18,7 @@
 		<!-- Interceptors -->
 		<interceptors>
 			<interceptor>
-				<mapping path="/Cart/*"/>
+				<mapping path="/cart/*"/>
 				<mapping path="/order/*"/>
 				<beans:ref bean="loginChecker"/>
 			</interceptor>

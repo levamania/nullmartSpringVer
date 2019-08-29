@@ -13,7 +13,7 @@
 	</select>
 	<!-- Products_info list-->
 	<select id="getCategory" parameterType="hashmap" resultType="string">
-		select	distinct ${HEAD} from
+		select	 distinct ${HEAD} from
 		<foreach collection="TABLES" item="TABLE" separator=",">
 			${TABLE}	
 		</foreach> 
@@ -36,9 +36,14 @@
 	<select id="selectProductList" parameterType="hashmap" resultType="hashmap">
 		select p.pcode pcode,   styletop, stylemid, stylebot, pname, pimage, pregitdate, m.pPrice min_price , nvl(searchedCnt,0) popularity
 		from product p, stock s , (select pCode,min(pPrice) pPrice
-								   				from stock
-								   				group by pCode) m, searchedWord w
+								   						  from stock
+								   					      group by pCode) m, searchedWord w
 		where p.pcode = s.pcode and s.pcode = m.pcode and p.pname = w.sword(+)
+			<if test="STYLETOP!=null">and styletop in
+			 	<foreach collection="STYLETOP" item="item" open="(" close=")"  separator=",">
+			 		#{item}	
+			 	</foreach>
+			 </if>
 			<if test="STYLEMID!=null">and styleMid in
 			 	<foreach collection="STYLEMID" item="item" open="(" close=")"  separator=",">
 			 		#{item}	
@@ -94,7 +99,7 @@
 		  merge into stock s
  		  using
  		  	<foreach collection="list" item="item"  open="(" close=")" separator="union"> 
- 		  		select scode, 
+ 		  		select scode scode, 
  		  			<choose>
  		  				<when test="item.DIFFER!=null">#{item.DIFFER}</when>
  		  				<otherwise>	#{item.PAMOUNT} </otherwise>  
@@ -112,9 +117,11 @@
 		 					<when test="direction=='minus'">-</when>
 		  					<when test="direction=='plus'">+</when>		  
 		  			</choose>
-		   			e.pamount
+		   			(select e.pamount from dual)
 		   		</when>
 		   </choose>
+		   when not matched then
+		   insert values ('0','3','0','0','0','0','Y')
 	</insert>
 	
 </mapper>

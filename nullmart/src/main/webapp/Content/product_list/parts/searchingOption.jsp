@@ -4,8 +4,10 @@
 <link rel="stylesheet" href="/null/Content/product_list/css/searchingOption.css"  type="text/css"> 
 <!-- <script src="/null/Content/product_list/js/searchingOption.js"></script> -->
 <jsp:include page="/Content/product_list/js/searchingOption.jsp" flush="true"/>
-
-<%-- <c:if test="${!empty listing_setup || !empty pList}"> --%>
+<c:if test="${empty basic || !empty pList}">
+<c:if test="${source=='menu'}">
+	<div class="block body" id="blank_mesg"></div>
+</c:if>
 <div class="body searching_option">
 	<div class="category_option" id="styletop">
 		<div class="head">테마</div>
@@ -69,4 +71,4 @@
 		<input type="hidden" name="searchedWord" value="${searchedWord}"> 
 	</form>
 </div>
-<%-- </c:if> --%>
+</c:if>
