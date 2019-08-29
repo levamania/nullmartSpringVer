@@ -25,7 +25,7 @@
 		//id 비밀번호 일치 불일치 유효성 검사
 		//var = loginFunction = function
 				
-			$("#memberLogin").on("submit", function() {
+			$("#memberBtn").on("click", function() {
 				
 				var id = $("#userid");
 				var pw = $("#passwd");
@@ -34,7 +34,7 @@
 			
 				$.ajax({
 					type : "get",
-					url : "/null/IdPwCheckServlet",
+					url : "/null/pwcheck",
 					data : {
 						userid : id.val(),
 						passwd : pw.val()
@@ -45,16 +45,18 @@
 					
 					success : function(data, status, xhr) {
 						
-						if (data == 0) {
-							alert("아이디또는 비밀번호가 일치하지 않습니다.");
-							
-
-							$("#userid").focus();
+						if (data == "0") {
+							alert("아이디가 없습니다.");
+							id.val("");
+							id.focus();
 							return false;
+						} else if(data =="1"){
+							alert("패스워드가 없습니다.");
+							pw.val("");
+							pw.focus();
 						} else {
 							alert("로그인이 되었습니다.")
-							
-							$("#userid").focus();
+							$("#memberLogin").submit();
 
 							
 
@@ -69,7 +71,7 @@
 			});
 				
 				//masterid 비밀번호 일치 불일치 유효성 검사
-				$('#masterLogin').on("submit", function() {
+				$('#adminBtn').on("click", function() {
 					var mid = $("#masteruserid");
 					var mpw = $("#masterpasswd");
 					$.ajax({
@@ -230,7 +232,7 @@
 					<br>
 				</tr>
 			</table>
-			<br> <input type="submit" value="  로그인 " id="loginbtn" class="test_btn1"
+			<br> <input type="button" value="  로그인 " id="memberBtn" class="test_btn1"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
 			<input type="reset" value="다시입력" class="test_btn1"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">
@@ -269,7 +271,7 @@
 					<br>
 				</tr>
 			</table>
-			<br> <input type="submit" value="  로그인 " class="test_btn1" id=""
+			<br> <input type="button" value="  로그인 " class="test_btn1" id="adminBtn"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
 			<input type="reset" value="다시입력" class="test_btn1"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">

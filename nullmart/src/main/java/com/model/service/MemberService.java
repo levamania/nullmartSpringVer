@@ -26,4 +26,11 @@ public class MemberService {
 	
  }
 
+
+
+	public int selectById(String userid) {
+		
+		return dao.selectById(userid);
+	}
+
 }

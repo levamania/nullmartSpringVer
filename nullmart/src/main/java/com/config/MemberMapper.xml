@@ -43,4 +43,8 @@ where passwd=#{oldpasswd}
 <select id="SearchID" parameterType="map" resultType="MemberDTO">
 select userid from account where username=#{username} and  email1=#{email1} and email2=#{email2}
 </select>
+
+<select id="selectById" resultType="int">
+	select  count(*) from account where userid=#{userid}
+</select>
 </mapper>

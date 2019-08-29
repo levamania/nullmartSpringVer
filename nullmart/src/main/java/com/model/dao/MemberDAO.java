@@ -21,6 +21,10 @@ SqlSessionTemplate template;
 		return dto;
 	}
 
+	public int selectById(String userid) {
+		return template.selectOne("MemberMapper.selectById", userid);
+	}
+
 
 
 }
