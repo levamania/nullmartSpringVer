@@ -40,7 +40,7 @@ $(document).ready(function() {
 	
 	$("form").on("submit",function(){
 		console.log(check.text());
-		var pwdReg = /^[A-Za-z0-9~;!:]{4,12}$/;
+		var pwdReg = /^[A-Za-z0-9~;!:@#]{4,12}$/;
 		if(check.text()){
 			alert("기존 비밀번호를 확인하세요");
 			oldpwd.focus();

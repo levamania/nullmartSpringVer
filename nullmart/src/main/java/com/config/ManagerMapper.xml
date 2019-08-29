@@ -10,8 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 select * from Manager where masteruserid=#{masteruserid} and masterpasswd=#{masterpasswd}
 
 </select>
-<select id="ManagerIdPwCheck" parameterType="map" resultType="int">
+<select id="ManagerIdPwCheck"  resultType="int">
 select count(*) from MANAGER
-where masteruserid=#{masteruserid} and masterpasswd=#{masterpasswd}
+where masteruserid=#{masteruserid} 
 </select>
 </mapper>

@@ -26,7 +26,7 @@ select count(*) from account where email1=#{email1} and email2=#{email2}
 select * from account where userid=#{userid} and passwd=#{passwd}
 
 </select>
-<select id="IdPwCheck" parameterType="map" resultType="int">
+<select id="IdPwCheck2" parameterType="map" resultType="int">
 select count(*) from account where userid=#{userid} and passwd=#{passwd}
 </select>
 <select id="SearchPw" parameterType="map" resultType="int">
@@ -42,5 +42,9 @@ where passwd=#{oldpasswd}
 </update>
 <select id="SearchID" parameterType="map" resultType="MemberDTO">
 select userid from account where username=#{username} and  email1=#{email1} and email2=#{email2}
+</select>
+
+<select id="idPwCheck" resultType="int">
+	select  count(*) from account where userid=#{userid}
 </select>
 </mapper>

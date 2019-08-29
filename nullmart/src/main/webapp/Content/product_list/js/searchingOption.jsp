@@ -385,7 +385,7 @@ buttonSet();
 		var input = specific.querySelector("[name='selected_atoms']");
 		//값 설정
 		input.value = JSON.stringify(reposit);
-		form.action = "/null/ProductListing/specificFilter";
+		form.action = "/null/productListing/specificFilter";
 		form.submit();
 	})
 	

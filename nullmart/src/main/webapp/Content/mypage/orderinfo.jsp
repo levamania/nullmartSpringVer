@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:if test="${empty login}">
 	<%
-		response.sendRedirect("/null/LoginUIServlet");
+		response.sendRedirect("/null/loginForm");
 	%>
 </c:if>
 <!DOCTYPE html>
@@ -45,28 +45,17 @@
 	<c:forEach var="order" items="${orderlist}">
 	<div class="order_list">
 		<span class="order_list_content">${order.ono}</span>
-		<span class="order_list_content">${order.ordername}</span>
+		<span class="order_list_content">${order.scode}</span>
 		<span class="order_list_content">${order.paymethod}</span>
 		<span class="order_list_content">${order.order_date}</span>
 	</div>
 	</c:forEach>
-	<%-- <table >
-		<c:forEach var="order" items="${orderlist}">
-		<tr style="font-weight: bold; " height="40px;" align="center">
-			<td width="200px;">${order.ono}</td>
-			<td width="200px;">${order.ordername}</td>
-			<td width="200px;">${order.paymethod}</td>
-			<td width="200px;">${order.order_date}</td>
-		</tr>
-		</c:forEach>
-	</table>  --%>
 	</c:if>
 	<c:if test="${empty orderlist}">
 		<div id="empty_body">
 			<span>주문 내역이 없습니다.</span>
 		</div>
 	</c:if>
-	<%-- <c:forEach var="order" items="${orderlist}"><div class="order_list_content">${order.ono}</div><div class="order_list_content">${order.ordername}</div><div class="order_list_content">${order.paymethod}</div><div class="order_list_content">${order.order_date}</div></c:forEach> --%>
 </div>
 </div>
 <script src="/null/Content/mypage/js/orderinfo.js?ver=3"></script> 

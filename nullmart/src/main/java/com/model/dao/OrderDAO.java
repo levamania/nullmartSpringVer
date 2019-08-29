@@ -12,7 +12,7 @@ public class OrderDAO {
 	@Autowired
 	private SqlSessionTemplate session;
 
-	public List<HashMap<String, Object>> selectBook(HashMap<Object, Object> reposit) {
+	public List<HashMap<String, Object>> selectBook(HashMap<String, Object> reposit) {
 		String table = reposit.get("TABLE").toString();
 		List<HashMap<String, Object>> result = null;
 		if(table.equals("DELIVINFO")) {

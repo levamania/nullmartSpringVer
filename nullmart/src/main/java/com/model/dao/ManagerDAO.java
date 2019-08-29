@@ -1,23 +1,30 @@
 package com.model.dao;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.dto.ManagerDTO;
 import com.dto.MemberDTO;
-
+@Repository
 public class ManagerDAO {
-
+@Autowired
+SqlSessionTemplate template;
 	
-	public ManagerDTO masterLogin(SqlSession session, HashMap<String, String> map) {
-		ManagerDTO dto = session.selectOne("ManagerMapper.masterLogin", map);
-		return dto;
+	
+	public int ManagerIdPwCheck(String userid) {
+		int n = template.selectOne("ManagerMapper.ManagerIdPwCheck", userid);
+		return n;
 	}
 
-	public int ManagerIdPwCheck(SqlSession session, HashMap<String, String> map) {
-		int num = session.selectOne("ManagerMapper.ManagerIdPwCheck", map);
-		return num;
+
+	public ManagerDTO login(Map<String, String> map) {
+		ManagerDTO dto = template.selectOne("ManagerMapper.masterLogin", map);
+		return dto;
 	}
 
 

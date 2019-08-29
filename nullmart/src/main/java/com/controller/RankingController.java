@@ -13,18 +13,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.model.service.ProductService;
 import com.model.service.RankingService;
 
 @Controller
-public class RankingInfoServlet{
+@RequestMapping(value = "/ranking", produces = "text/plain;charset=utf-8")
+public class RankingController{
 	
 	@Autowired
 	RankingService service;
 	
-	@RequestMapping(value = "/RankingInfoServlet", method = RequestMethod.GET)
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	@ResponseBody
+	public String provide_rankingInfo() {
 		//model 연동
 		List<String> list = service.selectRankingInfoServlet();
 			//data가공
@@ -38,13 +41,7 @@ public class RankingInfoServlet{
 				count++;
 			}
 		//출력
-		response.setContentType("text/plain;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(string);
-	}
-	@RequestMapping(value = "/RankingInfoServlet", method = RequestMethod.POST)
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		return string;
 	}
 
 }

@@ -32,8 +32,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exception.CustomException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,9 +58,11 @@ public class ProductListingController  {
 	private ServletContext context;
 	@Autowired
 	private ProductService pService;
+	@Autowired
+	private RankingService rser;
 
 	@RequestMapping(value = "/specificFilter")
-	protected void filterCondition(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String filterCondition(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		String selected_atoms = request.getParameter("selected_atoms");
 		//유틸 셋팅
 		WordInspector inspector = new WordInspector(new File(context.getRealPath("/Content/configuration/subsitution_dictionary.json")));
@@ -104,13 +108,13 @@ public class ProductListingController  {
 		prev_stack.put("listing_setup", atom_lists);//셋팅 재설정 완료
 		
 		//디스패치
-		RequestDispatcher dis = request.getRequestDispatcher("/ProductListing/work");
-		dis.forward(request, response);
+		return "forward:/productListing/work";
 	}
 	
 	private static Logger logger = LoggerFactory.getLogger(ProductListingController.class);
 	@RequestMapping(value = "/work")
-	public  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public  String work(HttpServletRequest request, HttpServletResponse response, Model model,
+										  @RequestParam(defaultValue = "false", name = "refresh") boolean refresh) throws ServletException, IOException {
 		//세션 처리
 		HttpSession session = request.getSession();
 		HashMap<String, Object> prev_stack = 
@@ -146,7 +150,6 @@ public class ProductListingController  {
 		int paging_quantity = Integer.parseInt(p_temp2);
 		
 		//setting
-		RequestDispatcher dis = null;
 		HashMap<String, List<String>> words_map = null;
 		List<HashMap<String, Object>> pList = null;
 		
@@ -154,7 +157,7 @@ public class ProductListingController  {
 		HashMap<String,Object> reposit = null;	
 		try {
 			
-			if(!back_word.equals(searchedWord)) {
+			if(!back_word.equals(searchedWord)||refresh) {
 				//검증되고 번역된 단어얻기
 				words_map = inspector.translate(searchedWord);
 				//repository of category or name
@@ -193,8 +196,8 @@ public class ProductListingController  {
 				pList = raw_list.stream().sorted(ComparatorFactory.generate(order_criteria, direction)) //정렬
 						   .skip((cur_page-1)*paging_quantity).limit(paging_quantity).collect(Collectors.toList()); //페이징->리스트
 				//페이지 갯수 저장
-				request.setAttribute("page_size", Math.round((raw_list.size()/paging_quantity)+1));
-				request.setAttribute("items_size", raw_list.size());
+				model.addAttribute("page_size", Math.round((raw_list.size()/paging_quantity)+1));
+				model.addAttribute("items_size", raw_list.size());
 
 				//extract column
 				List<HashMap<String, Object>> repo = new ArrayList<HashMap<String,Object>>();
@@ -218,25 +221,24 @@ public class ProductListingController  {
 					String smep = mapper.writeValueAsString((List<String>)cols.get(key));
 					String ne = "";
 					ne = inspector.render(smep, Language.Korean);
-					request.setAttribute(key, mapper.readValue(ne, List.class));
+					model.addAttribute(key, mapper.readValue(ne, List.class));
 				}
 				//클릭된 리스팅셋업 저장
 				HashMap<String, Object> clicked = (HashMap<String, Object>)session.getAttribute("clicked");
 				if(clicked!=null) {
-					request.setAttribute("clicked", new JSONObject(inspector.render(clicked, Language.Korean) ));					
+					model.addAttribute("clicked", new JSONObject(inspector.render(clicked, Language.Korean) ));					
 				}
 				
 				//스타일 미드에 스타일 봇 바인딩
 				HashMap<String, Object> binded = query.bind(raw_list, "STYLEMID",new String[] {"STYLEBOT"});
 					//한글로 번역 & json 파싱 => 저장
 				JSONObject sonsang = new JSONObject(inspector.render(binded, Language.Korean));
-				request.setAttribute("BINDING", sonsang);
+				model.addAttribute("BINDING", sonsang);
 				
 				//inserting keyword to ranking
 				if(source.equals("input")) {
-					RankingService ser = new RankingService();
 					for(String word: words_map.get("ranking")) {
-						if(ser.updateRanking(word)==0)ser.insertRanking(word); 
+						if(rser.updateRanking(word)==0)rser.insertRanking(word); 
 					}
 				}//end_rank
 			}// end_ser
@@ -251,23 +253,20 @@ public class ProductListingController  {
 			e.printStackTrace();
 		}
 		//with jsp
-		dis = request.getRequestDispatcher("/Content/product_list/productList.jsp");
-			//statcking 
 				//세션 처리용
 			session.setAttribute("prev_stack", 
 					MapParamInputer.setOb("listing_setup", (reposit==listing_setup)?listing_setup:reposit ,"back_word",searchedWord)  );
 				//화면 구현용
-			request.setAttribute("searchedWord", searchedWord);
-			request.setAttribute("source", source);
+			model.addAttribute("searchedWord", searchedWord);
+			model.addAttribute("source", source);
 				
-			request.setAttribute("pList", pList);
-			request.setAttribute("cur_page", cur_page);
-			request.setAttribute("paging_quantity", paging_quantity);
+			model.addAttribute("pList", pList);
+			model.addAttribute("cur_page", cur_page);
+			model.addAttribute("paging_quantity", paging_quantity);
 			
-			request.setAttribute("ordering_info", ordering_info);
-			//shooting
-			dis.forward(request, response);
+			model.addAttribute("ordering_info", ordering_info);
 		
+			return "/Content/product_list/productList";
 	}
 
 }

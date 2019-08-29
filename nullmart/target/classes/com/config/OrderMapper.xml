@@ -9,23 +9,29 @@
 		where userid = #{USERID}
 	</select>
 	<select id="selectBook_recent" parameterType="hashmap" resultType="hashmap">
-		select  order_name, phone phone1, telephone phone2, post, addr1, addr2, addr3, userid, order_date
+		select  order_name, phone phone1, telephone phone2, post, addr1, addr2, addr3, userid, order_date, order_transaction
 		from orders
 		where userid =  #{USERID}
+		<trim prefix="and">
+		<if test="cnos!=null">cno in
+			<foreach item="cno" collection="cnos" open="(" close=")" separator=",">#{cno}</foreach>
+		</if>
+		</trim>
 		order by order_date desc
 	</select>
 	
 	<insert id="insertOrder" parameterType="hashmap">
 		insert all 
-		into orders values (ocode(),  scode, pamount, pprice, 
-										     userid, caller_name, caller_phone, caller_email1, caller_email2,
+		into orders values (ocode(), (select order_transaction() from dual),  scode, pamount, pprice, deliver_fee, total_price,
+										     cno, userid, caller_name, caller_phone, caller_email1, caller_email2,
 											 order_name, order_phone, order_telephone, order_postcode, order_address1, order_address2, order_address3,order_mesg,
 											 paymethod, systimestamp)  													 
 		<foreach  item="cno" collection="cnos" open="(" close=")" separator="union">
 			select  (select scode from cart where cno = #{cno}) scode,
 						  (select pamount from cart where cno = #{cno}) pamount,
 						  (select pprice from cart where cno = #{cno}) pprice,
-						  #{userid} userid,#{user} caller_name ,#{user_phone} caller_phone,#{user_email1} caller_email1,#{user_email2} caller_email2,
+						  #{cno} cno, #{deliver_fee} deliver_fee , #{total_price} total_price,
+						  #{USERID} userid,#{user} caller_name ,#{user_phone} caller_phone,#{user_email1} caller_email1,#{user_email2} caller_email2,
 						  #{order_name} order_name, #{order_phone} order_phone, #{order_telephone} order_telephone,
 						  #{order_postcode} order_postcode, #{order_address1} order_address1,#{order_address2} order_address2,#{order_address3} order_address3,
 						  #{order_mesg} order_mesg, #{payment} paymethod

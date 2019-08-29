@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+/*여백 공간*/
+#blank_mesg{
+	height: 30px;
+}
+
+
 /* 카테고리 사이징 */
 
 .category_option{

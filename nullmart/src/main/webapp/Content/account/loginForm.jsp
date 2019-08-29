@@ -15,9 +15,19 @@
 </head>
 <body>
 	<script type="text/javascript">
-	
+
 	$(document).ready(function() {
-		
+		function check(re, what, message) {
+			if (re.test(what.val())) {
+				return true;
+			}
+			alert(message);
+			what.value = "";
+			what.focus();
+			return false;
+
+		}
+
          
 
 		$( "#tabs" ).tabs();
@@ -25,16 +35,42 @@
 		//id 비밀번호 일치 불일치 유효성 검사
 		//var = loginFunction = function
 				
-			$("#memberLogin").on("submit", function() {
+			$("#memberBtn").on("click", function() {
 				
-				var id = $("#userid");
-				var pw = $("#passwd");
+				var re = /^[a-zA-Z0-9]{4,12}$/
+					var re1 = /^[a-zA-Z0-9~!;:@#]{4,12}$/
+
+					var id = $("#userid");
+					var pw = $("#passwd");
+
+					if (id.val() == "") {
+						alert("아이디를 입력하시오")
+						id.focus();
+						return ;
+					}
+					
+					if (pw.val() == "") {
+						alert("패스워드를 입력하시오")
+						pw.focus();
+						return ;
+					}
+
+					if (!check(re, id, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력하시오")) {
+						return ;
+
+					}
+
+					if (!check(re1, pw, "패스워드는 4~12자로 입력하시오")) {
+						return ;
+					}
+
+				
 
 			
 			
 				$.ajax({
 					type : "get",
-					url : "/null/IdPwCheckServlet",
+					url : "/null/idPwCheck",
 					data : {
 						userid : id.val(),
 						passwd : pw.val()
@@ -45,16 +81,18 @@
 					
 					success : function(data, status, xhr) {
 						
-						if (data == 0) {
-							alert("아이디또는 비밀번호가 일치하지 않습니다.");
-							
-
-							$("#userid").focus();
+						if (data == "0") {
+							alert("아이디가 없습니다.");
+							id.val("");
+							id.focus();
 							return false;
-						} else {
+						} else if(data =="1"){
+							alert("패스워드가 틀립니다.");
+							pw.val("");
+							pw.focus();
+						} else{
 							alert("로그인이 되었습니다.")
-							
-							$("#userid").focus();
+							$("#memberLogin").submit();
 
 							
 
@@ -69,12 +107,36 @@
 			});
 				
 				//masterid 비밀번호 일치 불일치 유효성 검사
-				$('#masterLogin').on("submit", function() {
-					var mid = $("#masteruserid");
-					var mpw = $("#masterpasswd");
+				$("#managerBtn").on("click", function() {
+					
+					var mre = /^[a-zA-Z0-9]{4,12}$/
+						var mre1 = /^[a-zA-Z0-9~!;:@#]{4,12}$/
+
+						var mid = $("#masteruserid");
+						var mpw = $("#masterpasswd");
+
+						if (mid.val() == "") {
+							alert("아이디를 입력하시오")
+							mid.focus();
+							return false;
+						}
+						if (mpw.val() == "") {
+							alert("패스워드를 입력하시오")
+							mpw.focus();
+							return false;
+						}
+
+						if (!check(mre, mid, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력하시오")) {
+							return false;
+
+						}
+
+						if (!check(mre1, mpw, "패스워드는 4~12자로 입력하시오")) {
+							return false;
+						}
 					$.ajax({
 						type : "get",
-						url : "/null/ManagerIdPwCheckServlet",
+						url : "/null/ManagerIdPwCheck",
 						data : {
 							masteruserid : mid.val(),
 							masterpasswd : mpw.val()
@@ -82,17 +144,18 @@
 						dataType : "text",
 						success : function(data, status, xhr) {
 						
-							if (data == 0) {
-								alert("아이디또는 비밀번호가 일치하지 않습니다.");
-								
-								$("#masteruserid").focus();
+							if (data == "0") {
+								alert("아이디가 없습니다.");
+								mid.val("");
+								mid.focus();
 								return false;
-							} else {
+							} else if(data =="1"){
+								alert("패스워드가 틀립니다.");
+								mpw.val("");
+								mpw.focus();
+							} else{
 								alert("로그인이 되었습니다.")
-								
-								$("#masteruserid").focus();
-
-								
+								$("#managerLogin").submit();
 
 							}
 						},
@@ -103,85 +166,6 @@
 					});
 
 				});
-			
-				
-
-				function check(re, what, message) {
-					if (re.test(what.val())) {
-						return true;
-					}
-					alert(message);
-					what.value = "";
-					what.focus();
-					return false;
-
-				}
-
-			
-
-			//기본 유효성검사
-
-			$("#memberLogin").on("submit", function(event) {
-
-				var re = /^[a-zA-Z0-9]{4,12}$/
-				var re1 = /^[a-zA-Z0-9~!;:]{4,12}$/
-
-				var id = $("#userid");
-				var pw = $("#passwd");
-
-				if (id.val() == "") {
-					alert("아이디를 입력하시오")
-					id.focus();
-					return false;
-				}
-				
-				if (pw.val() == "") {
-					alert("패스워드를 입력하시오")
-					pw.focus();
-					return false;
-				}
-
-				if (!check(re, id, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력하시오")) {
-					return false;
-
-				}
-
-				if (!check(re1, pw, "패스워드는 4~12자로 입력하시오")) {
-					return false;
-				}
-
-			}); 
-			//기본 유효성검사
-
-			$("#masterLogin").on("submit", function(event) {
-
-				var mre = /^[a-zA-Z0-9]{4,12}$/
-				var mre1 = /^[a-zA-Z0-9~!;:]{4,12}$/
-
-				var mid = $("#masteruserid");
-				var mpw = $("#masterpasswd");
-
-				if (mid.val() == "") {
-					alert("아이디를 입력하시오")
-					mid.focus();
-					return false;
-				}
-				if (mpw.val() == "") {
-					alert("패스워드를 입력하시오")
-					mpw.focus();
-					return false;
-				}
-
-				if (!check(mre, mid, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력하시오")) {
-					return false;
-
-				}
-
-				if (!check(mre1, mpw, "패스워드는 4~12자로 입력하시오")) {
-					return false;
-				}
-
-			});
 
 		});
 		
@@ -201,7 +185,7 @@
   
   </ul>
  
-	<form name="memberLogin" action="/null/LoginServlet" method="get" id="memberLogin">
+	<form name="memberLogin" action="/null/login" method="get" id="memberLogin">
 		 <div id="tabs-1">
 		<div align="center" style="font-size: 200%">
 			<br> <br> <b >회원 로그인</b>
@@ -217,7 +201,7 @@
 						style="font-size: 60%">아이디</a></td>
 					<td width="200" height="35"><input type="text"
 						style="width: 150px; height: 80%; font-size: 70%" id="userid"
-						placeholder="영문,숫자사용 4~12자" name="userid"></td>
+						placeholder="영문,숫자사용 4~12자" name="userid" required></td>
 					<br>
 				</tr>
 				<tr>
@@ -226,11 +210,11 @@
 						style="font-size: 60%">패스워드</a></td>
 					<td width="200" height="35"><input type="password"
 						style="width: 150px; height: 80%; font-size: 70%" id="passwd"
-						placeholder="영문,숫자,특수문자사용 4~12자" name="passwd"></td>
+						placeholder="영문,숫자,특수문자사용 4~12자" name="passwd" required></td>
 					<br>
 				</tr>
 			</table>
-			<br> <input type="submit" value="  로그인 " id="loginbtn" class="test_btn1"
+			<br> <input type="button" value="  로그인 " id="memberBtn" class="test_btn1"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
 			<input type="reset" value="다시입력" class="test_btn1"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">
@@ -240,7 +224,7 @@
 	</div>
 	</form>
 	<div id="tabs-2">
-   <form name="masterLogin" action="/null/ManagerLoginServlet" method="get" id="masterLogin">
+   <form name="managerLogin" action="/null/managerLogin" method="get" id="managerLogin">
 		 <div id="tabs-1">
 		<div align="center" style="font-size: 200%">
 			<br> <br> <b>관리자 로그인</b>
@@ -269,7 +253,7 @@
 					<br>
 				</tr>
 			</table>
-			<br> <input type="submit" value="  로그인 " class="test_btn1" id=""
+			<br> <input type="button" value="  로그인 " class="test_btn1" id="managerBtn"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
 			<input type="reset" value="다시입력" class="test_btn1"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">

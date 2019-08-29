@@ -3,9 +3,9 @@
 // top - menu
 	$().ready(function(){
 		$("#login").on("click",()=>location.href="/null/Content/account/loginForm.jsp");
-		$("#logout").on("click",()=>location.href="/null/LogoutServlet");
+		$("#logout").on("click",()=>location.href="/null/logout");
 		$("#signup").on("click",()=>location.href="/null/Content/account/signup_first.jsp");
-		$("#mypage").on("click",()=>location.href="/null/OrderInfoServlet");
+		$("#mypage").on("click",()=>location.href="/null/mypage/orderInfo");
 		$("#cart").on("click",()=>location.href="/null/cart/UI");
 		$("#order").on("click",()=>location.href="/null/cart/UI");
 	});
@@ -39,7 +39,7 @@
 			// ranking_info
 			$.ajax({
 				tyep:"post",
-				url:"/null/RankingInfoServlet",
+				url:"/null/ranking/info",
 				dataType:"text",
 				success:function(data,status,xhr){
 					ranking_list = data.split(":");
@@ -132,7 +132,7 @@
 									});
 		//style mid - anchor setting
 		$("#horizentalBar a").each(function(){
-											var href = "/null/productListing/work?source=menu&searchedWord=" + $(this).text();  
+											var href = "/null/productListing/work?source=menu&searchedWord=" + $(this).text()+"&refresh=true";  
 											$(this).attr("href",href);
 										})
 });
