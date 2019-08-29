@@ -21,18 +21,10 @@ public class LoginChecker implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO)session.getAttribute("login");
 		if(member==null) {
-//			response.sendRedirect("/null/main");
-			member = new MemberDTO();
-			member.setUserid("broth59");
-			member.setUsername( "고명진");
-			member.setPhone1( "010");
-			member.setPhone2("9938");
-			member.setPhone3("2134");
-			member.setEmail1("broth59");
-			member.setEmail2("naver.com");
-			session.setAttribute("login", member);
+			response.sendRedirect("/null/Content/account/loginForm.jsp");
+			result = false;
 		}else {
-		
+			
 		}
 		return result;
 	}
