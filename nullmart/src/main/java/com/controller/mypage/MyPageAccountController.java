@@ -90,14 +90,6 @@ public class MyPageAccountController {
 		return "redirect:/logout";
 	}
 	
-	@RequestMapping(value = "/mypage/addrList",method = RequestMethod.GET)
-	public String goAddrList(HttpSession session) {
-		MemberDTO member = (MemberDTO)session.getAttribute("login");
-		String userid = member.getUserid();
-		List<RegAddrDTO> regAddrDTOs = service.getAddrList(userid);
-		session.setAttribute("addrList", regAddrDTOs);
-		return "/Content/mypage/addrlist";
-	}
 	
 	//임시 개인정보 이동 페이지 
 	//추후 삭제 필요 

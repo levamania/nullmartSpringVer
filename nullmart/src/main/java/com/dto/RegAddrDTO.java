@@ -60,7 +60,11 @@ public class RegAddrDTO {
 	}
 
 	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
+		if(phone1.length()<5) {
+			this.phone1="없음";
+		}else {
+			this.phone1 = phone1;
+		}
 	}
 
 	public String getPhone2() {

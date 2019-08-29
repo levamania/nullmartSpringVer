@@ -20,11 +20,10 @@ public class MypageDAO {
 	@Autowired
 	private SqlSessionTemplate template;
 	public int regAddrTotal(SqlSession session) {
-		
 		return template.selectOne("myPage.regAddrTotal");
 	}
 
-	public void insertAddr(SqlSession session, RegAddrDTO dto) {
+	public void insertAddr(RegAddrDTO dto) {
 		template.insert("myPage.insertAddr", dto);
 	}
 
@@ -32,15 +31,15 @@ public class MypageDAO {
 		return template.selectList("myPage.getAddrList", userid);
 	}
 
-	public RegAddrDTO searchByNo(SqlSession session, String delivno) {
+	public RegAddrDTO searchByNo(String delivno) {
 		return template.selectOne("myPage.searchByNo", delivno);
 	}
 
-	public void modifyAddr(SqlSession session, RegAddrDTO dto) {
+	public void modifyAddr(RegAddrDTO dto) {
 		template.insert("myPage.modifyAddr", dto);
 	}
 
-	public void deleteDelivnos(SqlSession session, List<String> delivnos) {
+	public void deleteDelivnos(List<String> delivnos) {
 		template.delete("myPage.deleteDelivnos",delivnos);
 	}
 

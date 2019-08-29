@@ -128,7 +128,7 @@ $(document).ready(function(){
 			phone1 = phone11.val()+"-"+phone12.val()+"-"+phone13.val();
 		}
 		var phone2 = phone21.val()+"-"+phone22.val()+"-"+phone23.val();
-		var queryString = "/null/AddrAddServlet?delivname="+delivname.val()+"&delivperson="+delivperson.val()+"&phone1="+phone1+"&phone2="+phone2;
+		var queryString = "/null/mypage/regAddr?delivname="+delivname.val()+"&delivperson="+delivperson.val()+"&phone1="+phone1+"&phone2="+phone2;
 		queryString+="&post="+post.val()+"&address1="+address1.val()+"&address2="+address2.val();
 		console.log(queryString);
 		$(location).attr("href",queryString);

@@ -22,58 +22,25 @@ public class MyPageService {
 	@Autowired
 	private MypageDAO mypageDAO;
 	
-//	public void addAddr(RegAddrDTO dto) {
-//		SqlSession session = MySqlSessionFactory.getSession();
-//		try {
-//			/*
-//			 * int num = mypageDAO.regAddrTotal(session)+1; dto.setDelivno(num);
-//			 */
-//			mypageDAO.insertAddr(session,dto);
-//			session.commit();
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			session.rollback();
-//		}finally {
-//			session.close();
-//		}
-//	}
+	public void addAddr(RegAddrDTO dto) {
+		mypageDAO.insertAddr(dto);
+	}
 	public List<RegAddrDTO> getAddrList(String userid) {
 		List<RegAddrDTO> list= mypageDAO.getAddrList(userid);
 		return list;
 	}
-//		RegAddrDTO dto =null;
-//		SqlSession session = MySqlSessionFactory.getSession();
-//		try {
-//			dto = mypageDAO.searchByNo(session,delivno);
-//		} finally {
-//			session.close();
-//		}
-//		return dto;
-//	}
-//	public void modifyAddr(RegAddrDTO dto) {
-//		SqlSession session = MySqlSessionFactory.getSession();
-//		try {
-//			mypageDAO.modifyAddr(session,dto);
-//			session.commit();
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			session.rollback();
-//		}finally {
-//			session.close();
-//		}
-//	}
-//	public void deleteDelivnos(List<String> delivnos) {
-//		SqlSession session = MySqlSessionFactory.getSession();
-//		try {
-//			mypageDAO.deleteDelivnos(session,delivnos);
-//			session.commit();
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			session.rollback();
-//		}finally {
-//			session.close();
-//		}
-//	}
+	public RegAddrDTO searchByNo(String delivno) {
+		RegAddrDTO dto = mypageDAO.searchByNo(delivno);
+		return dto;
+	}
+	public void modifyAddr(RegAddrDTO dto) {
+		mypageDAO.modifyAddr(dto);
+			
+	}
+	public void deleteDelivnos(List<String> delivnos) {
+		mypageDAO.deleteDelivnos(delivnos);
+		
+	}
 	public int searchPwdById(Map<String, String> map) {
 		int num = mypageDAO.searchPwdById(map);
 		return num;
