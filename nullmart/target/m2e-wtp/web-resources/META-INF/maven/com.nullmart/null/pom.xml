@@ -40,6 +40,14 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
+		<!-- context support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>3.2.8.RELEASE</version>
+		</dependency>
+
+		<!-- context support -->
 
 		<!-- Logging -->
 		<dependency>
@@ -64,13 +72,14 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
 			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
+
 				<exclusion>
 					<groupId>javax.jms</groupId>
 					<artifactId>jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>com.sun.jdmk</groupId>
@@ -209,25 +218,22 @@
 			<version>2.6</version>
 		</dependency>
 
-		<!-- mail -->
-		<!-- https://mvnrepository.com/artifact/com.sun.mail/mailapi -->
+
+		<!-- mail Start -->
 		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>mailapi</artifactId>
-			<version>1.4.4-rc1</version>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.3</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.sun.mail/pop3 -->
+
+		<!-- mail end -->
+		<!-- activation 추가 -->
 		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>pop3</artifactId>
-			<version>1.4.2</version>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.sun.mail/smtp -->
-		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>smtp</artifactId>
-			<version>1.4.2</version>
-		</dependency>
+		<!-- activation 끝 -->
 
 
 		<!-- captcha -->

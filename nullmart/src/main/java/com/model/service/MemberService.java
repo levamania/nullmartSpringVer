@@ -36,4 +36,22 @@ public class MemberService {
 
 
 
+
+
+
+	public MemberDTO SearchID(Map<String, String> map) {
+		MemberDTO dto = dao.SearchID(map);
+		return dto;
+	}
+
+
+
+	public int UpdatePw(Map<String, String> map) {
+		int n = dao.UpdatePw(map);
+		return n;
+	}
+
+
+
+
 }

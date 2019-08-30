@@ -25,6 +25,16 @@ SqlSessionTemplate template;
 		return template.selectOne("MemberMapper.idPwCheck", userid);
 	}
 
+	public MemberDTO SearchID(Map<String, String> map) {
+		MemberDTO dto = template.selectOne("MemberMapper.SearchID", map);
+		return dto;
+	}
+
+	public int UpdatePw(Map<String, String> map) {
+		int n = template.update("MemberMapper.updatePw", map);
+		return n;
+	}
+
 
 
 }

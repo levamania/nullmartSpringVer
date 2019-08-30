@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +32,7 @@ $(document).ready(function(){
 		var un = $("#username");
 		var em1 = $("#email1");
 		var em2 = $("#email2");
+		
 
 		if (id.val() == "") {
 			alert("아이디를 입력하시오")
@@ -56,7 +59,7 @@ $(document).ready(function(){
 			
 			
 			type : "get",
-			url : "/null/SearchPwServlet",
+			url : "/null/searchPwMail",
 			data : {
 				
 				userid : id.val(),
@@ -66,26 +69,21 @@ $(document).ready(function(){
 			},
 			dataType : "text",
 			success : function(data, status, xhr) {
-				console.log('확인');
-				console.log(data);
-				if (data == 0) {
-					alert("올바른 정보를 입력해주세요.");
-					
 
-					event.preventDefault(); 
+				if ( "${pwResult}"==0) {
+
+				alert("올바른 정보를 입력해주세요.");
 					return false;
-				} else if(data==1){
+				} else if("${pwResult}"==1){
 					alert("메일이전송되었습니다.")
 				
-					$(location).attr("href","/null/SendMailPWServlet?email1="+em1.val()+"&email2="+em2.val()+"&userid="+id.val());
+					$(location).attr("href","/null/searchPwMail?email1="+em1.val()+"&email2="+em2.val()+"&userid="+id.val());
 					 
 
 
 				}
 			},
 			error : function(xhr, status, e) {
-				console.log("error", e);
-				console.log("status", status);
 			}
 	
 
@@ -111,7 +109,6 @@ $(document).ready(function(){
 </head>
 
 <body>
-
 <form action="/null/loginFrom.jsp" method="get" id="search" >
 		<div align="center" style="display: block; width: 1500px;">
 			<br> 

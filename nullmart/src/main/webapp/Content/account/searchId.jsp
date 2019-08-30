@@ -50,7 +50,7 @@ $(document).ready(function(){
 			
 			
 			type : "get",
-			url : "/null/SendMailIDServlet",
+			url : "/null/searchIdMail",
 			data : {
 				
 				
@@ -62,25 +62,15 @@ $(document).ready(function(){
 			success : function(data, status, xhr) {
 				console.log('확인');
 				console.log(data);
-				if (data=="응답실패") {
-					alert("올바른 정보를 입력해주세요.");
-					
-
-					
-					return false;
-				} else if(un.val()||em1.val()||em2.val()!=null){
+				if(un.val()||em1.val()||em2.val()!=null){
+					$(location).attr("href","/null/searchIdMail?email1="+em1.val()+"&email2="+em2.val()+"&username="+un.val());
 					alert("메일이전송되었습니다.")
-					
-				
-					$(location).attr("href","/null/SendMailIDServlet?email1="+em1.val()+"&email2="+em2.val()+"&username="+un.val());
-					 
-
 
 				}
 			},
 			error : function(xhr, status, e) {
-				console.log("error", e);
-				console.log("status", status);
+				alert("올바른 정보를 입력해주세요.");
+				return false;
 			}
 	
 
@@ -108,7 +98,7 @@ $(document).ready(function(){
 
 <body>
 
-<form action="/null/loginFrom.jsp" method="get" id="search" >
+<form action="/null/loginForm.jsp" method="get" id="search" >
 		<div align="center" style="display: block; width: 1500px;">
 			<br> 
 			<br> <b style="font-size: 200%">아이디 찾기</b>
