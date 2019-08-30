@@ -14,10 +14,7 @@
 			<div data-target="info" class="in">배송/AS 안내</div>
 		</div>
 		<div class="pool">
-			<textarea name="editor1"></textarea>
-			<script>
-				CKEDITOR.replace('editor1');
-			</script>
+
 		</div>
 	</div>
 
