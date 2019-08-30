@@ -125,6 +125,6 @@
 </div>
 
 </form>
-<script src="/null/Content/admin/js/searchStock.js?ver=5"></script>
+<script src="/null/Content/admin/js/searchStock.js?ver=6"></script>
 </body>
 </html>

@@ -73,11 +73,12 @@ $(document).ready(function() {
 			}
 			
 		}
+		console.log(pname.val());
 		$.ajax({
+			url: "/null/admin/checkpcode",
 			type: "get",
-			url: "/null/InputStockServlet",
-			data:{pname:pname.val(),pcode:pcode.val()},
 			dataType: "text",
+			data:{pname:pname.val(),pcode:pcode.val()},
 			success: function(data,status,xhr){
 				console.log(data);
 				if(data=="pnamenone"){

@@ -62,7 +62,7 @@ $(document).ready(function(){
 	function searchInitSelector(){
 		$.ajax({
 			type: "get",
-			url: "/null/GetInitSearchStockServlet",
+			url: "/null/admin/initSearchPage",
 			dataType: "json",
 			success: function(data,status,xhr){
 				
@@ -158,7 +158,7 @@ $(document).ready(function(){
 			// ajax json 응답 처리
 			$.ajax({
 				type: "get",
-				url: "/null/GetInitSearchStockServlet",
+				url: "/null/admin/initSearchPage",
 				data: {pname:pname.val()},
 				dataType: "json",
 				success: function(data,status,xhr){

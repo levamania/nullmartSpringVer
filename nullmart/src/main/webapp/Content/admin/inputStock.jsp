@@ -10,7 +10,7 @@
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
 <body>
 <div><jsp:include page="top.jsp"/></div>
-<form action="/null/InputStockServlet" method="post">
+<form action="/null/admin/inputStock" method="post">
 <div id="body">
 	<div id="body_left"><jsp:include page="left.jsp"/></div>
 	<div id="body_content">
@@ -96,6 +96,7 @@
 	
 </div>
 </form>
-<script src="/null/Content/admin/js/inputStock.js?ver=1"></script>
+<script src="/null/Content/admin/js/inputStock.js?ver=10
+"></script>
 </body>
 </html>
