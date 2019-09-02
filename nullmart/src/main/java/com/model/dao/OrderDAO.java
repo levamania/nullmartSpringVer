@@ -26,4 +26,10 @@ public class OrderDAO {
 	public int insertOrder(HashMap<String, Object> reposit) {
 		return session.insert("insertOrder", reposit);
 	}
+
+	
+	//평가 자료
+	public List<HashMap<String, Object>> selectEvaluatedes(HashMap<String, Object> reposit) {
+		return session.selectList("selectEvaluatedes", reposit);
+	}
 }

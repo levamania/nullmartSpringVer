@@ -5,5 +5,15 @@ $().ready(()=>{
 	$(".header>.in").on("click",()=>location.href="#info_content");
 
 
+	//문자열 컨버팅
 
+
+	//상품 후기 이벤트
+	$(".content>div:first-child").on("click",function(){
+		$(this).parent().next().toggleClass("leo");
+	})
+
+	$("#paging>div").on("click",function(){
+		
+	})
 })
