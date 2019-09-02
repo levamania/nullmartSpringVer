@@ -48,27 +48,27 @@ public class AdminDAO {
 		return template.update("com.dto.Admin.updateStock", stock);
 	}
 
-	public List<String> searchStyleTop(SqlSession session) {
+	public List<String> searchStyleTop() {
 		return template.selectList("com.dto.Admin.searchStyleTop");
 	}
 
-	public List<String> searchStyleMid(SqlSession session) {
+	public List<String> searchStyleMid() {
 		return template.selectList("com.dto.Admin.searchStyleMid");
 	}
 
-	public List<String> searchStyleBot(SqlSession session) {
+	public List<String> searchStyleBot() {
 		return template.selectList("com.dto.Admin.searchStyleBot");
 	}
 
-	public List<String> searchPname(SqlSession session) {
+	public List<String> searchPname() {
 		return template.selectList("com.dto.Admin.searchPname");
 	}
 
-	public ProductDTO searchProduct(SqlSession session, String pname) {
+	public ProductDTO searchProduct(String pname) {
 		return template.selectOne("com.dto.Admin.searchProduct", pname);
 	}
 
-	public List<StockJoinProductDTO> searchStock(SqlSession session, HashMap<String, String> map) {
+	public List<StockJoinProductDTO> searchStock(HashMap<String, String> map) {
 		List<StockJoinProductDTO> list = null;
 		int offset = Integer.parseInt(map.get("offset"));
 		int limit = Integer.parseInt(map.get("limit"));
@@ -76,7 +76,7 @@ public class AdminDAO {
 		return list;
 	}
 
-	public  int searchCount(SqlSession session, HashMap<String, String> map) {
+	public  int searchCount(HashMap<String, String> map) {
 		return template.selectOne("com.dto.Admin.searchCount", map);
 	}
 

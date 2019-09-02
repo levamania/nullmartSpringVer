@@ -229,3 +229,7 @@ input[type=submti]{
 	font-size: 20px;
 	font-weight: bold;
 }
+#group_a>span{
+	padding-top: 4px;
+	align-self: center;
+}

@@ -1,6 +1,7 @@
-/**
- * 
- */
+$.getScript("/null/Content/api/jquery/jquery-ui/jquery-ui.js",function(){
+	console.log("jquery-ui.js");
+})
+
 
 // select 태그 초기화
 function initSelector(selector,options){
@@ -61,11 +62,11 @@ $(document).ready(function(){
 	console.log(isSearchOption.val());
 	function searchInitSelector(){
 		$.ajax({
-			type: "get",
+			type: "post",
 			url: "/null/admin/initSearchPage",
 			dataType: "json",
 			success: function(data,status,xhr){
-				
+					console.log(data);
 					initSelector(styletop,data.styletops);
 					initSelector(stylemid,data.stylemids);
 					initSelector(stylebot,data.stylebots);
@@ -78,6 +79,7 @@ $(document).ready(function(){
 							source:keywords
 						});
 					});
+					
 					//조회 후 페이지를 로딩한 것이면?
 					if(isSearchOption.val()==1){
 						 var hpcode = $("#hpcode");
@@ -157,7 +159,7 @@ $(document).ready(function(){
 			
 			// ajax json 응답 처리
 			$.ajax({
-				type: "get",
+				type: "post",
 				url: "/null/admin/initSearchPage",
 				data: {pname:pname.val()},
 				dataType: "json",
@@ -296,6 +298,25 @@ $(document).ready(function(){
 	var startCur = $("#startCur");
 	var endCur= $("#endCur");
 	var atags = $("#group_a>a");
+	var prevGroup = $("#prevGroup");
+	var nextGroup = $("#nextGroup");
+	var groupindecator = $("#groupindecator");
+	
+	/*
+	 * 그룹 설정 이벤트 
+	 * */
+	
+	prevGroup.on("click",function(event){
+		event.preventDefault();
+		groupindecator.val("1");
+		$("form").submit();
+	});
+	
+	nextGroup.on("click",function(){
+		event.preventDefault();
+		groupindecator.val("2");
+		$("form").submit();
+	});
 	
 	// 번호 a태그 설정
 	// 현재 페이지는 a 태그 비 활성
@@ -313,6 +334,7 @@ $(document).ready(function(){
 		}
 		
 	});
+	
 });
 
 
