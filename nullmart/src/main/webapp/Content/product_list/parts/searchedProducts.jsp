@@ -61,13 +61,13 @@
 		<c:if test="${! empty pList }">
 			<!-- 	페이징 -->
 			<div id="paging">
-				<c:forEach var="num" begin="1" end="${page_size}">
+				<c:forEach var="count" begin="1" end="${page_size}">
 					<c:choose>
-						<c:when test="${num==cur_page}">
-							<div class="page active" id="page${num}">${num}</div>
+						<c:when test="${count==cur_page}">
+							<div class="page active" id="page${count}">${count}</div>
 						</c:when>
 						<c:otherwise>
-							<div class="page" id="page${num}">${num}</div>
+							<div class="page" id="page${count}">${count}</div>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

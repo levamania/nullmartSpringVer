@@ -40,14 +40,30 @@
 	justify-content: center;
 	align-content: flex-start;
 
-	min-height: 300px;
 	width: 100%;
 }
 .pool *{
 	box-sizing: border-box;
 }
+	
+	/*상품 정보 설정*/
+	#board_content>.pool>div{
+		display:flex;
+		align-items:center;
+		justify-content:center;
+	
+		width: 100%;
+		height: 100px;
+	}
+	
+
 
 	/* 상픔 후기 */
+	#eval_content .star{
+		height: 15px;
+		width: 15px;
+	}
+	
 	#eval_content>.pool{
 		padding: 20px 0 20px ;
 	}
@@ -60,12 +76,15 @@
 		height:30px;
 
 		border: 1px solid black;
+		
+		font-size: 13px;
 	}
 	#eval_content .record>div{
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		
+		height:100%;
 		flex:15;
 	}
 	#eval_content .record>div:first-child{flex:70%;}
@@ -74,9 +93,63 @@
 		background-color: #ffdede;
 	}
 
+		/*종합 평가 설정*/
+	#eval_content>.pool>.starry{
+		margin-bottom: 20px;
+		border:none;
+				
+		height: 50px;
+	}
+	#eval_content>.pool>.starry>div{
+		flex:30;
+		font-weight: bold;	
+	}
+	#eval_content>.pool>.starry>div img{
+		height:25px;
+		width:25px;
+	}
+	#eval_content>.pool>.starry>div:nth-child(1){
+		flex: 15;
+		font-size: 20px;
+		color: #e20f0f;
+		margin-left: 10px;
+	}
+	#eval_content>.pool>.starry>div:nth-child(2){
+		flex: 15;
+		font-size: 30px;
+	}
+	#eval_content>.pool>.starry>div:nth-child(2)>span{font-size:15px;}
+	
+	#eval_content>.pool>.starry>div:nth-child(3){
+		flex: 25;
+	}
+	#eval_content>.pool>.starry>div:nth-child(4){
+		flex: 55;
+		justify-content: flex-start;
+		align-items: flex-end;
+		
+		padding-bottom: 10px;
+		
+		font-size: 15px;
+		
+	}
+	
+
 		/*콘텐트 설정*/
-		.wrap>div:first-child{cursor:pointer;}
-		#eval_content .wrap.leo{display: none;}
+	#eval_content .wrap{
+		border-top-width: 0;
+	}
+		
+	#eval_content .wrap>div:first-child{
+			justify-content: flex-start;
+			padding-left: 5%;
+			cursor:pointer;
+		}
+	#eval_content .wrap>div:first-child:hover{
+		text-decoration: underline;
+	}	
+		
+	#eval_content .wrap.leo{display: none;}
 
 
 		/*장기 설정*/
@@ -87,19 +160,21 @@
 			justify-content: flex-start;
 			
 			width: 80%;
-
+			
+			border-bottom: 1px solid black;
+			font-size: 13px;
 		}
 		.organ.leo{display: flex;}
 
 		.organ>div{
-			display: flex;
+			display: flex;		
 		}
 		
 		.organ>.summing{
 			align-items: center;
 			justify-content: space-around;
 
-			width: 30%;
+			width: 50%;
 			height: 30px; 
 			
 			margin:10px;
@@ -107,14 +182,14 @@
 			background-color: #f0e5ee;
 		}
 		.organ>.text_area{
-			align-items: flex-start;
-			justify-content: flex-start;
+			display:inline-block;
 			
 			width:80%;
 
 			margin: 15px;
 		}
-
+		.organ>.text_area>span:first-child{font-weight: bold;}
+		
 	/*페이징 설정*/
 	#paging{
 		display: flex;
@@ -123,6 +198,8 @@
 
 		height: 30px;
 		width: 100%;
+		
+		margin-bottom: 30px;
 	}
 	#paging>div{
 		display: inline-flex;
@@ -136,11 +213,47 @@
 
 		border: 1px solid black;
 		cursor:pointer;
+		font-size: 13px;
 	}
 	#paging>div.dead{
 		background-color: red;
+		border: none;
 		color:white;
 		cursor:default;
 	}
 	
 	#paging>.arrow{display:none;}
+	
+	
+	
+	/*배송 안내 설정*/
+	#info_content>.pool{
+		flex-direction: column;
+		padding: 20px 10% 20px;
+		
+		font-size: 13px;
+	}
+	
+	#info_content>.pool>div{
+		width:100%;	
+	}
+	#info_content>.pool span{
+		font-weight: bold;
+	}
+	
+	#info_content>.pool>div:first-child{
+		font-size: 15px;
+		margin: 10px 0 10px;
+	}
+	
+/* 	#info_content>.pool>div:first-child>span::before{ */
+/* 		content: '            '; */
+/* 		width: 20px; */
+/* 		height: 20px; */
+/* 		background-image: url("/null/Content/img/order/fast_deliver.jpg"); */
+/* 		background-repeat: no-repeat; */
+/* 		background-position: center center; */
+/* 		background-size: contain; */
+/* 		background-color: red; */
+		
+/* 	} */

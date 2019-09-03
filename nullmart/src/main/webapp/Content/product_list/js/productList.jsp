@@ -26,7 +26,7 @@
 	  	  	 case "productListing/work":{ 
 	  	  		 data ={
 			  	  		    	"searchedWord" : "${searchedWord}",
-			    		 	     "cur_page" : $("#paging>.page.active").text(),
+			    		 	     "cur_page" : ($("#paging>.page.active").length!=0)?$("#paging>.page.active").text():1,
 						     	 "ordering_info" : $("#order_info>.order.active").children().text()
 			   			   };break;
 	  	  		 }

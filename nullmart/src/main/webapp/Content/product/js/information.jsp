@@ -211,18 +211,18 @@ $().ready(()=>{
 //-----------------------------------결제-----------------------------------------//	
 	
 	//로그인 체커
-	function login_checker(fuc){
+	function login_checker(fuc){ 
 		if(${!empty login}){
 			fuc();
 		}else{
 			alert("로그인이 필요합니다");
-			location.href="/null/LoginUIServlet";	
+			location.href="/null/login/UI";	
 		}
 	}
 	
 	//결제버튼 설정
 	$("#payment>div")
-		.eq(1).on("click",function(){location.href="/null"})
+		.eq(1).on("click",function(){location.href="/null/main"})
 		//장바구니
 		.end().eq(2).on("click",function(){
 				if($("#option>.content.reposit").length!=0){
@@ -254,12 +254,18 @@ $().ready(()=>{
 								success:function(data){
 									if(data=="success"){
 										$("#product_info>.layout").css({display:"flex"});
-									}else{
-										var [son] = JSON.parse(data); //destructing
-										let warnning = ` \n 죄송합니다. 상품이 부족합니다.
-													   \n *상품: `+son["SCODE"]+`  *선택하신 수량: `+son["PICK_QUAN"]+`  *부족한 수량: `+son["DIFFER"];
-										alert(warnning);
 										
+									}else{
+										var atoms = JSON.parse(data); 
+										var error_mesg = "";
+										
+										for(var atom of atoms){
+											error_mesg += "\n *상품: "+atom["SCODE"]+" *선택하신 수량: "+atom["PICK_QUAN"]+"  *부족한 수량: "+atom["DIFFER"];
+										}
+										
+										let warnning = "\n 죄송합니다. 상품이 부족합니다.\n"+ error_mesg;
+										alert(warnning);
+
 									}
 								},
 								error:function(staus,xhr,error){
@@ -274,7 +280,70 @@ $().ready(()=>{
 				
 		 })// end on
 		//구매하기
-		.end().eq(3).on("click",()=>location.href="/null/OrderServlet");
+		.end().eq(3).on("click",function(){
+			if($("#option>.content.reposit").length!=0){
+				login_checker(function(){
+					//무엇을 전달해야 하는가? 리파짓의 상품코드, 수량, 가격, 배송비
+					var info = new Array();
+					var count = 1;
+					$("#option>.content.reposit").each(function(){
+						var PCODE = "${product.PCODE}";
+						var SCODE = $(this).children("div:first-child").text().trim();
+						var PAMOUNT = $(this).find("input").val().trim();
+						var PPRICE = $(this).find("#for_calc").text().trim();
+						var DELIVER_FEE = $(this).find(".delete").attr("data-deliver");
+						
+						 info.push( { "PCODE":PCODE,"SCODE":SCODE, "PAMOUNT":PAMOUNT, 
+							 				    "PPRICE":PPRICE, "DELIVERFEE_YN": DELIVER_FEE});
+					})
+					
+					$("#payment").data("info",info);
+					
+					$.ajax({
+						//전달셋팅
+						method:"post",
+						url:"/null/cart/stackProduct",
+						data: {
+							list:JSON.stringify(info)
+						},
+					
+						//수용셋팅
+						type:"text",
+						success:function(data){
+							if(data=="success"){
+								var info = $("#payment").data("info");
+								var scodes = "";
+								for(var record of info){
+									scodes += record["SCODE"]+":";
+								}
+								scodes = scodes.substring(0, scodes.length-1);
+								
+								$.removeData($("#payment"), "info");
+ 								location.href = "/null/order/ui?scodes="+scodes+"&pcodes="+"${product.PCODE}"	;
+							}else{
+								var atoms = JSON.parse(data); 
+								var error_mesg = "";
+								
+								for(var atom of atoms){
+									error_mesg += "\n *상품: "+atom["SCODE"]+" *선택하신 수량: "+atom["PICK_QUAN"]+"  *부족한 수량: "+atom["DIFFER"];
+								}
+								
+								let warnning = "\n 죄송합니다. 상품이 부족합니다.\n"+ error_mesg;
+								alert(warnning);
+
+							}
+						},
+						error:function(staus,xhr,error){
+							console.log(error);
+						}
+					});//and ajax
+			
+				})//end fuc
+		}else{
+			alert("상품을 선택해 주세요");
+		}
+		
+	 })// end on
 	
 	//장바구니 선택時 팝업 설정
 	$("#pop_up")

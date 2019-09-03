@@ -56,18 +56,23 @@ public class OrderController {
 	@RequestMapping("/ui")
 	@SuppressWarnings("unchecked")
 	public String diplayUI(Model model, HttpSession session,
-										   @RequestParam("pcodes") String pcodes) {
+										   @RequestParam("pcodes") String pcodes,
+										   @RequestParam( value ="scodes",required = false ) String scodes	) {
 		// 세션 처리
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
 		String userid = member.getUserid();
 		
 		//수용	
 		List<String> pcode_list = Arrays.asList(pcodes.split(":"));
+		
+		List<String> scode_list = null;
+		if(scodes!=null)scode_list = Arrays.asList(scodes.split(":"));
 
 		// 유틸 셋팅
 		QueryUtil query = new QueryUtil();
 		// with model
-		List<HashMap<String, Object>> cart_list = cser.selectCartList(MapParamInputer.set("USERID", userid, "PCODE_LIST", pcode_list));
+		List<HashMap<String, Object>> cart_list 
+				= cser.selectCartList(MapParamInputer.set("USERID", userid, "PCODE_LIST", pcode_list, "SCODE_LIST", scode_list));
 		HashMap<String, Object> pcode_mapped = null;
 		Set<String> key_set = null;
 		List<String> cno_list = null;
