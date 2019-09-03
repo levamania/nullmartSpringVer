@@ -75,7 +75,9 @@
 	}
 
 		/*콘텐트 설정*/
-		.content>div:first-child{cursor:pointer;}
+		.wrap>div:first-child{cursor:pointer;}
+		#eval_content .wrap.leo{display: none;}
+
 
 		/*장기 설정*/
 		.organ{
@@ -135,3 +137,10 @@
 		border: 1px solid black;
 		cursor:pointer;
 	}
+	#paging>div.dead{
+		background-color: red;
+		color:white;
+		cursor:default;
+	}
+	
+	#paging>.arrow{display:none;}
