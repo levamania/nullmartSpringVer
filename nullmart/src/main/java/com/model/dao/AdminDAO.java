@@ -80,6 +80,10 @@ public class AdminDAO {
 		return template.selectOne("com.dto.Admin.searchCount", map);
 	}
 
+	public HashMap<String, String> searchProductToMap(String pcode) {
+		return template.selectOne("com.dto.Admin.searchProductToMap", pcode);
+	}
+
 	
 
 	

@@ -86,4 +86,8 @@ public class AdminService {
 		return num;
 	}
 
+	public HashMap<String, String> searchProductToMap(String pcode) {
+		return adminDAO.searchProductToMap(pcode);
+	}
+
 }

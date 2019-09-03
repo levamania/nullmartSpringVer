@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지</title>
-<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/inputStock.css?ver=1">
+<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/inputStock.css?ver=2">
 </head>
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
 <body>
@@ -34,7 +34,7 @@
 				<td colspan="2">
 					<div class="content_input">
 						<input type="button" value="확인" id="checkpcode" style="margin-right: 20px;">
-						<p style="font-size: 12px;">상품명과 상품코드는 확인 하나만 입력 후  검색을 통해 자동 입력 됩니다.입력 후 저장 버튼이 활 성화 됩니다.</p>
+						<p style="font-size: 12px;" id="init_explain">상품명과 상품코드는 확인 하나만 입력 후  검색을 통해 자동 입력 됩니다.입력 후 저장 버튼이 활 성화 됩니다.</p><a href="#layer2" class="btn-example"><img id="pImage" src="/null/Content/img/shoes/sports/running/RUN1.jpg" width="50px" height="50px"></a>
 					</div>
 				</td>
 			</tr >
@@ -96,7 +96,27 @@
 	
 </div>
 </form>
-<script src="/null/Content/admin/js/inputStock.js?ver=10
-"></script>
+<!-- popup -->
+<div class="dim-layer">
+    <div class="dimBg"></div>
+    <div id="layer2" class="pop-layer">
+        <div class="pop-container">
+            <div class="pop-conts">
+                <!--content //-->
+                <p class="ctxt mb20">Thank you.<br>
+                    Your registration was submitted successfully.<br>
+                    Selected invitees will be notified by e-mail on JANUARY 24th.<br><br>
+                    Hope to see you soon!
+                </p>
+				
+                <div class="btn-r">
+                    <a href="#" class="btn-layerClose">Close</a>
+                </div>
+                <!--// content-->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/null/Content/admin/js/inputStock.js?ver=15"></script>
 </body>
 </html>

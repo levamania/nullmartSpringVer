@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -103,7 +104,7 @@ public class StockController {
 		String pAmount = map.get("pamount");
 		String pPrice = map.get("pprice");
 		String deliverFee_YN = map.get("deliverfee_yn");
-		String sCode = pColor+pSize+pName;
+		String sCode = pColor+"/"+pSize+"/"+pName;
 		StockDTO stock = new StockDTO(sCode, pCode, pSize, pColor, Integer.parseInt(pPrice), Integer.parseInt(pAmount), deliverFee_YN);
 		service.insertStock(stock);
 		return "redirect:/gostock";
@@ -299,5 +300,21 @@ public class StockController {
 		return "forward:/Content/admin/searchStock.jsp";
 	}
 
+	/*
+	 * 
+	 * */
+	@RequestMapping(value = "/admin/searchProduct", method = RequestMethod.POST)
+	public  void getProduct(@RequestParam String pcode, HttpServletResponse response) throws IOException{
+		response.setContentType("text/plain;charset=utf-8");
+		JSONObject jsonObject = new JSONObject();
+		HashMap<String, String> map= service.searchProductToMap(pcode);
+		Set<String> keys = map.keySet();
+		keys.stream().forEach(k->{
+			String value = map.get(k);
+			jsonObject.put(k, value);
+		});
+		System.out.println(jsonObject);
+		response.getWriter().print(jsonObject);
+	}
 }
 
