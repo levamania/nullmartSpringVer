@@ -38,6 +38,7 @@ import com.dto.ProductDTO;
 import com.dto.StockDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.model.service.OrderService;
 import com.model.service.ProductService;
 import com.util.QueryUtil;
 import com.util.MapParamInputer;
@@ -46,9 +47,11 @@ import com.util.MapParamInputer;
 @RequestMapping("/product")
 public class ProductController {
 	private Logger logger = LoggerFactory.getLogger(ProductController.class);
-	private String key;
+
 	@Autowired
 	private ProductService service;
+	@Autowired
+	private OrderService oser;
 	
 	@RequestMapping(value = "/UI")
 	public String displayUI(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
@@ -97,7 +100,6 @@ public class ProductController {
 			Cookie[] cookies = request.getCookies();
 			for(Cookie c : cookies) {
 				if(c.getName().contains("Product")) {
-					System.out.println(c.getName());
 					cook.add(c);
 					HashMap<String,String> tep = mapper.readValue(URLDecoder.decode(c.getValue() , "utf-8"), HashMap.class) ;
 					if(tep.get("PCODE").equals(product.get("PCODE")))reiteration = true;
@@ -124,6 +126,11 @@ public class ProductController {
 				response.addCookie(cookie);
 			}
 				
+			//상품 평가 정보 가져오기
+			List<HashMap<String, Object>> eval_list = oser.selectEvaluatedes(reposit);
+			model.addAttribute("eval_list", eval_list);
+			
+			
 			//WITH JSP
 			model.addAttribute("product", product);
 			model.addAttribute("json", json);

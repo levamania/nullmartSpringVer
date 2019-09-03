@@ -227,7 +227,7 @@ $().ready(()=>{
 		.end().eq(2).on("click",function(){
 				if($("#option>.content.reposit").length!=0){
 						login_checker(function(){
-							//무엇을 전달해야 하는가? 리파짓의 상품코드, 수량, 가격
+							//무엇을 전달해야 하는가? 리파짓의 상품코드, 수량, 가격, 배송비
 							var info = new Array();
 							var count = 1;
 							$("#option>.content.reposit").each(function(){

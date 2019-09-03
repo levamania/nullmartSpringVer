@@ -36,6 +36,11 @@ public class OrderService {
 		return order_serial;
 	}
 
+	//평가 자료 
+	public List<HashMap<String, Object>> selectEvaluatedes(HashMap<String, Object> reposit) {
+		return dao.selectEvaluatedes(reposit);
+	}
+
 	
 	
 	

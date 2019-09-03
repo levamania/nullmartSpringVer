@@ -1,1 +1,146 @@
 @charset "UTF-8";
+
+#board>div{
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+
+/* head 설정 */
+.header{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+
+	height: 40px;
+	width: 100%;
+
+}
+.header>div{
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	height:100%;
+	flex: 10;
+
+	cursor:pointer;
+
+	border-bottom:1px solid black;
+}
+.header>div.active{
+	border:1px solid black;
+	border-bottom-width: 0; 
+}
+
+/*pool설정*/
+.pool{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: flex-start;
+
+	min-height: 300px;
+	width: 100%;
+}
+.pool *{
+	box-sizing: border-box;
+}
+
+	/* 상픔 후기 */
+	#eval_content>.pool{
+		padding: 20px 0 20px ;
+	}
+
+	#eval_content .record{
+		display: flex;
+		align-items: center;
+		
+		width:80%;
+		height:30px;
+
+		border: 1px solid black;
+	}
+	#eval_content .record>div{
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		
+		flex:15;
+	}
+	#eval_content .record>div:first-child{flex:70%;}
+
+	#eval_content .index{
+		background-color: #ffdede;
+	}
+
+		/*콘텐트 설정*/
+		.wrap>div:first-child{cursor:pointer;}
+		#eval_content .wrap.leo{display: none;}
+
+
+		/*장기 설정*/
+		.organ{
+			display: none;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+			
+			width: 80%;
+
+		}
+		.organ.leo{display: flex;}
+
+		.organ>div{
+			display: flex;
+		}
+		
+		.organ>.summing{
+			align-items: center;
+			justify-content: space-around;
+
+			width: 30%;
+			height: 30px; 
+			
+			margin:10px;
+
+			background-color: #f0e5ee;
+		}
+		.organ>.text_area{
+			align-items: flex-start;
+			justify-content: flex-start;
+			
+			width:80%;
+
+			margin: 15px;
+		}
+
+	/*페이징 설정*/
+	#paging{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		height: 30px;
+		width: 100%;
+	}
+	#paging>div{
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+
+		height: 70%;
+		width: 2%;
+
+		margin: 0 3px 0;
+
+		border: 1px solid black;
+		cursor:pointer;
+	}
+	#paging>div.dead{
+		background-color: red;
+		color:white;
+		cursor:default;
+	}
+	
+	#paging>.arrow{display:none;}
