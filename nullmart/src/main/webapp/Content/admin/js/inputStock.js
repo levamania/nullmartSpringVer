@@ -11,7 +11,6 @@ function response_callback(){
 		dataType: "json",
 		success:function(data,status,xhr){
 			imageSet(data);
-			console.log(data);
 
 		},
 		error:function(xhr,status,error){
@@ -63,7 +62,7 @@ function response_init(){
 $(document).ready(function() {
 	
 	//검색 이미지 초기화
-	response_imginit();
+	response_init();
 	
 	var pname = $("#pname");
 	var pcode = $("#pcode");

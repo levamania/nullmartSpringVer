@@ -34,11 +34,8 @@
 				<td colspan="2">
 					<div class="content_input">
 						<input type="button" value="확인" id="checkpcode" style="margin-right: 20px;">
-<<<<<<< HEAD
-						<p style="font-size: 12px;" id="init_explain">상품명과 상품코드는 확인 하나만 입력 후  검색을 통해 자동 입력 됩니다.입력 후 저장 버튼이 활 성화 됩니다.</p><a href="#layer2" class="btn-example"><img id="pImage" width="50px" height="50px"></a>
-=======
-						<p style="font-size: 12px;" id="init_explain">상품명과 상품코드는 확인 하나만 입력 후  검색을 통해 자동 입력 됩니다.입력 후 저장 버튼이 활 성화 됩니다.</p><a href="#layer2" class="btn-example"><img id="pImage"  width="50px" height="50px"></a>
->>>>>>> refs/heads/tglee
+						<p style="font-size: 12px;" id="init_explain">상품명과 상품코드는 확인 하나만 입력 후  검색을 통해 자동 입력 됩니다.입력 후 저장 버튼이 활 성화 됩니다.</p>
+						<a href="#layer2" class="btn-example"><img id="pImage"  width="50px" height="50px"></a>
 					</div>
 				</td>
 			</tr >
