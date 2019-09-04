@@ -8,6 +8,17 @@
 	<name>shoe</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<!-- captcha repositories -->
+	<repositories>
+	<repository>
+		<id>enonic</id>
+		<name>Enonic Repository</name>
+		<url>http://repo.enonic.com/public/</url>
+	</repository>
+</repositories>
+
+
+	
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>4.3.25.RELEASE</org.springframework-version>
@@ -15,6 +26,21 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+	<!-- https://mvnrepository.com/artifact/nl.captcha/simplecaptcha -->
+<dependency>
+    <groupId>nl.captcha</groupId>
+    <artifactId>simplecaptcha</artifactId>
+    <version>1.2.1</version>
+</dependency>
+<!-- captcha end -->
+<!-- sms start -->
+<dependency>
+    <groupId>net.nurigo</groupId>
+    <artifactId>javaSDK</artifactId>
+    <version>2.2</version>
+</dependency>
+<!-- sms end -->
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

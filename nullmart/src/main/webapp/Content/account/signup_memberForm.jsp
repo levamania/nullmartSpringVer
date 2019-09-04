@@ -25,20 +25,16 @@
 			var id = $("#userid");
 			$.ajax({
 				type : "get",
-				url : "/null/IdCheckServlet",
+				url : "/null/idCheck",
 				data : {userid:id.val()},
 				dataType : "text",
 				success : function (data,status,xhr){
-					console.log('확인');
-					console.log(data);
-					if(data==1&&id.val("nullmart")){
-						alert("아이디 중복입니다.");
-						/* window.open("idCheck.jsp","idCheck","width=100,height=50,resizable=no,scrollbars=no"); */
 
+					if(data=="1"&&id.val("nullmart")){
+						alert("아이디 중복입니다.");
 						$("#userid").focus();
 						return false;
 					}else{
-						/* window.open("idCheckPass.jsp","idCheck","width=100,height=50,resizable=no,scrollbars=no"); */
                         alert("사용가능입니다.");
 						$("#userid").focus();
 						return false;
@@ -59,18 +55,18 @@
 			var em2 = $("#email2");
 			$.ajax({
 				type : "get",
-				url : "/null/EmailCheckServlet",
+				url : "/null/emailCheck",
 				data : {email1:em1.val(),email2:em2.val()},
 				dataType : "text",
 				success : function (data,status,xhr){
 					
-					if(data==1||em1.val("nullmart")){
+					if(data=="1"){
 						alert("이메일 중복입니다.");
 						
 
 						$("#email1").focus();
 						return false;
-					}else if(data==0){
+					}else {
 						
                         alert("사용가능입니다.");
 						$("#email1").focus();
@@ -259,7 +255,7 @@
 	  */
 	 function changeCaptcha() {
 	  //IE에서 '새로고침'버튼을 클릭시 CaptChaImg.jsp가 호출되지 않는 문제를 해결하기 위해 "?rand='+ Math.random()" 추가 
-	  $('#catpcha').html('<img src="/null/CaptCha?rand='+ Math.random() + '"/>');
+	  $('#catpcha').html('<img src="/null/captcha?rand='+ Math.random() + '"/>');
 	 }
 
 
@@ -278,7 +274,7 @@
 	 function audioCaptcha() {
 
 	   var uAgent = navigator.userAgent;
-	   var soundUrl = '/null/AudioCaptCha';
+	   var soundUrl = '/null/audioCaptcha';
 	   if (uAgent.indexOf('Trident') > -1 || uAgent.indexOf('MSIE') > -1) {
 	       //IE일 경우 호출
 	       winPlayer(soundUrl+'?agent=msie&rand='+ Math.random());
@@ -308,17 +304,17 @@
 	           alert('이미지에 보이는 숫자를 입력해 주세요.');
 	      } else {
 	    	  $.ajax({
-	               url: '/null/CaptchaConfirm',
+	               url: '/null/captchaConfirm',
 	               type: 'POST',
 	               dataType: 'text',
 	               data: 'answer=' + answer.val(),
 	               async: false,  
 	               success: function(data) {
-	            	   
-	            	   if(data==0){
+	            	   console.log(data);
+	            	   if(data=="0"){
 	            		   alert("입력값이 일치합니다.");    
 	            		  return false
-	            	   }else if(data==1){            		   
+	            	   }else if(data=="1"){            		   
 	            		  
 	                       alert("입력값이 일치하지않습니다. 다시 입력하셔야합니다.");
 	                        reload.click();
@@ -710,7 +706,7 @@ function check(re3, what, message) {
 
 </head>
 <body >
-<form action="/null/SignUpServlet" method="get" >
+<form action="/null/SignUp" method="get" >
 
 <div id="" class="align-center vi" style="font-size:25px">
 <b> </b><br>

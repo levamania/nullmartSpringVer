@@ -33,7 +33,8 @@ public class MailPwController {
 
 	// mailSending 코드
 	@RequestMapping(value = "/searchPwMail")
-    public String mailSending(@RequestParam Map<String, String> map,Model m) {
+	@ResponseBody
+    public String mailSending(@RequestParam Map<String, String> map) {
 		String tempPassword = ""; 
 		for(int i=0; i<8; i++) {
 			int rndVal = (int)(Math.random() * 62);
@@ -51,9 +52,6 @@ public class MailPwController {
 		int n = service.UpdatePw(map);
 	
 		System.out.println("n값은?????"+n);
-		m.addAttribute("pwResult",n);
-
-
 		String setfrom = "nullmart@naver.com";
 		String tomail = mail1 + "@" + mail2;
 		String title = "nullmart 비밀번호 찾기 메일입니다.";
@@ -73,6 +71,13 @@ public class MailPwController {
 			System.out.println(e);
 		}
 
-		return "/Content/account/searchPw";
+		if(n==0) {
+			return "0";
+		}else {
+			return "1";
+
+		}
+
+		//return "/Content/account/searchPw";
 	}
 }

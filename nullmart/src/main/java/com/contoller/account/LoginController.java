@@ -94,5 +94,16 @@ public class LoginController {
 		session.invalidate();
 		return "redirect:/main";
 	}
+	@RequestMapping(value = "/phoneSearchPw")
+	@ResponseBody
+	public String phoneSearchPw(@RequestParam Map<String, String> map) {
+		int n = service.searchPwPhone(map);
+		if(n==0) {
+			return "0";
+		}else {
+			return "1";
+		}
+		
+	}
 
 }
