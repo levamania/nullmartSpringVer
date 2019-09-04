@@ -2,14 +2,30 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="top menu">
-	<c:if test="${empty login}">
+	<%-- <c:if test="${empty login}">
 		<span class="static_menu" id="login">로그인</span>
 		<span class="static_menu" id="signup" >회원가입</span>
 	</c:if>
 	<c:if test="${!empty login}">
 		<span class="static_menu" id="logout">로그아웃</span>
 		<span class="static_menu" id="mypage">마이페이지</span> 
-	</c:if>
+	</c:if> --%>
+	
+	<c:choose>
+		<c:when test="${!empty login}">
+			<span class="static_menu" id="logout">로그아웃</span>
+			<span class="static_menu" id="mypage">마이페이지</span> 
+		</c:when>
+		<c:when test="${!empty managerLogin}">
+			<span class="static_menu" id="managerlogout">관리자 로그아웃</span>
+			<span class="static_menu" id="managerpage">관리자페이지</span> 
+		</c:when>
+		<c:otherwise>
+			<span class="static_menu" id="login">로그인</span>
+			<span class="static_menu" id="signup" >회원가입</span>
+		</c:otherwise>
+	</c:choose>
+	
 	<span class="static_menu" id="cart">장바구니</span> <span
 		class="static_menu" id="order">주문배송</span>
 </div>
