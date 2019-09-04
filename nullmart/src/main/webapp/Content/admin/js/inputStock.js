@@ -10,6 +10,7 @@ function response_callback(){
 		data:{pcode:$("#pcode").val()},
 		dataType: "json",
 		success:function(data,status,xhr){
+			imageSet(data);
 			console.log(data);
 		},
 		error:function(xhr,status,error){
@@ -18,12 +19,41 @@ function response_callback(){
 		}
 		
 	});
-	var init_explain = $("#init_explain");
-	var pImage = $("#pImage");
-	init_explain.hide();
-	pImage.show();
+	
 	
 };
+
+function imageSet(product){
+	//src="/null/Content/img/shoes/tennis/sneakers/SNE1.jpg
+	var response_styletop = product.STYLETOP;
+	var response_stylemid = product.STYLEMID;
+	var response_stylebot = product.STYLEBOT;
+	
+	var response_pimage = product.PIMAGE;
+	var response_pname = product.PNAME;
+	var response_pcode = product.PCODE;
+	
+	var image_pname = $("#image_pname");
+	var image_pcode = $("#image_pcode");
+	var image_src = $("#image_src");
+	var image_top = $("#image_top");
+	var image_mid = $("#image_mid");
+	var image_bot = $("#image_bot");
+	
+	var src ="/null/Content/img/shoes/"+response_stylemid+"/"+response_stylebot+"/"+response_pimage+".jpg";
+	var init_explain = $("#init_explain");
+	var pImage = $("#pImage");
+	pImage.attr("src",src);
+	image_pname.text(response_pname);
+	image_pcode.text(response_pcode);
+	image_top.text(response_styletop);
+	image_mid.text(response_stylemid);
+	image_bot.text(response_stylebot);
+	
+	image_src.attr("src",src);
+	init_explain.hide();
+	pImage.show();
+}
 function response_init(){
 	var init_explain = $("#init_explain");
 	var pImage = $("#pImage");

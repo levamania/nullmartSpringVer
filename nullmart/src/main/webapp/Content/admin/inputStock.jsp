@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지</title>
-<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/inputStock.css?ver=1">
+<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/inputStock.css?ver=6">
 </head>
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
 <body>
@@ -34,7 +34,7 @@
 				<td colspan="2">
 					<div class="content_input">
 						<input type="button" value="확인" id="checkpcode" style="margin-right: 20px;">
-						<p style="font-size: 12px;" id="init_explain">상품명과 상품코드는 확인 하나만 입력 후  검색을 통해 자동 입력 됩니다.입력 후 저장 버튼이 활 성화 됩니다.</p><a href="#layer2" class="btn-example"><img id="pImage" src="/null/Content/img/shoes/sports/running/RUN1.jpg" width="50px" height="50px"></a>
+						<p style="font-size: 12px;" id="init_explain">상품명과 상품코드는 확인 하나만 입력 후  검색을 통해 자동 입력 됩니다.입력 후 저장 버튼이 활 성화 됩니다.</p><a href="#layer2" class="btn-example"><img id="pImage"  width="50px" height="50px"></a>
 					</div>
 				</td>
 			</tr >
@@ -103,12 +103,12 @@
         <div class="pop-container">
             <div class="pop-conts">
                 <!--content //-->
-                <p class="ctxt mb20">Thank you.<br>
-                    Your registration was submitted successfully.<br>
-                    Selected invitees will be notified by e-mail on JANUARY 24th.<br><br>
-                    Hope to see you soon!
-                </p>
-				
+                <p class="ctxt mb20"  style="border-bottom: 1px solid #EAEAEA; font-size: 18px; font-weight: bold; padding: 5px;">
+                	상품명:<span id="image_pname"></span><br>
+                	상품코드:<span id="image_pcode"></span><br>
+                	분류: 대분류[<span id="image_top"></span>], 소분류[<span id="image_mid"></span>], 소분류[<span id="image_bot"></span>]
+                 </p>
+                  	<div align="center"><img  src="" id="image_src" width="400px" height="auto"></div>
                 <div class="btn-r">
                     <a href="#" class="btn-layerClose">Close</a>
                 </div>
