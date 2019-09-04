@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
-	<select id="idCheck" parameterType="string" resultType="int">
+	<select id="idCheck" parameterType="map" resultType="int">
 	select count(*) from account where userid=#{userid}
 
 	
@@ -47,4 +47,12 @@ select userid from account where username=#{username} and  email1=#{email1} and 
 <select id="idPwCheck" resultType="int">
 	select  count(*) from account where userid=#{userid}
 </select>
+<select id="searchPwPhone" resultType="int" parameterType="map">
+select count(*) from account where userid=#{userid} and username=#{username} and phone1=#{phone1} and 
+phone2=#{phone2} and phone3=#{phone3} 
+</select>
+<update id="UpdatePwPhone" parameterType="map">
+update account set passwd=#{tempPassword}
+where phone1=#{phone1} and phone2=#{phone2} and phone3=#{phone3}
+</update>
 </mapper>

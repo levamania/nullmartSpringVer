@@ -79,7 +79,7 @@
 
 </head>
 <body >
-<form action="/null/MainServlet">
+<form action="/null/main">
 
 <div id="" class="align-center vi" style="font-size:25px">
 <b> </b><br>
