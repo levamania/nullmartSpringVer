@@ -301,10 +301,11 @@ public class StockController {
 	}
 
 	/*
-	 * 
+	 * 상품 정보 ajax 응답처리용 
+	 * json 객체 생성 후 반환 
 	 * */
 	@RequestMapping(value = "/admin/searchProduct", method = RequestMethod.POST)
-	public  void getProduct(@RequestParam String pcode, HttpServletResponse response) throws IOException{
+	public void getProduct(@RequestParam String pcode, HttpServletResponse response) throws IOException{
 		response.setContentType("text/plain;charset=utf-8");
 		JSONObject jsonObject = new JSONObject();
 		HashMap<String, String> map= service.searchProductToMap(pcode);

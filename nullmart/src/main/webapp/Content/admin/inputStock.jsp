@@ -34,7 +34,7 @@
 				<td colspan="2">
 					<div class="content_input">
 						<input type="button" value="확인" id="checkpcode" style="margin-right: 20px;">
-						<p style="font-size: 12px;" id="init_explain">상품명과 상품코드는 확인 하나만 입력 후  검색을 통해 자동 입력 됩니다.입력 후 저장 버튼이 활 성화 됩니다.</p><a href="#layer2" class="btn-example"><img id="pImage" src="/null/Content/img/shoes/sports/running/RUN1.jpg" width="50px" height="50px"></a>
+						<p style="font-size: 12px;" id="init_explain">상품명과 상품코드는 확인 하나만 입력 후  검색을 통해 자동 입력 됩니다.입력 후 저장 버튼이 활 성화 됩니다.</p><a href="#layer2" class="btn-example"><img id="pImage" width="50px" height="50px"></a>
 					</div>
 				</td>
 			</tr >
@@ -103,11 +103,10 @@
         <div class="pop-container">
             <div class="pop-conts">
                 <!--content //-->
-                <p class="ctxt mb20">Thank you.<br>
-                    Your registration was submitted successfully.<br>
-                    Selected invitees will be notified by e-mail on JANUARY 24th.<br><br>
-                    Hope to see you soon!
+                <p class="ctxt mb20">상품 이름: <span id="image_pname"></span><br>
+                    상품 코드: <span id="image_pcode"></span><br>
                 </p>
+               	<img id="product_image" height="">
 				
                 <div class="btn-r">
                     <a href="#" class="btn-layerClose">Close</a>

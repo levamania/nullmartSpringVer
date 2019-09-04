@@ -10,7 +10,7 @@ function response_callback(){
 		data:{pcode:$("#pcode").val()},
 		dataType: "json",
 		success:function(data,status,xhr){
-			console.log(data);
+			response_imgset(data);
 		},
 		error:function(xhr,status,error){
 			console.log(status);
@@ -18,13 +18,29 @@ function response_callback(){
 		}
 		
 	});
-	var init_explain = $("#init_explain");
-	var pImage = $("#pImage");
-	init_explain.hide();
-	pImage.show();
 	
 };
-function response_init(){
+
+function response_imgset(product){
+	///null/Content/img/shoes/sports/running/RUN1.jpg
+	
+	var stylemid = product.STYLEMID;
+	var stylebot = product.STYLEBOT;
+	var pimage = product.PIMAGE;
+	var image_pname = $("#image_pname");
+	var image_pcode = $("#image_pcode");
+	var src = "/null/Content/img/shoes/"+stylemid+"/"+stylebot+"/"+pimage+".jpg";
+	var init_explain = $("#init_explain");
+	var pImage = $("#pImage");
+	pImage.attr("src",src);
+	image_pname.text(product.PNAME);
+	image_pcode.text(product.PCODE);
+	
+	console.log(product);
+	init_explain.hide();
+	pImage.show();
+}
+function response_imginit(){
 	var init_explain = $("#init_explain");
 	var pImage = $("#pImage");
 	init_explain.show();
@@ -32,8 +48,8 @@ function response_init(){
 }
 $(document).ready(function() {
 	
-	//조회 초기화
-	response_init();
+	//검색 이미지 초기화
+	response_imginit();
 	
 	var pname = $("#pname");
 	var pcode = $("#pcode");
@@ -75,13 +91,13 @@ $(document).ready(function() {
 	//pcode, pname keyup 이벤트시
 	pcode.on("keyup",function(){
 		if(!submitBtn.prop("disabled")){
-			response_init();
+			response_imginit();
 			submitBtn.prop("disabled",true);
 		}
 	});
 	pname.on("keyup",function(){
 		if(!submitBtn.prop("disabled")){
-			response_init();
+			response_imginit();
 			submitBtn.prop("disabled",true);
 		}
 	});
