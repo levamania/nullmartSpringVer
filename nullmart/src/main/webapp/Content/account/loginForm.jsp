@@ -38,6 +38,7 @@
 				
 			$("#memberBtn").on("click", function() {
 				
+<<<<<<< HEAD
 				var re = /^[a-zA-Z0-9]{4,12}$/
 					var re1 = /^[a-zA-Z0-9~!;:@#]{4,12}$/
 
@@ -69,18 +70,24 @@
 
 			
 			
+=======
+				var id = $("#userid");
+				var pw = $("#passwd");
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 				$.ajax({
 					type : "get",
+<<<<<<< HEAD
 					url : "/null/idPwCheck",
+=======
+					url : "/null/IdPwCheck",
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 					data : {
 						userid : id.val(),
 						passwd : pw.val()
 					},
 					dataType : "text",
-					
-					
-					
 					success : function(data, status, xhr) {
+<<<<<<< HEAD
 						
 						if (data == "0") {
 							alert("아이디가 없습니다.");
@@ -97,6 +104,18 @@
 
 							
 
+=======
+						if (data==0) {
+							alert("아이디또는 비밀번호가 일치하지 않습니다.");
+							console.log(data);
+
+							$("#userid").focus();
+							
+						} else if(data==1){
+							alert("로그인이 되었습니다.");
+							console.log(data);
+							$("#userid").focus();							
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 						}
 					},
 					error : function(xhr, status, e) {
@@ -225,7 +244,11 @@
 	</div>
 	</form>
 	<div id="tabs-2">
+<<<<<<< HEAD
    <form name="managerLogin" action="/null/managerLogin" method="get" id="managerLogin">
+=======
+   <form name="masterLogin" action="/null/managerLogin" method="get" id="masterLogin">
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 		 <div id="tabs-1">
 		<div align="center" style="font-size: 200%">
 			<br> <br> <b>관리자 로그인</b>
@@ -272,6 +295,7 @@
 					<br>
 				</tr>
 			</table>
+<<<<<<< HEAD
 			<br>
 				<c:if test="${empty managerLogin}">
 					<input type="button" value="  로그인 " class="test_btn1" id="managerBtn"
@@ -283,6 +307,12 @@
 							
 				</c:if>
 			 
+=======
+			<br> <input type="button" value="  로그인 " class="test_btn1" id=""
+				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
+			<input type="reset" value="다시입력" class="test_btn1"
+				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 			<br> <br>
 			<hr>
 		</div>

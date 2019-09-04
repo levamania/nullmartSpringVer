@@ -23,6 +23,7 @@ public class LoginController {
 	@Autowired
 	ManagerService mgrService;
 	
+<<<<<<< HEAD
 	@RequestMapping("/ManagerIdPwCheck")
 	@ResponseBody
 	public String ManagerIdPwCheck(@RequestParam Map<String, String> map) {
@@ -33,17 +34,60 @@ public class LoginController {
 			//아이디 없음
 			return "0";
 		}
+=======
+	@Autowired
+	ManagerService mgrService;
+	
+
+	@RequestMapping(value = "/IdPwCheck")
+	@ResponseBody
+	public int idPwCheck(@RequestParam Map<String, String> map) {
+		System.out.println(map);
+		int num = service.IdPwCheck(map);
+		System.out.println(num);
+		return num;
+	}
+	
+	//메니저로그인
+	@RequestMapping(value = "/managerLogin")
+	public String managerLogin(@RequestParam Map<String,String> map,HttpSession session) {
+		//System.out.println(map);
+		ManagerDTO dto = mgrService.managerLogin(map);
 		
+		if(dto!=null) {
+			session.setAttribute("login",dto);
+					return "redirect:/Content/admin/adminMain.jsp";
+					
+		}else {
+			
+			return "/Content/account/loginForm";
+		}
+	}
+	//일반회원 로그인
+	@RequestMapping(value = "/login")
+	public String login(@RequestParam Map<String,String> map,HttpSession session) {
+		//System.out.println(map);
+		MemberDTO dto = service.login(map);
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
+		
+<<<<<<< HEAD
 		ManagerDTO mgrDto = mgrService.login(map);
 		if(mgrDto==null) {
 			//패스워드 없음
 			return "1";
+=======
+		if(dto!=null) {
+			session.setAttribute("login",dto);
+					return "redirect:/main";
+					
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 		}else {
 			//통과
 			return "2";
 		}
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping("/idPwCheck")
 	@ResponseBody
 	public String loginCheck(@RequestParam Map<String, String> map) {
@@ -89,6 +133,9 @@ public class LoginController {
 			return "redirect:/Content/admin/adminMain.jsp";
 		}
 	
+=======
+	//로그아웃
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
 

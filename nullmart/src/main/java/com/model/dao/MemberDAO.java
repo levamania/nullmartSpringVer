@@ -22,6 +22,7 @@ SqlSessionTemplate template;
 		return dto;
 	}
 
+<<<<<<< HEAD
 	public int idPwCheck(String userid) {
 		return template.selectOne("MemberMapper.idPwCheck", userid);
 	}
@@ -58,6 +59,10 @@ SqlSessionTemplate template;
 
 	public int UpdatePwPhone(Map<String, String> map) {
 	int n = template.update("MemberMapper.UpdatePwPhone", map);
+=======
+	public int IdPwCheck(Map<String, String> map) {
+		int n = template.selectOne("MemberMapper.IdPwCheck", map);
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 		return n;
 	}
 

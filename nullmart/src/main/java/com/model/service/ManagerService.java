@@ -7,7 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 import com.dto.ManagerDTO;
 
 import com.model.dao.ManagerDAO;
@@ -18,17 +21,31 @@ import com.model.dao.ManagerDAO;
 @Service
 public class ManagerService {
 
+<<<<<<< HEAD
 	@Autowired
 	ManagerDAO dao;
+=======
+@Autowired
+ManagerDAO dao;
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 
 
 
 
+<<<<<<< HEAD
 	public int ManagerIdPwCheck(String userid) {
 
 		return dao.ManagerIdPwCheck(userid);
+=======
+
+
+	public ManagerDTO managerLogin(Map<String, String> map) {
+		ManagerDTO dto = dao.managerLogin(map);
+		return dto;
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 	}
 
+<<<<<<< HEAD
 
 
 
@@ -37,6 +54,8 @@ public class ManagerService {
 		return dto;
 	}
 
+=======
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 	
 
 }

@@ -28,6 +28,7 @@ public class MemberService {
 
 
 
+<<<<<<< HEAD
 	public int idPwCheck(String userid) {
 		
 		return dao.idPwCheck(userid);
@@ -88,5 +89,11 @@ public class MemberService {
 
 
 
+=======
+	public int IdPwCheck(Map<String, String> map) {
+		int n = dao.IdPwCheck(map);
+		return n;
+	}
+>>>>>>> branch 'sandwich' of https://github.com/levamania/nullmartSpringVer.git
 
 }
