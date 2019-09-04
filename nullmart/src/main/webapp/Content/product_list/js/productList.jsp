@@ -26,7 +26,8 @@
 	  	  	 case "productListing/work":{ 
 	  	  		 data ={
 			  	  		    	"searchedWord" : "${searchedWord}",
-			    		 	     "cur_page" : $("#paging>.page.active").text(),
+			    		 	     "cur_page" : ($("#paging>.page.active").length!=0)?$("#paging>.page.active").text():$("#searched_list").attr("data-page"),
+			    		 	     "paging_quantity" : $("#paging_quantity").val(),		
 						     	 "ordering_info" : $("#order_info>.order.active").children().text()
 			   			   };break;
 	  	  		 }
@@ -81,7 +82,20 @@
 	  								  form_generator("productListing/work");
 	    						  }
   							  });
-
+	$("#right").on("click",function(){
+		var last_no = $(".page")[$(".page").length-1].innerText;
+		$("#searched_list").attr("data-page", ++last_no);
+		$(".page.active").removeClass("active");
+		form_generator("productListing/work");
+	})
+	$("#left").on("click",function(){
+		var init_no = $(".page")[0].innerText;
+		$("#searched_list").attr("data-page", init_no-$(".page").length);
+		$(".page.active").removeClass("active");
+		form_generator("productListing/work");
+	})
+  	
+  	
   	//개별 상품 셋팅
   		//상세 페이지 이동
   	$(".product>div.item.name").on("click",function(){	form_generator("product/UI",$(this).parent());});

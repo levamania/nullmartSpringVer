@@ -41,7 +41,7 @@ $('document').ready(function(){
 	 });
 		 
 		 
-	 
+
 	
 });
 </script>
@@ -110,9 +110,6 @@ $('document').ready(function(){
           border-top:1px solid lightgray};
 
 
-    
-
-
 
 
 
@@ -120,6 +117,10 @@ $('document').ready(function(){
 
 </head>
 <body >
+
+
+
+
 
 <div id="" class="align-center vi" style="font-size:25px">
 <b> </b><br>
@@ -133,10 +134,13 @@ $('document').ready(function(){
 <hr style="color:red">
 </div> 
 <input type="checkbox" name="info1" id="info1" class="group"><a style="font-size: 50%;color:gray">NULL-MART 구매이용약관</a><a style="font-size: 50%;color:lightgray">(필수)</a>
-<button style="border: 1px solid lightgray;background-color: rgba(0,0,0,0);color: black;padding: 1px;font-size:50%"  onclick="window.open('signup_buyinfo.jsp')" >내용보기></button>
+
+ 
+<button style="border: 1px solid lightgray;background-color: rgba(0,0,0,0);color: black;padding: 1px;font-size:50%"   id="info1" onClick="window.open('/null/Content/account/signup_buyinfo.jsp','buyinfo','width=300, height=400, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;">내용보기></button>
 <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
 <input type="checkbox" name="info2" id="info2" class="group"><a style="font-size: 50%;color:gray">NULL-MART 전자금융거래 이용약관</a><a style="font-size: 50%;color:lightgray">(필수)</a>
-<button style="border: 1px solid lightgray;background-color: rgba(0,0,0,0);color: black;padding: 1px;font-size:50%"  onclick="window.open('signup_payinfo.jsp')" >내용보기></button><br>
+<button style="border: 1px solid lightgray;background-color: rgba(0,0,0,0);color: black;padding: 1px;font-size:50%"  id="info2"onClick="window.open('/null/Content/account/signup_buyinfo.jsp','payinfo','width=300, height=400, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;">내용보기></button><br>
 <br>
 <br>
 <div >

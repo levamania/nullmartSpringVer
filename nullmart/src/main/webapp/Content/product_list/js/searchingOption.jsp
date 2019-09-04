@@ -429,7 +429,8 @@ buttonSet();
 	}//end if
 
 
-	 	
+ 
+	
 	  	//자동 스크롤 함수
 	  	var distance =0;
 	  	var temp =null;
@@ -442,15 +443,19 @@ buttonSet();
 	  	distance -= toNum($(".searched_product").css("height")); 	
 	  	
 		var position = 0;
-		function scroller(){	
+		var speed = 20;
+		if(${refresh})speed=10;				
+		
+		function scrolling(){
 			if (position < distance){
-		    	position+=10;
+		    	position+=speed;
 		    	scroll(0,position);
 		    	clearTimeout(timer);
-		    	var timer = setTimeout(scroller,0); timer;
+		    	var timer = setTimeout(scrolling,0); timer;
 		    }
 		 }
-		scroller();	
+		
+		scrolling();
 	
 })
 </script>

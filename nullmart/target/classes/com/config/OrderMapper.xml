@@ -44,6 +44,7 @@
 		select evalno, orderscore, fastdelivery, ordersatis, evalcontent, substr(userid,0,length(userid)-3)||'***' userid, pcode, scode, pamount 
 		from eval e, orders o
 		where e.ono = o.ono
+<!-- 		and pcode = #{PCODE} -->
 		order by  orderscore
 	</select>
 </mapper>

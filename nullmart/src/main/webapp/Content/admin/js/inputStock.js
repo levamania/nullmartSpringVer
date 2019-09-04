@@ -11,7 +11,7 @@ function response_callback(){
 		dataType: "json",
 		success:function(data,status,xhr){
 			imageSet(data);
-			console.log(data);
+
 		},
 		error:function(xhr,status,error){
 			console.log(status);
@@ -19,8 +19,7 @@ function response_callback(){
 		}
 		
 	});
-	
-	
+
 };
 
 function imageSet(product){
@@ -62,7 +61,7 @@ function response_init(){
 }
 $(document).ready(function() {
 	
-	//조회 초기화
+	//검색 이미지 초기화
 	response_init();
 	
 	var pname = $("#pname");
@@ -105,13 +104,13 @@ $(document).ready(function() {
 	//pcode, pname keyup 이벤트시
 	pcode.on("keyup",function(){
 		if(!submitBtn.prop("disabled")){
-			response_init();
+			response_imginit();
 			submitBtn.prop("disabled",true);
 		}
 	});
 	pname.on("keyup",function(){
 		if(!submitBtn.prop("disabled")){
-			response_init();
+			response_imginit();
 			submitBtn.prop("disabled",true);
 		}
 	});
