@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -236,34 +237,59 @@
 				style="text-align: center; align-self: center">
 				<tr>
 					<td width="100" height="35"><a
-						style="font-size: 60%; color: red">* </a><a
-						style="font-size: 60%">아이디</a></td>
-					<td width="200" height="35"><input type="text"
-						style="width: 150px; height: 80%; font-size: 70%" id="masteruserid"
-						placeholder="영문,숫자사용 4~12자" name="masteruserid"></td>
+						style="font-size: 60%; color: red">* </a>
+						<a style="font-size: 60%">아이디</a></td>
+					<td width="200" height="35">
+						<c:if test="${empty managerLogin}">
+							<input type="text" style="width: 150px; height: 80%; font-size: 70%" id="masteruserid"
+							placeholder="영문,숫자사용 4~12자" name="masteruserid" >
+						</c:if>
+						<c:if test="${!empty managerLogin}">
+							<span>${managerLogin.masteruserid}</span>
+						</c:if>
+					</td>
 					<br>
 				</tr>
 				<tr>
 					<td width="100" height="35"><a
-						style="font-size: 60%; color: red">* </a><a
-						style="font-size: 60%">패스워드</a></td>
-					<td width="200" height="35"><input type="password"
-						style="width: 150px; height: 80%; font-size: 70%" id="masterpasswd"
-						placeholder="영문,숫자,특수문자사용 4~12자" name="masterpasswd"></td>
+						style="font-size: 60%; color: red">* </a>
+						<c:if test="${empty managerLogin}">
+							<a style="font-size: 60%">패스워드</a>
+						</c:if>
+						<c:if test="${!empty managerLogin}">
+							<a style="font-size: 60%">로그인 상태</a>
+						</c:if>
+						</td>
+					<td width="200" height="35">
+						<c:if test="${empty managerLogin}">
+							<input type="password" style="width: 150px; height: 80%; font-size: 70%" id="masterpasswd"
+							placeholder="영문,숫자,특수문자사용 4~12자" name="masterpasswd">
+						</c:if>
+						<c:if test="${!empty managerLogin}">
+							<span>관리자님 환영합니다.</span>
+						</c:if>
+					</td>
 					<br>
 				</tr>
 			</table>
-			<br> <input type="button" value="  로그인 " class="test_btn1" id="managerBtn"
-				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
-			<input type="reset" value="다시입력" class="test_btn1"
-				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">
+			<br>
+				<c:if test="${empty managerLogin}">
+					<input type="button" value="  로그인 " class="test_btn1" id="managerBtn"
+					style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
+					<input type="reset" value="다시입력" class="test_btn1"
+					style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">
+				</c:if>
+				<c:if test="${!empty managerLogin}">
+							
+				</c:if>
+			 
 			<br> <br>
 			<hr>
 		</div>
 	</div>
 	</form>
   </div>
-
+	<c:if test="${empty managerLogin}">
 	<div align="center">
 		<button type="button"
 			style="width: 68pt; height: 15pt; font-size: 76%; background-color: white; border-color: white; color: black; border-style: hidden;"
@@ -272,6 +298,8 @@
 			style="width: 68pt; height: 15pt; font-size: 76%; background-color: white; border-color: white; color: black; border-style: hidden;"
 			onclick="location.href='/null/Content/account/searchPw.jsp' ">비밀번호찾기</button>
 	</div>
+	</c:if>
+	
 	</div>
 	<br>
 	<br>

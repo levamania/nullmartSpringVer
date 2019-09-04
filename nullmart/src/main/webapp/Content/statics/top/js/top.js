@@ -6,6 +6,8 @@
 		$("#logout").on("click",()=>location.href="/null/logout");
 		$("#signup").on("click",()=>location.href="/null/Content/account/signup_first.jsp");
 		$("#mypage").on("click",()=>location.href="/null/mypage/orderInfo");
+		$("#managerpage").on("click",()=>location.href="/null/Content/admin/adminMain.jsp");
+		$("#managerlogout").on("click",()=>location.href="/null/mgrLogout");
 		$("#cart").on("click",()=>location.href="/null/cart/UI");
 		$("#order").on("click",()=>location.href="/null/cart/UI");
 	});

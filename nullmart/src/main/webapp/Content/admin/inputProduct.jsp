@@ -6,6 +6,7 @@
 <head>
 <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
 <script src="/null/Content/account/jquery-3.4.1.js"></script>
+<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/inputProduct.css">
 <meta charset="UTF-8">
 <title>Input Product</title>
 <style type="text/css">
@@ -92,10 +93,11 @@ $(document).ready(function(){
     </script>
 
 <div align="center"><jsp:include page="top.jsp"/></div>
-<br>
-<br>
-<br>
-<br>
+<div id="parent">
+<div id="left">
+	<jsp:include page="left.jsp"/>
+</div>
+<div id="body">
 <form action="">
 
 
@@ -348,17 +350,8 @@ $(document).ready(function(){
     
     </script>
 
-</div>
-<form>
-
-
-
-
-
-
-
-</form>
-
+</div><!-- body-->
+</div><!--left,body 전체 -->
 </body>
 
 </html>

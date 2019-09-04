@@ -70,7 +70,10 @@ public class LoginController {
 		System.out.println(map+"map값");
 		MemberDTO dto = service.login(map);
 		session.setAttribute("login", dto);
-		System.out.println(dto+"dto값");
+		ManagerDTO manager = (ManagerDTO)session.getAttribute("managerLogin");
+		if(manager!=null) {
+			session.removeAttribute("managerLogin");
+		}
 		return "redirect:/main";
 	}
 	//관리자login
@@ -78,7 +81,11 @@ public class LoginController {
 		public String managerLogin(@RequestParam Map<String, String> map,HttpSession session) {
 			
 			ManagerDTO dto = mgrService.login(map);
-			session.setAttribute("login", dto);
+			session.setAttribute("managerLogin", dto);
+			MemberDTO member = (MemberDTO)session.getAttribute("login");
+			if(member!=null) {
+				session.removeAttribute("login");
+			}
 			return "redirect:/Content/admin/adminMain.jsp";
 		}
 	

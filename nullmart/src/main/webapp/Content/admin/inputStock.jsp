@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지</title>
-<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/inputStock.css?ver=2">
+<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/inputStock.css?ver=1">
 </head>
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
 <body>

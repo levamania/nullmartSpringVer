@@ -1,0 +1,13 @@
+@charset "UTF-8";
+#parent{
+	display: flex;
+	flex-direction: row;
+}
+#left{
+	flex-grow: 1;
+	flex-basis: 100px;
+}
+#body{
+	flex-grow: 10;
+	border-left: 1px solid red;
+}
