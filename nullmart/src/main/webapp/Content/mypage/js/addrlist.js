@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$(".modifybtns").each(function(idx,btn){
 		$(this).on("click",function(){
 			delivno=$(this).prev().val();
-			$(location).attr("href","/null/ModifyAddrList?delivno="+delivno);
+			$(location).attr("href","/null/mypage/modifyAddr?delivno="+delivno);
 		});
 	});
 	
@@ -14,17 +14,14 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-	var num = 0;
 	var checks = $(".checks");
 	$("#allcheck").on("click",function(){
-		num+=1;
 		checks.each(function(idx,check){
-			
 			$(this).prop("checked",true);
 		});
 	});
 	$("#delete").on("click",function(){
-		var queryString = "/null/DeleteAddrServlet?delivnos=";
+		var queryString = "/null/mypage/deleteAddr?delivnos=";
 		checks.each(function(idx,check){
 			if($(this).prop("checked")){
 				queryString +=$(this).val()+"-";
@@ -36,6 +33,6 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	$("#goaddradd").on("click",function(){
-		$(location).attr("href","regaddr.jsp");
+		$(location).attr("href","/null/Content/mypage/regaddr.jsp");
 	});
 });

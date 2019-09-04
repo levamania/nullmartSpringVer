@@ -1,6 +1,9 @@
-/**
- * 
- */
+//$.getScript("/null/Content/api/jquery/jquery-ui/jquery-ui.js",function(){
+//	console.log("jquery-ui.js");
+//})
+
+$.getScript("/null/Content/api/jquery/jquery-ui/jquery-ui.js",function(){
+	console.log("jquery-ui.js");
 
 // select 태그 초기화
 function initSelector(selector,options){
@@ -58,14 +61,14 @@ $(document).ready(function(){
 	
 	// 검색 조전 유지용
 	var isSearchOption = $("#isSearchOption");
-	console.log(isSearchOption.val());
+	
 	function searchInitSelector(){
 		$.ajax({
-			type: "get",
-			url: "/null/GetInitSearchStockServlet",
+			type: "post",
+			url: "/null/admin/initSearchPage",
 			dataType: "json",
 			success: function(data,status,xhr){
-				
+					
 					initSelector(styletop,data.styletops);
 					initSelector(stylemid,data.stylemids);
 					initSelector(stylebot,data.stylebots);
@@ -78,6 +81,7 @@ $(document).ready(function(){
 							source:keywords
 						});
 					});
+					
 					//조회 후 페이지를 로딩한 것이면?
 					if(isSearchOption.val()==1){
 						 var hpcode = $("#hpcode");
@@ -157,8 +161,8 @@ $(document).ready(function(){
 			
 			// ajax json 응답 처리
 			$.ajax({
-				type: "get",
-				url: "/null/GetInitSearchStockServlet",
+				type: "post",
+				url: "/null/admin/initSearchPage",
 				data: {pname:pname.val()},
 				dataType: "json",
 				success: function(data,status,xhr){
@@ -296,6 +300,25 @@ $(document).ready(function(){
 	var startCur = $("#startCur");
 	var endCur= $("#endCur");
 	var atags = $("#group_a>a");
+	var prevGroup = $("#prevGroup");
+	var nextGroup = $("#nextGroup");
+	var groupindecator = $("#groupindecator");
+	
+	/*
+	 * 그룹 설정 이벤트 
+	 * */
+	
+	prevGroup.on("click",function(event){
+		event.preventDefault();
+		groupindecator.val("1");
+		$("form").submit();
+	});
+	
+	nextGroup.on("click",function(){
+		event.preventDefault();
+		groupindecator.val("2");
+		$("form").submit();
+	});
 	
 	// 번호 a태그 설정
 	// 현재 페이지는 a 태그 비 활성
@@ -313,6 +336,25 @@ $(document).ready(function(){
 		}
 		
 	});
+	
 });
 
+//화면 스크롤
+$(document).ready(function(){
+	//search_title
+	//group_a
+	var search_title = $("#search_title");
+	var section = $("section");
+	var empty_body = $("#empty_body");
+	var offsetValue = section.offset().top;
+	var group_a = $("#group_a");
+	var input_pname = $("#input_pname");
+	if(group_a.length==1){
+		var gap = search_title.offset().top - group_a.offset().top;
+		offsetValue =input_pname.offset().top;
+		
+	}
+	$('html, body').animate({scrollTop : offsetValue}, 400);
+});
 
+});

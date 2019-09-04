@@ -45,6 +45,10 @@
 		select * from product where pname= #{pname}
 	</select>
 	
+	<select id="searchProductToMap" resultType="hashmap">
+		select pcode,styletop,stylemid,stylebot,pname,pimage,to_char(pregitdate,'yyyy-MM-dd') pregitdate from product where pcode= #{pcode}
+	</select>
+	
 	<select id="searchStock" parameterType="hashmap" resultType="StockJoinProductDTO">
 		select sCode, pCode ,pSize, pColor, pPrice, pAmount,
 		deliverFee_YN, styleTop, styleMid, styleBot, pName, pImage, pRegitDate

@@ -1,5 +1,6 @@
 package com.model.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.model.dao.CartDAO;
@@ -49,10 +51,10 @@ public class CartService {
 	}
 
 	@Transactional
-	public int updateCart(List<HashMap<String, Object>> list) {
-		int result = dao.upadateCart(list);
-		if (result != pser.updateProducts(MapParamInputer.set("list", list, "direction", "plus")))result = 0;
-		return result;
+	public int updateCart(List<HashMap<String, Object>> list){
+		pser.updateProducts(MapParamInputer.set("list", list, "direction","plus"));
+		dao.upadateCart(list);
+		return 0;
 	}
 
 }

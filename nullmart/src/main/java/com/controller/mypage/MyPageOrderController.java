@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dto.EvalDTO;
 import com.dto.MemberDTO;
 import com.dto.OrderDTO;
+import com.dto.OrderEvalListDTO;
 import com.model.service.MyPageService;
 import com.util.SearchOrderCalDate;
 
@@ -26,6 +28,12 @@ public class MyPageOrderController {
 	@Autowired
 	private MyPageService service;
 	
+	/*
+	 * 주문한 상품에 대한 검색
+	 * day: 검색에 필요한 날짜, null일 경우 15일 default값으로 
+	 * orderList: 상품 검색 리스트
+	 * selectDays: 검색한 날짜 반환 
+	 * */
 	@RequestMapping(value = "/mypage/orderInfo", method = RequestMethod.GET)
 	public ModelAndView goOrderInfo(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "day" ,required = false, defaultValue = "15일") String day) {
 		System.out.println("goOrderInfo");
@@ -71,9 +79,64 @@ public class MyPageOrderController {
 		return mav;
 	}
 	
+	/*로그인 form으로 이동 */
 	@RequestMapping(value = "/loginForm")
 	public String goLoginForm() {
 		System.out.println("goLoginForm");
 		return "/Content/account/loginForm";
+	}
+	
+	/*
+	 * 작성한 상품후기 리스트 이동
+	 * orderevallist: 상품 구매 후기 리스트 페이지
+	 * */
+	@RequestMapping(value = "/mypage/orderEvalList")
+	public String orderEvalList(HttpSession session) {
+		MemberDTO member = (MemberDTO)session.getAttribute("login");
+		String userid = member.getUserid();
+		List<OrderEvalListDTO> orderEvalList = service.getOrderEvalList(userid);
+		session.setAttribute("orderevallist",orderEvalList);
+		return "/Content/mypage/orderevallist";
+	}
+	
+	/*
+	 * 상품후기 작성 등록 
+	 * EvalDTO eval: 상품 후기 작성 내용 객체 
+	 * 완료후 상품 후기 리스트 페이지로 
+	 * */
+	@RequestMapping(value = "/mypage/orderEval")
+	public String orderEval(EvalDTO eval) {
+		eval.setEvalno(eval.getOno()+"EVAL");
+		System.out.println(eval);
+		int num = service.addEval(eval);
+		return "redirect:/mypage/orderEvalList";
+	}
+	
+	/*
+	 * 상품 후기 수정 
+	 * ono: 주문 번호 
+	 * scode: 재고 번호 
+	 * modifyordereval.jsp: 상품 후기 수정 페이지 
+	 * */
+	@RequestMapping(value = "/mypage/modifyOrderEval",method = RequestMethod.GET)
+	public String modifyOrderEval(@RequestParam String ono,HttpServletRequest request) {
+		EvalDTO eval = service.searchEvalByOno(ono);
+		String scode = service.searchScodeByOno(ono);
+		System.out.println(scode);
+		request.setAttribute("scode", scode);
+		request.setAttribute("eval", eval);
+		
+		return "forward:/Content/mypage/modifyordereval.jsp";
+	}
+	
+	/*
+	 * 상품 후기 수정 완료
+	 * EvalDTO: 상품 후기 정보 저장 객체 
+	 * orderEvalList: 상품후기 리스트 페이지
+	 * */
+	@RequestMapping(value = "/mypage/modifyOrderEval",method = RequestMethod.POST)
+	public String modifyOrderEvalConfirm(EvalDTO eval) {
+		int num = service.updateEval(eval);
+		return "redirect:/mypage/orderEvalList";
 	}
 }

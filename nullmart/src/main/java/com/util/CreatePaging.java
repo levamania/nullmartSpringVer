@@ -79,9 +79,15 @@ public class CreatePaging {
 		return cur;
 	}
 	
+	public int getCols() {
+		return cols;
+	}
 	//범위 반환
 	public List<Integer> getNums() {
 		return nums;
+	}
+	public int getMaxPage() {
+		return maxPage;
 	}
 	//rowBound 시작 index
 	public int getCurColumn() {

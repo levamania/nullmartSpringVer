@@ -18,7 +18,7 @@
 		<!-- Interceptors -->
 		<interceptors>
 			<interceptor>
-				<mapping path="/Cart/*"/>
+				<mapping path="/cart/*"/>
 				<mapping path="/order/*"/>
 				<beans:ref bean="loginChecker"/>
 			</interceptor>
@@ -42,7 +42,8 @@
 		</bean-name>
 		<jsp prefix="" suffix=".jsp"/>
 	</view-resolvers>
-
+	
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<context:component-scan base-package="com" /> 
 </beans:beans>

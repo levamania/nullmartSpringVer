@@ -55,7 +55,7 @@ $().ready(()=>{
 	
 	//가져온 데이터 가공
 	var map = ${json};
-	
+	console.log(map);
 	//색상,사이즈로 가격 얻는 함수
 	function getPrice(color, size){
 		var price = 0;
@@ -64,13 +64,20 @@ $().ready(()=>{
 		}
 		return price;
 	}
+	function getDeliverFee(color,size){
+		var fee = "";
+		for(var info of map[color]){
+			if(info["PSIZE"]==size)fee = info["DELIVERFEE_YN"];
+		}
+		return fee;		
+	}
 	
 	//색상 클릭시 => 색상에 존재하는 색상정보, 사이즈 클릭시 => 사이즈와 색상정보를 넘겨 상응하는 레코드의 가격정보
 	
 	function createReposit(color,size){	
 		if(color.length!=0||size.length!=0){
 			var price = getPrice(color,size);
-			console.log(price);
+			var deliver_fee = getDeliverFee(color,size);
 			var ele = $("#product_info>.reposit").clone();
 			//콘텐츠 설정
 			var code = color+"/"+size+"/"+"${product.PNAME}";
@@ -88,7 +95,7 @@ $().ready(()=>{
 		           .end().children("div:eq(1)").html("<div id='plus'>+</div><input value='1' ><div id='minus'>-</div>")
   		             .end().children("div:eq(2)").text( toWon(price)+"("+toWon(price-${PPRICE[0]})+"원+)")
  		                  	  .append("<div id='for_calc'>X<div>").children().text(price).end()                    
-		           .end().children("div:eq(3)").html("<div class='delete'></div>");
+		           .end().children("div:eq(3)").html("<div class='delete' data-deliver = '"+deliver_fee+"'></div>");
 				$("#option").append(ele);
 			}
 
@@ -220,7 +227,7 @@ $().ready(()=>{
 		.end().eq(2).on("click",function(){
 				if($("#option>.content.reposit").length!=0){
 						login_checker(function(){
-							//무엇을 전달해야 하는가? 리파짓의 상품코드, 수량, 가격
+							//무엇을 전달해야 하는가? 리파짓의 상품코드, 수량, 가격, 배송비
 							var info = new Array();
 							var count = 1;
 							$("#option>.content.reposit").each(function(){
@@ -228,8 +235,10 @@ $().ready(()=>{
 								var SCODE = $(this).children("div:first-child").text().trim();
 								var PAMOUNT = $(this).find("input").val().trim();
 								var PPRICE = $(this).find("#for_calc").text().trim();
+								var DELIVER_FEE = $(this).find(".delete").attr("data-deliver");
 								
-								 info.push( { "PCODE":PCODE,"SCODE":SCODE, "PAMOUNT":PAMOUNT, "PPRICE":PPRICE });
+								 info.push( { "PCODE":PCODE,"SCODE":SCODE, "PAMOUNT":PAMOUNT, 
+									 				    "PPRICE":PPRICE, "DELIVERFEE_YN": DELIVER_FEE});
 							})
 							
 							$.ajax({

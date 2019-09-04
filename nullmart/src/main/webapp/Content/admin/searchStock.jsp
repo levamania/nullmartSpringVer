@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>관리자페이지</title>
-<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/searchStock.css?ver=4" >
+<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/searchStock.css?ver=6" >
 <link rel="stylesheet" href="/null/Content/api/jquery/jquery-ui/jquery-ui.css">
 </head>
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
@@ -17,7 +17,7 @@
 <header>
 	<jsp:include page="top.jsp"/>
 </header>
-<form action="/null/SearchStockServlet" method="post">
+<form action="/null/admin/searchStockByCondition" method="post">
 <div id="container">
 	<nav>
 		<jsp:include page="left.jsp"/>
@@ -98,6 +98,7 @@
 			<div>수량</div>
 			<div>등록날짜</div>
 		</div>
+		<input type="hidden"  name="groupindecator" id="groupindecator" value="0">
 		<c:if test="${empty orders}">
 			<div id="empty_body">
 			상품검색 결과 없음</div>
@@ -113,18 +114,27 @@
 					<div>${order.pRegitDate}</div>
 				</div>
 			</c:forEach>
-		</c:if>
-		<c:if test="${!empty page}">
+			
+			<c:if test="${!empty page}">
 			<div id="group_a">
+				<c:if test="${page.cur >= page.cols}">
+					<c:if test="${page.endCur>page.cols}">
+						<span><a><img src="/null/Content/img/mypage/leftArrow.png" width="16" height="auto"  id="prevGroup"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+					</c:if>
+				</c:if>
 				<c:forEach items="${page.nums}" var="num">
 					<a href="">${num}</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				</c:forEach>
+				<c:if test="${page.maxPage != page.cur}">
+					<span><a><img src="/null/Content/img/mypage/rightArrow.png" width="16" height="auto"  id="nextGroup"></a></span>
+				</c:if>
 			</div>
 		</c:if>
+		</c:if>
+		
 	</section>
 </div>
-
 </form>
-<script src="/null/Content/admin/js/searchStock.js?ver=5"></script>
+<script src="/null/Content/admin/js/searchStock.js?ver=3"></script>
 </body>
 </html>

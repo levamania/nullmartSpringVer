@@ -63,18 +63,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="end!=null">
 		and
 			<if test="start==null">
-				order_date=#{end}
+				to_char(order_date,'yyyy-MM-dd') = #{end}
 			</if>
 			<if test="start!=null">
-				order_date between #{start} and #{end}
+				to_char(order_date,'yyyy-MM-dd') between #{start} and #{end}
 			</if>
 		</if>
 		order by order_date desc
 	</select>
 	
 	<select id="getOrderEvalList" resultType="OrderEvalListDTO" parameterType="string">
-		select order_date, ono, ordername, evalno
-		from ordertable
+		select order_date, scode, ono, order_name, evalno
+		from orders
 		left outer join eval
 		using(ono)
 		where userid=#{userid}
@@ -89,8 +89,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from eval where ono = #{ono}
 	</select>
 	
-	<select id="searchOrdernameByOno" parameterType="string" resultType="string">
-		select ordername from ordertable where ono=#{ono}
+	<select id="searchScodeByOno" parameterType="string" resultType="string">
+		select scode from orders where ono=#{ono}
 	</select>
 	
 	<update id="updateEval" parameterType="EvalDTO">

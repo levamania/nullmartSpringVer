@@ -8,8 +8,8 @@ $(document).ready(function(){
 			$(this).css("background-color","red");
 			$(this).on("click",function(){
 				var ono = $(this).parents("div.body_contentblock").children(":nth-child(3)").val();
-				var ordername = $(this).parents("div.body_contentblock").children(":nth-child(5)").val();
-				$(location).attr("href","/null/Content/mypage/ordereval.jsp?ono="+ono+"&ordername="+ordername);
+				var scode = $(this).parents("div.body_contentblock").children(":nth-child(5)").val();
+				$(location).attr("href","/null/Content/mypage/ordereval.jsp?ono="+ono+"&scode="+scode);
 			});
 			
 		}else{
@@ -17,7 +17,7 @@ $(document).ready(function(){
 			$(this).css("background-color","gray");
 			$(this).on("click",function(){
 				var ono = $(this).parents("div.body_contentblock").children(":nth-child(3)").val();
-				$(location).attr("href","/null/ModifyOrderEvalServlet?ono="+ono);
+				$(location).attr("href","/null/mypage/modifyOrderEval?ono="+ono);
 			});
 		}
 	});

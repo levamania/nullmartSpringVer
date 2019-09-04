@@ -12,7 +12,7 @@ public class OrderDAO {
 	@Autowired
 	private SqlSessionTemplate session;
 
-	public List<HashMap<String, Object>> selectBook(HashMap<Object, Object> reposit) {
+	public List<HashMap<String, Object>> selectBook(HashMap<String, Object> reposit) {
 		String table = reposit.get("TABLE").toString();
 		List<HashMap<String, Object>> result = null;
 		if(table.equals("DELIVINFO")) {
@@ -25,5 +25,11 @@ public class OrderDAO {
 
 	public int insertOrder(HashMap<String, Object> reposit) {
 		return session.insert("insertOrder", reposit);
+	}
+
+	
+	//평가 자료
+	public List<HashMap<String, Object>> selectEvaluatedes(HashMap<String, Object> reposit) {
+		return session.selectList("selectEvaluatedes", reposit);
 	}
 }

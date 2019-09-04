@@ -213,7 +213,7 @@ input[type=submti]{
 
 /*초기 결과값이 없을 시  css*/
 #empty_body{
-	height: 300px; 
+	height: 150px; 
 	display: flex; 
 	align-items: center; 
 	justify-content: center;
@@ -228,4 +228,8 @@ input[type=submti]{
 #group_a>a{
 	font-size: 20px;
 	font-weight: bold;
+}
+#group_a>span{
+	padding-top: 4px;
+	align-self: center;
 }

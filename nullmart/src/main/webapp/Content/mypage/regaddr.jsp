@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
     <c:if test="${empty login}">
 	<%
-		response.sendRedirect("/null/LoginUIServlet");
+		response.sendRedirect("/null/loginForm");
 	%>
 </c:if>
 <!DOCTYPE html>
@@ -141,6 +141,6 @@ userid - 회원 아이디
 </div>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="js/addressAPI.js"></script>
-<script src="js/regaddr.js"></script>
+<script src="js/regaddr.js?ver=2"></script>
 </body>
 </html>

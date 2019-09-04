@@ -28,6 +28,7 @@ body {
 	height:30px;
 }
 
+
 /*top menu: 상단에 고정되어 있는 로그인,장바구니, 마이페이지 등*/
 .top.menu {
 	position: relative;
@@ -80,7 +81,7 @@ body {
 	position:relative;
 	width: 100%;
 	line-height: 25px; /*높이값 초기화  */
-	border: 5px solid red;
+	border: 5px solid #e80000;
 	-webkit-appearance: none;
 
 	margin-left: 5%;
@@ -133,15 +134,15 @@ body {
 /* 가로바: 상품 서칭*/
 /* 	줄 */
 .hr{
-	position:absolute;
+	position:relative;
 	left:-20%;
 
 	display:block;
 	width: 140%;
 	height: 0px;
 }
-	.hr#hr1{border-top:1px red solid}
-	.hr#hr2{border-top:1px gray solid}
+	.hr#hr1{border-top:3px #e80000 solid;}
+	.hr#hr2{border-top:1px #5f197a solid}
 	.hr#hr3{border-top:1px gray solid}
 
 /* 바 포지션 설정 => 바 내부 아이템 설정 가능 및 노말플로우에 따른 위치 설정 */
