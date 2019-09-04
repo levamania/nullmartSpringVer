@@ -4,6 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:if test="${!empty basic_setup || !empty pList}">
 <jsp:include page="/Content/product_list/js/productList.jsp"/>
 	<!-- 검색됨 -->
@@ -22,7 +24,7 @@
 		<hr style="border: 1px black solid; margin: 0;">
 		<div id="other_info"></div>
 		<hr style="border: 1px gray solid; margin: 0;">
-		<div id="searched_list">
+		<div id="searched_list" data-page="1">
 			<c:choose>
 				<c:when test="${!empty pList}">
 					<!-- 	검색된 상품들 -->
@@ -60,8 +62,15 @@
 		</div>
 		<c:if test="${! empty pList }">
 			<!-- 	페이징 -->
+			<c:set var="unit" value="5" />
+			<fmt:parseNumber var="phase" value="${cur_page/unit-0.1}"  integerOnly="true"/>
+			
 			<div id="paging">
-				<c:forEach var="count" begin="1" end="${page_size}">
+				<c:if test="${phase*unit+1 != 1}">
+					<div class="arrow" id="left"></div>
+				</c:if>
+ 
+				<c:forEach var="count" begin="${phase*unit+1}" end="${(page_size<unit*(1+phase))?page_size:unit*(1+phase)}">
 					<c:choose>
 						<c:when test="${count==cur_page}">
 							<div class="page active" id="page${count}">${count}</div>
@@ -71,7 +80,13 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
+				
+				<c:if test="${page_size > unit*(1+phase)}">
+					<div class="arrow" id="right"></div>
+				</c:if>
 			</div>
+			
 		</c:if>
+		
 	</div>
 </c:if>

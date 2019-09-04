@@ -31,8 +31,7 @@ $().ready(()=>{
 	
 
 	//상품 후기 이벤트
-	var paging_quan = 3;
-	
+	var paging_quan = toNum($("#paging").attr("data-page")); 
 	$(".wrap>div:first-child").on("click",function(){
 		$(this).parent().next().toggleClass("leo");
 	})
@@ -66,12 +65,13 @@ $().ready(()=>{
 	$("#paging>div:contains('1')").trigger("click");
 	
 	
-	//페이징 처리
+	//페이징 화살표 처리
 	var unit = 5;
 	var max_length = $("#paging>.no").length;
 	var count = 0;
 	
 		//visible 설정
+	$($("#paging>.no").slice(unit,$("#paging>.no").length)).css("display","none");
 	
 	
 		//페이징 애로우 버튼 활성화

@@ -222,7 +222,18 @@
 		cursor:default;
 	}
 	
-	#paging>.arrow{display:none;}
+	#paging>.arrow{
+		display:none;
+		
+		margin:0;
+		border:none;
+		
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 90% 100%;
+	}
+	#paging>#left{background-image: url("/null/Content/img/product/arrow_left.png")}
+	#paging>#right{background-image: url("/null/Content/img/product/arrow_right.png")}
 	
 	
 	

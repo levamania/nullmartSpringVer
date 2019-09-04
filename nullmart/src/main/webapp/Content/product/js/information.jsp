@@ -179,19 +179,21 @@ $().ready(()=>{
 	}
 	
 	//reposit input 유효성 설정
-	var prev_val=1;
 	function setInput_corrector(ele){
+		var prev_val=1;
 		ele.find("input")
 			.on("keyup",function(){
 			var text = $(this).val();
-			var regEx = /\d{1,5}/.test(text)&&input>0;
+			var regEx = /^\d{1,3}$/.test(text)&&text>0;
 			if(regEx){
 				var input = Number.parseInt(text);
 				prev_val=input;	
 		 	}else{
-		 		$(this).val(prev_val);
+			 		$(this).val(prev_val);
 		 	}
-		});
+		}).on("blur",function(){
+			$(this).val(prev_val);
+		})
 	}
 	
 	

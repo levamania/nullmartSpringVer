@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" type="text/css"
 	href="/null/Content/product/css/board.css">
@@ -61,17 +62,16 @@
 				<div class="record">상품의 후기가 없습니다.</div>
 			</c:if>
 		</div>
-		<div id="paging">
-			<div id="left" class="arrow">L</div>
-			<c:set var="length" value="${fn: length(eval_list)/3}"/>
+		
+		<fmt:parseNumber  var="unit" value="1"  integerOnly="true"/>
+		
+		<div id="paging" data-page = ${unit }>
+			<div id="left" class="arrow"></div>
+			<c:set var="length" value="${fn: length(eval_list)/unit}"/>
 			<c:forEach var="no" begin="1" end="${(length%1>0)?length+1:length}" varStatus="stat">
-				<div class = "no" 
-				<c:if test="${stat.count>5}">
-					style="display:none;"
-				</c:if>
-				>${no}</div>
+				<div class = "no" >${no}</div>
 			</c:forEach>
-			<div id="right" class="arrow">R</div>
+			<div id="right" class="arrow"></div>
 		</div>
 	</div>
 
