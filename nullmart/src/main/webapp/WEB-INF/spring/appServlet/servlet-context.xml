@@ -43,6 +43,8 @@
 		<jsp prefix="" suffix=".jsp"/>
 	</view-resolvers>
 	
+	<view-controller path="/login/UI" view-name="/Content/account/loginForm"/>
+	
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<context:component-scan base-package="com" /> 

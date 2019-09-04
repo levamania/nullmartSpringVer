@@ -23,7 +23,7 @@
 			  var searchedWord = $("#search input").val().trim();
 			  var regEx = /^\S{2,15}/;
 			  if(regEx.test(searchedWord)){
-				  location.href = "/null/productListing/work?source=input&searchedWord="+searchedWord;
+				  location.href = "/null/productListing/work?source=input&refresh=true&searchedWord="+searchedWord;
 			  }else{
 					  alert("2글자 이상 입력해주세요");
 			  }

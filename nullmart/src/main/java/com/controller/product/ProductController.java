@@ -128,7 +128,9 @@ public class ProductController {
 				
 			//상품 평가 정보 가져오기
 			List<HashMap<String, Object>> eval_list = oser.selectEvaluatedes(reposit);
+			double score_avg = eval_list.stream().mapToInt((x)->Integer.parseInt(x.get("ORDERSCORE").toString())).average().orElse(0);
 			model.addAttribute("eval_list", eval_list);
+			model.addAttribute("score_avg",score_avg);
 			
 			
 			//WITH JSP
