@@ -1,8 +1,10 @@
 package com.controller.mypage;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dto.EvalDTO;
@@ -27,6 +30,9 @@ import com.util.SearchOrderCalDate;
 public class MyPageOrderController {
 	@Autowired
 	private MyPageService service;
+
+//	@Autowired
+//	private ServletContext servletContext;
 	
 	/*
 	 * 주문한 상품에 대한 검색
@@ -66,9 +72,8 @@ public class MyPageOrderController {
 		}
 		
 		map.put("userid", userid);
-		System.out.println(map);
+		//System.out.println(servletContext.getRealPath("Content/img/"));
 		List<OrderDTO> list = service.getOrderList(map);
-		System.out.println(list);
 		
 		session.setAttribute("orderlist", list);
 		session.setAttribute("selectDays", selectDays);
@@ -77,6 +82,23 @@ public class MyPageOrderController {
 		mav.addObject("selectDays", selectDays);
 		mav.setViewName("/Content/mypage/orderinfo");
 		return mav;
+	}
+	
+	/*
+	 * ajax 응답 요청
+	 * pcode 검색
+	 * pcode 반환
+	 * */
+	@RequestMapping(value = "/mypage/searchPcode",method = RequestMethod.POST)
+	@ResponseBody
+	public String searchPcode(String scode) {
+		String[] scodes = scode.split("/");
+		String pname = scodes[2];
+		String pcode= service.searchPcode(pname);
+		if(pcode==null) {
+			pcode="0";
+		}
+		return pcode;
 	}
 	
 	/*로그인 form으로 이동 */

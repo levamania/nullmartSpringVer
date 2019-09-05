@@ -114,3 +114,37 @@ $(document).ready(function(){
 	});
 });
 
+/*
+ * 판매 페이지로 이동
+ * ajax로 scode로 pcode 확인 
+ * /null/product/UI?pCode의 파라미터 전송 
+ *
+ * */
+$(document).ready(function(){
+	var scodes= $(".scode");
+	var pcode="";
+	scodes.each(function(idx,scode){
+		$(this).on("click",function(event){
+			event.preventDefault();
+			$.ajax({
+				type:"post",
+				url:"/null/mypage/searchPcode",
+				data: {scode:$(this).text()},
+				dataType:"text",
+				success:function(data,status,xhr){
+					if(data!="0"){
+						window.open("/null/product/UI?pCode="+data,"_blank");
+					}else{
+						alert("이미 단종된 상품입니다.");
+					}
+					
+				},
+				error:function(xhr,status,error){
+					console.log(status);
+					console.log(error);
+				}
+			});
+		});
+	});
+});
+

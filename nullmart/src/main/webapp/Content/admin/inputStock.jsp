@@ -119,6 +119,6 @@
         </div>
     </div>
 </div>
-<script src="/null/Content/admin/js/inputStock.js?ver=15"></script>
+<script src="/null/Content/admin/js/inputStock.js?ver=12"></script>
 </body>
 </html>

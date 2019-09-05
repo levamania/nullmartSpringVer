@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>관리자페이지</title>
-<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/searchStock.css?ver=6" >
+<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/searchStock.css?ver=7" >
 <link rel="stylesheet" href="/null/Content/api/jquery/jquery-ui/jquery-ui.css">
 </head>
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
@@ -119,15 +119,20 @@
 			<div id="group_a">
 				<c:if test="${page.cur >= page.cols}">
 					<c:if test="${page.endCur>page.cols}">
-						<span><a><img src="/null/Content/img/mypage/leftArrow.png" width="16" height="auto"  id="prevGroup"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+						<span><a><img src="/null/Content/img/mypage/left.PNG" width="24" height="auto"  id="prevGroup"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;
 					</c:if>
 				</c:if>
 				<c:forEach items="${page.nums}" var="num">
 					<a href="">${num}</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				</c:forEach>
-				<c:if test="${page.maxPage != page.cur}">
-					<span><a><img src="/null/Content/img/mypage/rightArrow.png" width="16" height="auto"  id="nextGroup"></a></span>
-				</c:if>
+				<c:choose>
+					<c:when test="${page.maxPage - page.cur> page.cols}">
+						<span><a><img src="/null/Content/img/mypage/right.PNG" width="24" height="auto"  id="nextGroup"></a></span>
+					</c:when>
+					<c:when test="${page.cur eq page.endCur}">
+						<span><a><img src="/null/Content/img/mypage/right.PNG" width="24" height="auto"  id="nextGroup"></a></span>
+					</c:when>
+				</c:choose>
 			</div>
 		</c:if>
 		</c:if>

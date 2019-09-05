@@ -108,4 +108,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update account set passwd = #{passwd}
 		where userid = #{userid}
 	</update>
+	
+	<select id="searchPcode" resultType="string" parameterType="string">
+		select pcode from product where pname = #{pname}
+	</select>
 </mapper>

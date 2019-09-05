@@ -45,7 +45,7 @@
 	<c:forEach var="order" items="${orderlist}">
 	<div class="order_list">
 		<span class="order_list_content">${order.ono}</span>
-		<span class="order_list_content">${order.scode}</span>
+		<span class="order_list_content"><a href="#" class="scode">${order.scode}</a></span>
 		<span class="order_list_content">${order.paymethod}</span>
 		<span class="order_list_content">${order.order_date}</span>
 	</div>
@@ -58,6 +58,6 @@
 	</c:if>
 </div>
 </div>
-<script src="/null/Content/mypage/js/orderinfo.js?ver=3"></script> 
+<script src="/null/Content/mypage/js/orderinfo.js?ver=5"></script> 
 </body>
 </html>

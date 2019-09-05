@@ -2,8 +2,17 @@
  * 
  */
 
+//스크롤 함수 
+function response_scroll(){
+	var bodyContent = $("#body_content").offset();
+	var offsetValue =  bodyContent.top;
+	$('html, body').animate({scrollTop : offsetValue}, 400);
+	
+}
 //ajax에 요청에 따른 callback method
 function response_callback(){
+	//화면 스크롤 
+	response_scroll();
 	$.ajax({
 		type:"post",
 		url:"/null/admin/searchProduct",
@@ -58,6 +67,7 @@ function response_init(){
 	var pImage = $("#pImage");
 	init_explain.show();
 	pImage.hide();
+	$('html, body').animate({scrollTop : 0}, 400);
 }
 $(document).ready(function() {
 	
@@ -104,13 +114,13 @@ $(document).ready(function() {
 	//pcode, pname keyup 이벤트시
 	pcode.on("keyup",function(){
 		if(!submitBtn.prop("disabled")){
-			response_imginit();
+			response_init();
 			submitBtn.prop("disabled",true);
 		}
 	});
 	pname.on("keyup",function(){
 		if(!submitBtn.prop("disabled")){
-			response_imginit();
+			response_init();
 			submitBtn.prop("disabled",true);
 		}
 	});

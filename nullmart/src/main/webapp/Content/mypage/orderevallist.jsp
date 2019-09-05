@@ -46,7 +46,7 @@
 		<div class="body_contentblock">
 			<span class="body_contentinner">${ordereval.order_date}</span>
 			<span class="body_contentinner">${ordereval.ono}</span><input type="hidden" value="${ordereval.ono}">
-			<span class="body_contentinner">${ordereval.scode}</span><input type="hidden" value="${ordereval.scode}">
+			<span class="body_contentinner"><a href="#" class="scode">${ordereval.scode}</a></span><input type="hidden" value="${ordereval.scode}">
 			<span class="body_contentinner"><input type="button" class="evalbtns" value="수정"><input type="hidden" value="${ordereval.evalno}"></span>
 		</div>
 		</c:forEach>
@@ -59,6 +59,6 @@
 	</div>
 	
 </div>
-<script src="/null/Content/mypage/js/orderevallist.js?ver=3"></script>
+<script src="/null/Content/mypage/js/orderevallist.js?ver=4"></script>
 </body>
 </html>

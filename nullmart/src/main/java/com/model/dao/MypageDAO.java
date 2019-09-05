@@ -88,4 +88,10 @@ public class MypageDAO {
 		return template.update("myPage.updatePwd", map);
 	}
 
+	public String searchPcode(String pname) {
+		String pcode = template.selectOne("myPage.searchPcode", pname);
+		
+		return pcode;
+	}
+
 }

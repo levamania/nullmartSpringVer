@@ -100,5 +100,9 @@ public class MyPageService {
 		}
 		return num;
 	}
+	public String searchPcode(String pname) {
+		String pcode = mypageDAO.searchPcode(pname);
+		return pcode;
+	}
 	
 }

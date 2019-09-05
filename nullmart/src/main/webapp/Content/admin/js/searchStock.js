@@ -3,7 +3,6 @@
 //})
 
 $.getScript("/null/Content/api/jquery/jquery-ui/jquery-ui.js",function(){
-	console.log("jquery-ui.js");
 
 // select 태그 초기화
 function initSelector(selector,options){

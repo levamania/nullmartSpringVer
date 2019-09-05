@@ -22,3 +22,31 @@ $(document).ready(function(){
 		}
 	});
 });
+
+$(document).ready(function(){
+	var scodes= $(".scode");
+	var pcode="";
+	scodes.each(function(idx,scode){
+		$(this).on("click",function(event){
+			event.preventDefault();
+			$.ajax({
+				type:"post",
+				url:"/null/mypage/searchPcode",
+				data: {scode:$(this).text()},
+				dataType:"text",
+				success:function(data,status,xhr){
+					if(data!="0"){
+						window.open("/null/product/UI?pCode="+data,"_blank");
+					}else{
+						alert("이미 단종된 상품입니다.");
+					}
+					
+				},
+				error:function(xhr,status,error){
+					console.log(status);
+					console.log(error);
+				}
+			});
+		});
+	});
+});
