@@ -124,4 +124,8 @@
 		   insert values ('0','3','0','0','0','0','Y')
 	</insert>
 	
+	<insert id="insertProduct" parameterType="Map">
+		insert into test values(#{name}, #{bytes})
+	</insert>
+	
 </mapper>
