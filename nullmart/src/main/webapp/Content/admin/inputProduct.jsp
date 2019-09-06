@@ -89,6 +89,31 @@ $(document).ready(function(){
 				}
 		   });
 		});
+	/* $("#btn").on("click",function(){
+		//var fst= $("#first");
+		var snd= $("#second");
+		var thd= $("#third");
+		var up= $("#profile_pt");
+	$.ajax({
+		type : "POST",
+		datatype : "text",
+		url : "/null/upload",
+		data : {first:fst.val(),second:snd.val(),third:thd.val(),profile_pt:up.val()},
+		sucsess:function(data,status,xhr){
+			$(location).attr("href","/null/upload?first="+fst.val()+"&second="+snd.val()+"&third="+trd.val()+"&profile_pt="+up.val());
+		return false;
+		},
+		error:function(xhr,status,e){
+		return false;
+			
+		}, */
+		
+		
+		
+		
+	});
+	});
+	
 });
     </script>
 
@@ -98,7 +123,7 @@ $(document).ready(function(){
 	<jsp:include page="left.jsp"/>
 </div>
 <div id="body">
-<form action="">
+<form action="/null/upload" method="post" enctype="multipart/form-data">
 
 
 <div align="center"><b style="font-size:35px ">상품등록</b></div>
@@ -121,35 +146,35 @@ $(document).ready(function(){
 <td width="10" style="border-color: #edebeb;border-right-style: hidden;"></td>
 <td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="styletop"  name="styletop" value="both">
 <a style="font-size: 70%;color: gray">  성별을 선택해주세요  &nbsp;</a><select id="bigOption">
-<option value="both" id="both">both</option>
-<option value="male" id="male">male</option>
-<option value="female" id="female">female</option>
+<option value="both" id="sex">both</option>
+<option value="male" id="sex">male</option>
+<option value="female" id="sex">female</option>
 </select ></td>
 </tr>
 <tr>
 <td width="150" height="45" style="background-color:#edebeb "><a  style="font-size:100%">중분류</a><a  style="font-size:70%;color:red" >   (필수) </a></td>
 <td width="10" style="border-color: #edebeb;border-right-style: hidden;"></td>
-<td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="stylemid"  name="stylemid" value="sports">
-<a style="font-size: 70%;color: gray">  상품종류를 선택해주세요  &nbsp;</a><select id="midOption">
-<option value="sports" id="sports">sports</option>
-<option value="tennis" id="tennis">tennis</option>
-<option value="boots" id="boots">boots</option>
-<option value="shoe" id="shoe">shoe</option>
+<td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="stylemid"  name="stylemid" >
+<a style="font-size: 70%;color: gray">  상품종류를 선택해주세요  &nbsp;</a><select id="midOption" name="stylemidSelect">
+<option value="sports" id="second">sports</option>
+<option value="tennis" id="second">tennis</option>
+<option value="boots" id="second">boots</option>
+<option value="shoe" id="second">shoe</option>
 </select ></td>
 </tr>
 <tr>
 <td width="150" height="45" style="background-color:#edebeb "><a  style="font-size:100%">소분류</a><a  style="font-size:70%;color:red" >   (필수) </a></td>
 <td width="10" style="border-color: #edebeb;border-right-style: hidden;"></td>
-<td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="stylebot"  name="stylebot" value="sneakers">
-<a style="font-size: 70%;color: gray">  상세종류를 선택해주세요  &nbsp;</a><select id="botOption">
-<option value="sneakers" id="sneakers">sneakers</option>
-<option value="canvas" id="canvas">canvas</option>
-<option value="running" id="running">running</option>
-<option value="hiking" id="hiking">hiking</option>
-<option value="high_heel" id="high_heel">high_heel</option>
-<option value="oxfurd" id="oxfurd">oxfurd</option>
-<option value="fur" id="fur">fur</option>
-<option value="work" id="work" >"work"</option>
+<td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="stylebot"  name="stylebot" >
+<a style="font-size: 70%;color: gray">  상세종류를 선택해주세요  &nbsp;</a><select id="botOption" name="stylebotSelect">
+<option value="sneakers" id="third">sneakers</option>
+<option value="canvas" id="third">canvas</option>
+<option value="running" id="third">running</option>
+<option value="hiking" id="third">hiking</option>
+<option value="high_heel" id="third">high_heel</option>
+<option value="oxfurd" id="third">oxfurd</option>
+<option value="fur" id="third">fur</option>
+<option value="work" id="third" >"work"</option>
 </select ></td>
 </tr>
 <tr>
@@ -157,7 +182,7 @@ $(document).ready(function(){
 <td width="10" style="border-color: #edebeb;border-right-style: hidden;"></td>
 <td width="300" height="300" >
 
-<input type="file" name="profile_pt" id="profile_pt" onchange="previewImage(this,'View_area')">
+<input type="file" name="theFile" id="profile_pt" onchange="previewImage(this,'View_area')">
 <div id='View_area' style='position:relative;
  width: 250px; height: 	250px; color: black; border: 0px solid black; dispaly: inline; '>
  <a style="font-size: 70%;color: gray">PNG,JPG만 가능합니다</a></div>
