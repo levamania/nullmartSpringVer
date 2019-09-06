@@ -104,5 +104,9 @@ public class MyPageService {
 		String pcode = mypageDAO.searchPcode(pname);
 		return pcode;
 	}
+	public int searchCount(HashMap<String, String> map) {
+		int maxColumn =  mypageDAO.searchCount(map);
+		return maxColumn;
+	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,11 @@ public class MypageDAO {
 	}
 
 	public List<OrderDTO> getOrderList(HashMap<String, String> map) {
-		return template.selectList("myPage.getOrderList", map);
+		 List<OrderDTO> list = null;
+		int offset = Integer.parseInt(map.get("offset"));
+		int limit = Integer.parseInt(map.get("limit"));
+		list = template.selectList("myPage.getOrderList", map,new RowBounds(offset, limit));
+		return list;
 	}
 
 	public List<OrderEvalListDTO> getOrderEvalList(String userid) {
@@ -92,6 +97,11 @@ public class MypageDAO {
 		String pcode = template.selectOne("myPage.searchPcode", pname);
 		
 		return pcode;
+	}
+
+	public int searchCount(HashMap<String, String> map) {
+		int maxColumn = template.selectOne("myPage.searchCount", map);
+		return maxColumn;
 	}
 
 }

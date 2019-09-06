@@ -3,16 +3,21 @@ package com.util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /*
  * 날짜 계산 클래스
  * 상수 필드에 맞는 값을 계산
  * HashMap<String,String> 타입의 start, end 반환
  * */
 public class SearchOrderCalDate {
+	private static Logger logger = LoggerFactory.getLogger(SearchOrderCalDate.class);
 	public static final int TODAY=0;
 	public static final int DAYS=1;
 	public static final int MONTHS=2;
 	public static final int YEAR=3;
+	
 	public static HashMap<String,String> getDate(String date, int mode) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		LocalDate currentDate = LocalDate.now();
