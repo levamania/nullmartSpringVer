@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.sql.Blob;
@@ -58,9 +57,6 @@ import com.util.Language;
 import com.util.MapParamInputer;
 import com.util.QueryUtil;
 import com.util.WordInspector;
-
-
-
 
 
 
@@ -213,20 +209,6 @@ public class ProductListingController  {
 				model.addAttribute("page_size", (raw_list.size()%paging_quantity>0)?Math.floor((raw_list.size()/paging_quantity)+1):raw_list.size()/paging_quantity );
 				model.addAttribute("items_size", raw_list.size());
 
-				//extract column
-				List<HashMap<String, Object>> repo = new ArrayList<HashMap<String,Object>>();
-				for(HashMap<String, Object> indiv :raw_list) {
-					repo.addAll(pService.selectProduct_info(indiv));
-				}
-					//조건
-				if(session.getAttribute("basic")!=null) {
-					session.setAttribute("basic_repo", repo);
-					session.setAttribute("basic_raw", raw_list);
-				}else {
-					repo = (List<HashMap<String, Object>>)session.getAttribute("basic_repo");
-					raw_list = (List<HashMap<String, Object>>)session.getAttribute("basic_raw");
-				}
-				
 				Iterator<HashMap<String, Object>> ite = raw_list.iterator();
 				
 				//상품 이미지 다운
@@ -245,19 +227,15 @@ public class ProductListingController  {
 					
 					FileChannel outChannel = 
 							FileChannel.open(Paths.get(context.getRealPath(path)), 
-															  StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+											 StandardOpenOption.CREATE, StandardOpenOption.WRITE);
 						
 					Blob pimage_bytes = (Blob)product.get("PIMAGE_BYTES");
-					
+			
 					byte[] bs =  pimage_bytes.getBytes(1L, (int)pimage_bytes.length());
 					ByteBuffer buff = ByteBuffer.allocate(bs.length);
+					buff.flip();
+					outChannel.write(buff);
 					
-					int read = -1;
-					while((read = chan2.read(bob))>0) {
-						bob.flip();
-						chan.write(bob);
-						bob.clear();
-					}
 					outChannel.close();
 					}catch (Exception e) {
 						logger.debug(e.getMessage());
@@ -269,26 +247,31 @@ public class ProductListingController  {
 				
 				int processCnt = Runtime.getRuntime().availableProcessors();
 				ExecutorService manager = Executors.newFixedThreadPool(processCnt);
+				List<Callable<String>> tasks = new ArrayList<Callable<String>>();
 				
 				for(int i = 0; i<raw_list.size(); i++) {
-					Future<String> future =  manager.submit(run);
-						Thread thread = new Thread(new Runnable() {
-							@Override
-							public void run() {
-								try {
-									System.out.println(future.get());
-								} catch (InterruptedException | ExecutionException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-						}) ;
-						thread.start();
-						thread.join();
+					tasks.add(run);
 				}
+	
+				manager.invokeAll(tasks);
 				
 				
 				/*상세 검색 관련*/
+				
+				
+				//extract column
+				List<HashMap<String, Object>> repo = new ArrayList<HashMap<String,Object>>();
+				for(HashMap<String, Object> indiv :raw_list) {
+					repo.addAll(pService.selectProduct_info(indiv));
+				}
+					//조건
+				if(session.getAttribute("basic")!=null) {
+					session.setAttribute("basic_repo", repo);
+					session.setAttribute("basic_raw", raw_list);
+				}else {
+					repo = (List<HashMap<String, Object>>)session.getAttribute("basic_repo");
+					raw_list = (List<HashMap<String, Object>>)session.getAttribute("basic_raw");
+				}
 				
 				//선택된 제품 컬럼 정보 중복제거하여 저장
 				query.extractColumn(repo,request); 
