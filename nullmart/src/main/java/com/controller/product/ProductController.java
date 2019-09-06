@@ -32,7 +32,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.dto.ProductDTO;
 import com.dto.StockDTO;
@@ -148,5 +150,20 @@ public class ProductController {
 	@RequestMapping("/provide_size")
 	public String provide_size(HttpServletRequest request){
 		return request.getAttribute("item_sizes").toString();
+	}
+	
+	
+	@RequestMapping("/register")
+	public String registerProduct (@RequestParam HashMap<String, Object> reposit,
+															    @RequestParam("profile_pt") CommonsMultipartFile profile,
+															    Model model) {
+		//reposit 설정
+		reposit.put("profile_bytes", profile.getBytes());
+		reposit.put("profile_name", profile.getOriginalFilename());
+		
+		//with model
+		int  result = service.insertProduct(reposit);
+		
+		return "Content/main/main";
 	}
 }

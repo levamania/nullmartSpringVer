@@ -3,7 +3,12 @@ package com.controller.product;
 import java.io.File;
 
 import java.io.IOException;
-
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,8 +19,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
@@ -47,6 +58,9 @@ import com.util.Language;
 import com.util.MapParamInputer;
 import com.util.QueryUtil;
 import com.util.WordInspector;
+
+
+
 
 
 
@@ -212,6 +226,69 @@ public class ProductListingController  {
 					repo = (List<HashMap<String, Object>>)session.getAttribute("basic_repo");
 					raw_list = (List<HashMap<String, Object>>)session.getAttribute("basic_raw");
 				}
+				
+				Iterator<HashMap<String, Object>> ite = raw_list.iterator();
+				
+				//상품 이미지 다운
+				Callable<String> run = ()->{
+				while(ite.hasNext()) {
+					try {
+					HashMap<String, Object> product =  ite.next();	
+					if(product.get("PIMAGE_BYTES")==null)throw new Exception("응 없어");
+					
+					String styletop = product.get("STYLETOP").toString();
+					String stylemid = product.get("STYLEMID").toString();
+					String stylebot = product.get("STYLEBOT").toString();
+					String pimage = product.get("PIMAGE").toString();
+						
+					String path = "Content/img/shoes/"+stylemid+"/"+stylebot+"/"+pimage;
+					
+					FileChannel outChannel = 
+							FileChannel.open(Paths.get(context.getRealPath(path)), 
+															  StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+						
+					Blob pimage_bytes = (Blob)product.get("PIMAGE_BYTES");
+					
+					byte[] bs =  pimage_bytes.getBytes(1L, (int)pimage_bytes.length());
+					ByteBuffer buff = ByteBuffer.allocate(bs.length);
+					
+					int read = -1;
+					while((read = chan2.read(bob))>0) {
+						bob.flip();
+						chan.write(bob);
+						bob.clear();
+					}
+					outChannel.close();
+					}catch (Exception e) {
+						logger.debug(e.getMessage());
+						e.printStackTrace();
+					}
+				}
+					return "완료";
+				};
+				
+				int processCnt = Runtime.getRuntime().availableProcessors();
+				ExecutorService manager = Executors.newFixedThreadPool(processCnt);
+				
+				for(int i = 0; i<raw_list.size(); i++) {
+					Future<String> future =  manager.submit(run);
+						Thread thread = new Thread(new Runnable() {
+							@Override
+							public void run() {
+								try {
+									System.out.println(future.get());
+								} catch (InterruptedException | ExecutionException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}) ;
+						thread.start();
+						thread.join();
+				}
+				
+				
+				/*상세 검색 관련*/
 				
 				//선택된 제품 컬럼 정보 중복제거하여 저장
 				query.extractColumn(repo,request); 

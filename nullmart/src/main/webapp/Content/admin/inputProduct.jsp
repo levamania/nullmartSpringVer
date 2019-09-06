@@ -98,7 +98,7 @@ $(document).ready(function(){
 	<jsp:include page="left.jsp"/>
 </div>
 <div id="body">
-<form action="">
+<form action="/null/product/register" enctype="multipart/form-data" method="post">
 
 
 <div align="center"><b style="font-size:35px ">상품등록</b></div>
@@ -120,7 +120,7 @@ $(document).ready(function(){
 <td width="150" height="45" style="background-color:#edebeb "><a  style="font-size:100%">대분류</a><a  style="font-size:70%;color:red" >   (필수) </a></td>
 <td width="10" style="border-color: #edebeb;border-right-style: hidden;"></td>
 <td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="styletop"  name="styletop" value="both">
-<a style="font-size: 70%;color: gray">  성별을 선택해주세요  &nbsp;</a><select id="bigOption">
+<a style="font-size: 70%;color: gray">  성별을 선택해주세요  &nbsp;</a><select id="bigOption" >
 <option value="both" id="both">both</option>
 <option value="male" id="male">male</option>
 <option value="female" id="female">female</option>
@@ -235,7 +235,7 @@ $(document).ready(function(){
 <td width="10" style="border-color: #edebeb;border-right-style: hidden;"></td>
 <td  width="300" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%" id="price"  name="price" ><a  style="font-size: 70%">원</a></td>
 <td  width="300" height="40" style="border-style: hidden;">
-<a style="color: gray;font-size: 70%">배송비호함여부 Y</a><input type="radio" name="deliverfree" id="deliverfree" value="Y">
+<a style="color: gray;font-size: 70%">배송비호함여부 Y</a><input type="radio" name="deliverfree" id="deliverfree" value="Y"  checked>
 <a style="color: gray;font-size: 70%">N</a><input type="radio" name="deliverfree" id="deliverfree" value="N">
 </td>
 
