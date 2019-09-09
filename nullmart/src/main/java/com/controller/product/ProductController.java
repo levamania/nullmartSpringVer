@@ -130,7 +130,7 @@ public class ProductController {
 				
 			//상품 평가 정보 가져오기
 			List<HashMap<String, Object>> eval_list = oser.selectEvaluatedes(reposit);
-			double score_avg = eval_list.stream().mapToInt((x)->Integer.parseInt(x.get("ORDERSCORE").toString())).average().orElse(0);
+			double score_avg = Math.round(eval_list.stream().mapToInt((x)->Integer.parseInt(x.get("ORDERSCORE").toString())).average().orElse(0)*10)/10;
 			model.addAttribute("eval_list", eval_list);
 			model.addAttribute("score_avg",score_avg);
 			
@@ -157,13 +157,15 @@ public class ProductController {
 	public String registerProduct (@RequestParam HashMap<String, Object> reposit,
 															    @RequestParam("profile_pt") CommonsMultipartFile profile,
 															    Model model) {
+		String pimage = reposit.get("stylebot").toString()+System.currentTimeMillis()+"."+profile.getOriginalFilename().split("[.]")[1];
+		
 		//reposit 설정
 		reposit.put("profile_bytes", profile.getBytes());
-		reposit.put("profile_name", profile.getOriginalFilename());
+		reposit.put("profile_name", pimage);
 		
 		//with model
 		int  result = service.insertProduct(reposit);
 		
-		return "Content/main/main";
+		return "Content/admin/inputProduct";
 	}
 }

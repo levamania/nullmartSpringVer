@@ -233,6 +233,7 @@ public class ProductListingController  {
 			
 					byte[] bs =  pimage_bytes.getBytes(1L, (int)pimage_bytes.length());
 					ByteBuffer buff = ByteBuffer.allocate(bs.length);
+					buff.put(bs);
 					buff.flip();
 					outChannel.write(buff);
 					
@@ -254,8 +255,6 @@ public class ProductListingController  {
 				}
 	
 				manager.invokeAll(tasks);
-				
-				
 				/*상세 검색 관련*/
 				
 				

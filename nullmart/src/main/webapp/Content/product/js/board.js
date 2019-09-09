@@ -82,7 +82,7 @@ $().ready(()=>{
 			return bool;
 		});
 		
-		if($(visible[0]).text()!="1"){
+		if($(visible[0]).text()!="1" && visible[0]!=undefined){
 			$("#left").css("display","flex");
 		}else{
 			$("#left").css("display","none");			

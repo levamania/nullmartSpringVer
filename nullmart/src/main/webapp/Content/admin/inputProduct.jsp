@@ -129,10 +129,10 @@ $(document).ready(function(){
 <tr>
 <td width="150" height="45" style="background-color:#edebeb "><a  style="font-size:100%">중분류</a><a  style="font-size:70%;color:red" >   (필수) </a></td>
 <td width="10" style="border-color: #edebeb;border-right-style: hidden;"></td>
-<td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="stylemid"  name="stylemid" value="sports">
+<td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="stylemid"  name="stylemid" value="tennis">
 <a style="font-size: 70%;color: gray">  상품종류를 선택해주세요  &nbsp;</a><select id="midOption">
-<option value="sports" id="sports">sports</option>
 <option value="tennis" id="tennis">tennis</option>
+<option value="sports" id="sports">sports</option>
 <option value="boots" id="boots">boots</option>
 <option value="shoe" id="shoe">shoe</option>
 </select ></td>

@@ -41,10 +41,10 @@
 	
 	<!-- 평가 자료 -->
 	<select id="selectEvaluatedes" parameterType="hashmap" resultType="hashmap">
-		select evalno, orderscore, fastdelivery, ordersatis, evalcontent, substr(userid,0,length(userid)-3)||'***' userid, pcode, scode, pamount 
-		from eval e, orders o
-		where e.ono = o.ono
-<!-- 		and pcode = #{PCODE} -->
+		select evalno, orderscore, fastdelivery, ordersatis, evalcontent, substr(userid,0,length(userid)-3)||'***' userid, s.pcode, o.scode, o.pamount 
+		from eval e, orders o, stock s
+		where e.ono = o.ono and o.scode = s.scode
+		and pcode = #{PCODE}
 		order by  orderscore
 	</select>
 </mapper>
