@@ -255,4 +255,25 @@ body{margin: 0;}
 		#paging #left{
 			background-image: url("/null/Content/img/product/arrow_left.png");
 		}
+		
+		/*로딩 화면*/
+		#loading{
+			display: none;
+			align-items: center;
+			justify-content: center;
+			align-items:center;
+			
+			position: fixed;
+			top:0;left:0;
+			
+			width:100vw;
+			height:100vh;	
+		}
+		
+		#loading>img{
+			width: 10vw;
+			height: auto;
+			
+			border:5px dashed red;
+		}
 			

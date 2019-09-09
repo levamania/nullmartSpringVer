@@ -11,7 +11,7 @@
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
 <body>
 <div><jsp:include page="top.jsp"/></div>
-<form action="/null/admin/inputStock" method="post">
+<form action="/null/admin/inputStock" method="post" name="sus">
 <div id="body">
 	<div id="body_left"><jsp:include page="left.jsp"/></div>
 	<div id="body_content">

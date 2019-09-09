@@ -344,8 +344,12 @@ buttonSet();
 			
 				$.each(binding,function(key, value){
 					if(key==partner.text()){
+						var curr = null; 
 						for(var o of value){
-							deeper.append("<div class='button'>"+o["STYLEBOT"]+"</div>");
+							if(curr!=o["STYLEBOT"]){
+								deeper.append("<div class='button'>"+o["STYLEBOT"]+"</div>");
+								curr = o["STYLEBOT"];								
+							}
 						}
 					}
 				})

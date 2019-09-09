@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.text.NumberFormat"%>
@@ -31,7 +32,7 @@
 					<c:forEach var="item" items="${pList}" varStatus="stat">
 						<div class="product">
 							<input type="hidden" name="pCode" value=" ${item.PCODE }">
-							<img src="/null/Content/img/shoes/${item.STYLEMID}/${item.STYLEBOT}/${item.PIMAGE}.jpg">
+							<img src="/null/Content/img/shoes/${item.STYLEMID}/${item.STYLEBOT}/${item.PIMAGE}">
 							<br>
 							<div class="item name">${item.PNAME}</div>
 							<br>
@@ -88,5 +89,8 @@
 			
 		</c:if>
 		
+	</div>
+	<div id="loading"> 
+		<img src="/null/Content/img/common/loading.gif">
 	</div>
 </c:if>
