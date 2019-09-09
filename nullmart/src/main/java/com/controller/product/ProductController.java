@@ -166,6 +166,6 @@ public class ProductController {
 		//with model
 		int  result = service.insertProduct(reposit);
 		
-		return "Content/admin/inputProduct";
+		return "redirect:/Content/admin/inputProduct.jsp";
 	}
 }

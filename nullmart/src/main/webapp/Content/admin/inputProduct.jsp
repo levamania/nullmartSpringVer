@@ -89,6 +89,12 @@ $(document).ready(function(){
 				}
 		   });
 		});
+	
+	$(window).on("keyup",function(){
+		if(event.keyCode==13){
+			document.sus.submit();	
+		}
+	})
 });
     </script>
 
@@ -98,7 +104,7 @@ $(document).ready(function(){
 	<jsp:include page="left.jsp"/>
 </div>
 <div id="body">
-<form action="/null/product/register" enctype="multipart/form-data" method="post">
+<form action="/null/product/register" enctype="multipart/form-data" method="post" name="sus">
 
 
 <div align="center"><b style="font-size:35px ">상품등록</b></div>
@@ -140,10 +146,10 @@ $(document).ready(function(){
 <tr>
 <td width="150" height="45" style="background-color:#edebeb "><a  style="font-size:100%">소분류</a><a  style="font-size:70%;color:red" >   (필수) </a></td>
 <td width="10" style="border-color: #edebeb;border-right-style: hidden;"></td>
-<td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="stylebot"  name="stylebot" value="sneakers">
+<td colspan="2" width="600" height="40" ><input type="text" style="width:150px;height:70%;font-size:70%;color: gray" id="stylebot"  name="stylebot" value="canvas">
 <a style="font-size: 70%;color: gray">  상세종류를 선택해주세요  &nbsp;</a><select id="botOption">
 <option value="sneakers" id="sneakers">sneakers</option>
-<option value="canvas" id="canvas">canvas</option>
+<option value="canvas" id="canvas" selected>canvas</option>
 <option value="running" id="running">running</option>
 <option value="hiking" id="hiking">hiking</option>
 <option value="high_heel" id="high_heel">high_heel</option>

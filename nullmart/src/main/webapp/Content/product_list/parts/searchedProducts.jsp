@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.text.NumberFormat"%>
