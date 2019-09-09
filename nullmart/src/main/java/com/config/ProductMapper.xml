@@ -34,7 +34,7 @@
 	
 	<!-- 상품 검색 리스트 -->
 	<select id="selectProductList" parameterType="hashmap" resultType="hashmap">
-		select p.pcode pcode,   styletop, stylemid, stylebot, pname, pimage, pimage_bytes, pregitdate, m.pPrice min_price , nvl(searchedCnt,0) popularity
+		select p.pcode pcode,   styletop, stylemid, stylebot, pname, pimage, pimage_bytes, pregitdate, to_number(m.pPrice) min_price , nvl(searchedCnt,0) popularity
 		from product p, stock s , (select pCode,min(pPrice) pPrice
 								   						  from stock
 								   					      group by pCode) m, searchedWord w
