@@ -90,4 +90,7 @@
 		</c:if>
 		
 	</div>
+	<div id="loading"> 
+		<img src="/null/Content/img/common/loading.gif">
+	</div>
 </c:if>
