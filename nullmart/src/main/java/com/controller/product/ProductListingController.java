@@ -3,7 +3,11 @@ package com.controller.product;
 import java.io.File;
 
 import java.io.IOException;
-
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,8 +18,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
@@ -48,12 +58,10 @@ import com.util.MapParamInputer;
 import com.util.QueryUtil;
 import com.util.WordInspector;
 
-
-
 @Controller
 @RequestMapping(value = "/productListing")
 @SuppressWarnings("unchecked")
-public class ProductListingController  {
+public class ProductListingController {
 	@Autowired
 	private ServletContext context;
 	@Autowired
@@ -62,56 +70,61 @@ public class ProductListingController  {
 	private RankingService rser;
 
 	@RequestMapping(value = "/specificFilter")
-	public String filterCondition(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+	public String filterCondition(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String selected_atoms = request.getParameter("selected_atoms");
-		//유틸 셋팅
-		WordInspector inspector = new WordInspector(new File(context.getRealPath("/Content/configuration/subsitution_dictionary.json")));
-		
-		//검색단어 가공 - json 파싱
+		// 유틸 셋팅
+		WordInspector inspector = new WordInspector(
+				new File(context.getRealPath("/Content/configuration/subsitution_dictionary.json")));
+
+		// 검색단어 가공 - json 파싱
 		ObjectMapper mapper = new ObjectMapper();
 		String transed = inspector.render(selected_atoms, Language.English);
 		HashMap<String, Object> atom_lists = mapper.readValue(transed, HashMap.class);
-			//루핑용 카피
-		HashMap<String, Object> copy = (HashMap<String, Object>)atom_lists.clone();
+		// 루핑용 카피
+		HashMap<String, Object> copy = (HashMap<String, Object>) atom_lists.clone();
 
 		HttpSession session = request.getSession();
-			//클릭된 셋팅저장
-			if(session.getAttribute("clicked")!=null)session.removeAttribute("clicked");
-			session.setAttribute("clicked", copy);
-			//이전 스택
-		HashMap<String, Object> prev_stack = (HashMap<String,Object>)session.getAttribute("prev_stack");
-			//갈무리된 검색 조건
-		HashMap<String, Object> established =  null;
-		if(session.getAttribute("basic_setup")==null) {
-			HashMap<String, Object> set_up = (HashMap<String, Object>)prev_stack.get("listing_setup"); //기존 셋업과 합쳐야한다.
+		// 클릭된 셋팅저장
+		if (session.getAttribute("clicked") != null)
+			session.removeAttribute("clicked");
+		session.setAttribute("clicked", copy);
+		// 이전 스택
+		HashMap<String, Object> prev_stack = (HashMap<String, Object>) session.getAttribute("prev_stack");
+		// 갈무리된 검색 조건
+		HashMap<String, Object> established = null;
+		if (session.getAttribute("basic_setup") == null) {
+			HashMap<String, Object> set_up = (HashMap<String, Object>) prev_stack.get("listing_setup"); // 기존 셋업과 합쳐야한다.
 			established = set_up;
-			session.setAttribute("basic_setup",  (HashMap<String, Object>)set_up.clone());
-		}else {
-			established = (HashMap<String, Object>)session.getAttribute("basic_setup");
+			session.setAttribute("basic_setup", (HashMap<String, Object>) set_up.clone());
+		} else {
+			established = (HashMap<String, Object>) session.getAttribute("basic_setup");
 		}
-		
-		//합치기
-		for(String key : copy.keySet()) {
-			for(String infe : established.keySet()) {
-				if(established.get(infe)!=null) {
-					List<String> lit_main  = (List<String>)atom_lists.get(key);
-					List<String> lit_sub  = (List<String>)established.get(infe);
-					if(key.equals(infe)) {
-						if(!lit_main.get(0).equals(lit_sub.get(0)))lit_main.addAll(lit_sub);				
-					}else {
+
+		// 합치기
+		for (String key : copy.keySet()) {
+			for (String infe : established.keySet()) {
+				if (established.get(infe) != null) {
+					List<String> lit_main = (List<String>) atom_lists.get(key);
+					List<String> lit_sub = (List<String>) established.get(infe);
+					if (key.equals(infe)) {
+						if (!lit_main.get(0).equals(lit_sub.get(0)))
+							lit_main.addAll(lit_sub);
+					} else {
 						atom_lists.put(infe, lit_sub);
 					}
 				}
 			}
 		}
-		prev_stack.remove("listing_setup"); //기존 셋업삭제
-		prev_stack.put("listing_setup", atom_lists);//셋팅 재설정 완료
-		
-		//디스패치
+		prev_stack.remove("listing_setup"); // 기존 셋업삭제
+		prev_stack.put("listing_setup", atom_lists);// 셋팅 재설정 완료
+
+		// 디스패치
 		return "forward:/productListing/work";
 	}
-	
+
 	private static Logger logger = LoggerFactory.getLogger(ProductListingController.class);
+
 	@RequestMapping(value = "/work")
 	public  String work(HttpServletRequest request, HttpServletResponse response, Model model,
 										  @RequestParam(defaultValue = "false", name = "refresh") boolean refresh) throws ServletException, IOException {
@@ -199,6 +212,57 @@ public class ProductListingController  {
 				model.addAttribute("page_size", (raw_list.size()%paging_quantity>0)?Math.floor((raw_list.size()/paging_quantity)+1):raw_list.size()/paging_quantity );
 				model.addAttribute("items_size", raw_list.size());
 
+				Iterator<HashMap<String, Object>> ite = raw_list.iterator();
+				
+				//상품 이미지 다운
+				Callable<String> run = ()->{
+				while(ite.hasNext()) {
+					try {
+					HashMap<String, Object> product =  ite.next();	
+					if(product.get("PIMAGE_BYTES")==null)throw new Exception("응 없어");
+					
+					String styletop = product.get("STYLETOP").toString();
+					String stylemid = product.get("STYLEMID").toString();
+					String stylebot = product.get("STYLEBOT").toString();
+					String pimage = product.get("PIMAGE").toString();
+						
+					String path = "Content/img/shoes/"+stylemid+"/"+stylebot+"/"+pimage;
+					File file = Paths.get(context.getRealPath(path)).toFile();
+					
+					if(!file.exists()) {
+					FileChannel outChannel = 
+							FileChannel.open(Paths.get(context.getRealPath(path)), 
+											 StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+						
+					Blob pimage_bytes = (Blob)product.get("PIMAGE_BYTES");
+			
+					byte[] bs =  pimage_bytes.getBytes(1L, (int)pimage_bytes.length());
+					ByteBuffer buff = ByteBuffer.allocate(bs.length);
+					buff.put(bs);
+					buff.flip();
+					outChannel.write(buff);
+					
+					outChannel.close();
+					}	
+					}catch (Exception e) {
+						logger.debug(e.getMessage());
+					}
+					
+				}
+					return "완료";
+				};
+				
+				int processCnt = Runtime.getRuntime().availableProcessors();
+				ExecutorService manager = Executors.newFixedThreadPool(processCnt);
+				List<Callable<String>> tasks = new ArrayList<Callable<String>>();
+				
+				for(int i = 0; i<raw_list.size(); i++) {
+					tasks.add(run);
+				}
+				manager.invokeAll(tasks);
+				/*상세 검색 관련*/
+				
+				
 				//extract column
 				List<HashMap<String, Object>> repo = new ArrayList<HashMap<String,Object>>();
 				for(HashMap<String, Object> indiv :raw_list) {
@@ -230,6 +294,7 @@ public class ProductListingController  {
 				}
 				
 				//스타일 미드에 스타일 봇 바인딩
+				raw_list = raw_list.stream().sorted(ComparatorFactory.generate("STYLEBOT")).collect(Collectors.toList());
 				HashMap<String, Object> binded = query.bind(raw_list, "STYLEMID",new String[] {"STYLEBOT"});
 					//한글로 번역 & json 파싱 => 저장
 				JSONObject sonsang = new JSONObject(inspector.render(binded, Language.Korean));
@@ -246,10 +311,10 @@ public class ProductListingController  {
 		} catch (CustomException e) {
 			logger.debug("mesg{"+e.getMessage()+"}", "debug");
 		} catch(IOException e){
-			System.out.println("경고: 파일이 없데요!");
+			logger.debug("mesg{"+e.getMessage()+"}", "debug");
 			e.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("너 또 왜!: " + e.getMessage());
+			logger.debug("mesg{"+e.getMessage()+"}", "debug");
 			e.printStackTrace();
 		}
 		//with jsp

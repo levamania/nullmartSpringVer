@@ -71,6 +71,17 @@ function response_init(){
 }
 $(document).ready(function() {
 	
+	$("#pname").on("keyup",function(){
+		if(event.keyCode==13){
+			$("#checkpcode").trigger("click");
+		}
+	})
+	$("#pprice").on("keyup",function(){
+		if(event.keyCode==13){
+			document.sus.submit();	
+		}
+	})
+	
 	//검색 이미지 초기화
 	response_init();
 	

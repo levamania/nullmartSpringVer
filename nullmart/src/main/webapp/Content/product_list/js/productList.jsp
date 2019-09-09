@@ -44,8 +44,10 @@
 	 	  //form  추가
 		  $(".searched_product").append(html);
 	 	  
+	 	  //로딩화면 보이게하기
+	 	  $("#loading").css("display","flex");
+	 	  
 	 	  var product_form = document.product_form;
-	 	  console.log(product_form);
 	 	  product_form.action = "/null/"+destination;
  	 	  product_form.submit();
 	

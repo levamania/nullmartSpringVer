@@ -39,4 +39,8 @@ public class ProductService implements ModelService {
 		return dao.updateProducts( hashMap);
 	}
 
+	public int insertProduct(HashMap<String, Object> reposit) {
+		return dao.insertProduct(reposit);
+	}
+
 }// end class

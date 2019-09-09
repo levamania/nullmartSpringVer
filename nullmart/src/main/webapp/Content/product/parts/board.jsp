@@ -16,8 +16,8 @@
 			<div data-target="eval" class="ev">상품 후기</div>
 			<div data-target="info" class="in">배송/AS 안내</div>
 		</div>
-		<div class="pool">
-			<div>상품이미지가 없습니다.</div>
+		<div class="pool" >
+			<div class="record" style="justify-content: center">상품이미지가 없습니다.</div>
 <!-- 			<img src="/null/Content/img/cart/down.png"> -->
 		</div>
 	</div>

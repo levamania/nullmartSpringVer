@@ -44,5 +44,9 @@ public class ProductDAO {
 		return session.update("updateProducts", hashMap);
 	}
 
+	public int insertProduct(HashMap<String, Object> reposit) {
+		return session.insert("insertProduct",reposit);
+	}
+
 	
 }//end class
