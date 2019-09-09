@@ -267,3 +267,13 @@ $(document).ready(function(){
 
     }
 });
+
+// 가격 - 통화 처리 
+$(document).ready(function(){
+	var pprice = $("#pprice");
+	pprice.on("keyup",function(){
+		  var temp = $(this).val().replace(/[^0-9]/g, '');
+		  pprice.val(temp.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+	});
+	
+});

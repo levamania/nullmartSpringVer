@@ -58,6 +58,7 @@
 </table>
 </div>
 <div id="addr_list">
+<input type="hidden" value="${fn:length(addrList)}" id="addrListSize">
 <c:set var="listSize" value="${fn:length(addrList)}"></c:set>
 <c:choose>
 <c:when test="${listSize==0}">
@@ -84,6 +85,6 @@
 </div>
 </div>
 
-<script src="/null/Content/mypage/js/addrlist.js"></script>
+<script src="/null/Content/mypage/js/addrlist.js?ver=1"></script>
 </body>
 </html>

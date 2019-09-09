@@ -126,7 +126,7 @@
 					<a href="">${num}</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				</c:forEach>
 				<c:choose>
-					<c:when test="${page.maxPage - page.cur> page.cols}">
+					<c:when test="${page.maxPage - page.cur>= page.cols}">
 						<span><a><img src="/null/Content/img/mypage/right.PNG" width="24" height="auto"  id="nextGroup"></a></span>
 					</c:when>
 					<c:when test="${page.cur eq page.endCur}">

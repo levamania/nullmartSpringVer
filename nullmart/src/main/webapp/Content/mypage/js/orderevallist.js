@@ -23,6 +23,63 @@ $(document).ready(function(){
 	});
 });
 
+//page 처리
+$(document).ready(function(){
+	var cur = $("#cur");
+	var startCur = $("#startCur");
+	var endCur= $("#endCur");
+	var atags = $("#group_a>a");
+	var prevGroup = $("#prevGroup");
+	var nextGroup = $("#nextGroup");
+	var groupindecator = $("#groupindecator");
+	
+	/*
+	 * 그룹 설정 이벤트 
+	 * */
+	
+	prevGroup.on("click",function(event){
+		event.preventDefault();
+		groupindecator.val("1");
+		$("form").submit();
+	});
+	
+	nextGroup.on("click",function(){
+		event.preventDefault();
+		groupindecator.val("2");
+		$("form").submit();
+	});
+	
+	// 번호 a태그 설정
+	// 현재 페이지는 a 태그 비 활성
+	atags.each(function(idx,a){
+		if($(a).text()==cur.val()){
+			$(this).removeAttr("href");
+		}else{
+			// 태그 클릭시
+			// click atag의 값을 cur에 할당
+			$(this).on("click",function(event){
+				event.preventDefault();
+				cur.val($(this).text());
+				$("form").submit();
+			});
+		}
+		
+	});
+	
+});
+
+//화면 스크롤
+$(document).ready(function(){
+	var body = $("#body");
+	var group_a = $("#group_a");
+	var userid = $("#userid");
+	if(group_a.length==1){
+		var topValue = body.offset().top;
+		$('html,body').animate({scrollTop : userid.offset().top},400);
+	}
+});
+
+
 $(document).ready(function(){
 	var scodes= $(".scode");
 	var pcode="";

@@ -12,14 +12,14 @@
 <head>
 <meta charset="UTF-8">
 <title>주문현황 조회</title>
-<link rel="stylesheet" href="/null/Content/mypage/css/orderinfo.css?ver=2">
+<link rel="stylesheet" href="/null/Content/mypage/css/orderinfo.css?ver=4">
 </head>
 <body>
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
 <jsp:include page="top.jsp"></jsp:include>
+<div id="body">
 <!-- submit-->
 <form action="/null/mypage/orderInfo" method="get">
-<div id="body">
 <div id="top_box" >
 	<input type="hidden" id="selectDays"  value="${selectDays}">
 	<p style="font-weight:bolder; font-size: 20px;">주문현황 조회</p>
@@ -78,7 +78,7 @@
 					<a href="">${num}</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				</c:forEach>
 				<c:choose>
-					<c:when test="${page.maxPage - page.cur> page.cols}">
+					<c:when test="${page.maxPage - page.cur>= page.cols}">
 						<span><a><img src="/null/Content/img/mypage/right.PNG" width="24" height="auto"  id="nextGroup"></a></span>
 					</c:when>
 					<c:when test="${page.cur eq page.endCur}">
@@ -94,8 +94,9 @@
 		</div>
 	</c:if>
 </div>
-</div>
 </form>
-<script src="/null/Content/mypage/js/orderinfo.js?ver=4"></script> 
+</div>
+
+<script src="/null/Content/mypage/js/orderinfo.js?ver=5"></script> 
 </body>
 </html>

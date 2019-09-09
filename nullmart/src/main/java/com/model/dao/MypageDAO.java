@@ -65,8 +65,12 @@ public class MypageDAO {
 		return list;
 	}
 
-	public List<OrderEvalListDTO> getOrderEvalList(String userid) {
-		return template.selectList("myPage.getOrderEvalList", userid);
+	public List<OrderEvalListDTO> getOrderEvalList(HashMap<String, String> map) {
+		List<OrderEvalListDTO> list= null;
+		int offset = Integer.parseInt(map.get("offset"));
+		int limit = Integer.parseInt(map.get("limit"));
+		list= template.selectList("myPage.getOrderEvalList", map, new RowBounds(offset, limit));
+		return list;
 	}
 
 	public int addEval(EvalDTO eval) {
@@ -101,6 +105,11 @@ public class MypageDAO {
 
 	public int searchCount(HashMap<String, String> map) {
 		int maxColumn = template.selectOne("myPage.searchCount", map);
+		return maxColumn;
+	}
+
+	public int searchCountEval(String userid) {
+		int maxColumn = template.selectOne("myPage.searchCountEval", userid);
 		return maxColumn;
 	}
 

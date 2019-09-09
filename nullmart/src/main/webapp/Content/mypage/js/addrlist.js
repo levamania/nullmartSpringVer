@@ -36,3 +36,16 @@ $(document).ready(function(){
 		$(location).attr("href","/null/Content/mypage/regaddr.jsp");
 	});
 });
+
+//화면 스크롤
+$(document).ready(function(){
+	var addrListSize = $("#addrListSize").val();
+	var horizentalBar = $("#horizentalBar");
+	var head_title = $("#head_title");
+	if(addrListSize==0){
+		$('html,body').animate({scrollTop : horizentalBar.offset().top},400);
+	}else{
+		$('html,body').animate({scrollTop : head_title.offset().top},400);
+	}
+	
+});

@@ -150,6 +150,19 @@ $(document).ready(function(){
 	});
 });
 
+//화면 스크롤
+$(document).ready(function(){
+	var top_box = $("#top_box");
+	var group_a = $("#group_a");
+	var horizentalBar = $("#horizentalBar");
+	if(group_a.length==1){
+		var topValue = top_box.offset().top;
+		$('html,body').animate({scrollTop : topValue},400);
+	}else{
+		$('html,body').animate({scrollTop : horizentalBar.offset().top},400);
+	}
+});
+
 /*
  * 판매 페이지로 이동
  * ajax로 scode로 pcode 확인 

@@ -65,8 +65,8 @@ public class MyPageService {
 		List<OrderDTO> list = mypageDAO.getOrderList(map);
 		return list;
 	}
-	public List<OrderEvalListDTO> getOrderEvalList(String userid) {
-		List<OrderEvalListDTO> list = mypageDAO.getOrderEvalList(userid);
+	public List<OrderEvalListDTO> getOrderEvalList(HashMap<String, String> map) {
+		List<OrderEvalListDTO> list = mypageDAO.getOrderEvalList(map);
 		return list;
 	}
 	public int addEval(EvalDTO eval) {
@@ -89,7 +89,6 @@ public class MyPageService {
 		String pwd=mypageDAO.searchPassword(userid);
 		return pwd;
 	}
-	
 	@Transactional
 	public int updatePwd(Map<String, String> map) {
 		int num =0;
@@ -108,5 +107,10 @@ public class MyPageService {
 		int maxColumn =  mypageDAO.searchCount(map);
 		return maxColumn;
 	}
+	public int searchCountEval(String userid) {
+		int maxColumn =  mypageDAO.searchCountEval(userid);
+		return maxColumn;
+	}
+	
 	
 }

@@ -66,3 +66,16 @@
 	justify-content: center;
 	font-weight: bolder;
 }
+/*paging을 위한  css*/
+#group_a{
+	display: flex;
+	height: 30px;
+	justify-content: center;
+}
+#group_a>a{
+	font-size: 20px;
+	font-weight: bold;
+}
+#group_a>span{s
+	align-self: center;
+}
