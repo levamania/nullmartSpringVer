@@ -43,11 +43,12 @@ scroller();
 	</div>
 
 	<div id="redirector">
-		<div id="mypage">마이 페이지</div>
+		<div id="mypag">마이 페이지</div>
 		<div id="mainpage">계속 쇼핑하기</div>
 	</div>
+	
 	<script>
-		$("#mypage").on("click",()=>location.href="/null/maypage/orderInfo");
+		$("#mypag").on("click",()=>location.href="/null/maypage/orderInfo");
 		$("#mainpage").on("click",()=>location.href="/null/main");
 	</script>
 

@@ -17,7 +17,7 @@
 			<div data-target="info" class="in">배송/AS 안내</div>
 		</div>
 		<div class="pool" >
-			<div class="record" style="justify-content: center">상품이미지가 없습니다.</div>
+			<div>상품이미지가 없습니다.</div>
 <!-- 			<img src="/null/Content/img/cart/down.png"> -->
 		</div>
 	</div>
@@ -59,11 +59,11 @@
 				</div>
 			</c:forEach>
 			<c:if test="${empty eval_list}">
-				<div class="record">상품의 후기가 없습니다.</div>
+				<div class="record" style="justify-content: center">상품의 후기가 없습니다.</div>
 			</c:if>
 		</div>
 		
-		<fmt:parseNumber  var="unit" value="1"  integerOnly="true"/>
+		<fmt:parseNumber  var="unit" value="5"  integerOnly="true"/>
 		
 		<div id="paging" data-page = ${unit }>
 			<div id="left" class="arrow"></div>

@@ -55,7 +55,6 @@ $().ready(()=>{
 	
 	//가져온 데이터 가공
 	var map = ${json};
-	console.log(map);
 	//색상,사이즈로 가격 얻는 함수
 	function getPrice(color, size){
 		var price = 0;
@@ -122,13 +121,15 @@ $().ready(()=>{
  						//이전에 사이즈 선택으로 활성화 되었이던 사이즈 버튼들 비활성화
  						$(".content #sizes>div").removeClass("active");
  						//색상에 맞는 사이즈 리스트  활성화
- 						var color = document.querySelector(".color.active").style.backgroundColor.toUpperCase();//rgb값만이 나오기에
+ 						if(document.querySelector(".color.active")!=null){
+ 							var color = document.querySelector(".color.active").style.backgroundColor.toUpperCase();//rgb값만이 나오기에 							
  						for(var info of map[color]){
  							if(info["PSIZE"]!=0){
 					   	 		$(".content #sizes>div").each(function(){
 					    			if($(this).text()==info["PSIZE"])$(this).toggleClass("active");
 					    		})
 					   		}
+ 						}
  						}
  						event_push();
 				   })
