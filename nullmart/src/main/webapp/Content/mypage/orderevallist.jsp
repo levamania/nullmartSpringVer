@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <title>나의 상품후기 작성</title>
-<link rel="stylesheet" type="text/css" href="/null/Content/mypage/css/orderevallist.css?ver=1">
+<link rel="stylesheet" type="text/css" href="/null/Content/mypage/css/orderevallist.css?ver=2">
 </head>
 <body>
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
@@ -40,16 +40,51 @@
 		<span class="body_item">상품명</span>
 		<span class="body_item">구매후기</span>
 	</div>
+	<form action="/null//mypage/orderEvalList" method="get">
 	<div id="body_content">
 		<c:if test="${not empty orderevallist}">
 		<c:forEach var="ordereval" items="${orderevallist}">
 		<div class="body_contentblock">
 			<span class="body_contentinner">${ordereval.order_date}</span>
 			<span class="body_contentinner">${ordereval.ono}</span><input type="hidden" value="${ordereval.ono}">
-			<span class="body_contentinner">${ordereval.scode}</span><input type="hidden" value="${ordereval.scode}">
+			<span class="body_contentinner"><a href="#" class="scode">${ordereval.scode}</a></span><input type="hidden" value="${ordereval.scode}">
 			<span class="body_contentinner"><input type="button" class="evalbtns" value="수정"><input type="hidden" value="${ordereval.evalno}"></span>
 		</div>
 		</c:forEach>
+			<!--페이징 -->
+		<c:choose>
+			<c:when test="${empty page}">
+				<input type="hidden" id="cur" name="cur" value="1">
+				<input type="hidden" id="startCur" name="startCur" value="1">
+				<input type="hidden" id="endCur" name="endCur" value="0">
+			</c:when>
+			<c:otherwise>
+				<input type="hidden" id="cur" name="cur" value="${page.cur}">
+				<input type="hidden" id="startCur" name="startCur" value="${page.startCur}">
+				<input type="hidden" id="endCur" name="endCur" value="${page.endCur}">
+			</c:otherwise>
+			</c:choose>
+		<input type="hidden"  name="groupindecator" id="groupindecator" value="0">
+		<c:if test="${!empty page}">
+			<div id="group_a">
+				<c:if test="${page.cur >= page.cols}">
+					<c:if test="${page.endCur>page.cols}">
+						<span><a><img src="/null/Content/img/mypage/left.PNG" width="24" height="auto"  id="prevGroup"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+					</c:if>
+				</c:if>
+				<c:forEach items="${page.nums}" var="num">
+					<a href="">${num}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				</c:forEach>
+				<c:choose>
+					<c:when test="${page.maxPage - page.cur>= page.cols}">
+						<span><a><img src="/null/Content/img/mypage/right.PNG" width="24" height="auto"  id="nextGroup"></a></span>
+					</c:when>
+					<c:when test="${page.cur eq page.endCur}">
+						<span><a><img src="/null/Content/img/mypage/right.PNG" width="24" height="auto"  id="nextGroup"></a></span>
+					</c:when>
+				</c:choose>
+			</div>
+		</c:if>
 		</c:if>
 		<c:if test="${empty orderevallist}">
 		<div id="body_emptyblock">
@@ -57,8 +92,8 @@
 		</div>
 		</c:if>
 	</div>
-	
+	</form>
 </div>
-<script src="/null/Content/mypage/js/orderevallist.js?ver=3"></script>
+<script src="/null/Content/mypage/js/orderevallist.js?ver=5"></script>
 </body>
 </html>

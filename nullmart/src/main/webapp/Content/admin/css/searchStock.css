@@ -220,6 +220,7 @@ input[type=submti]{
 	font-size: 18px;
 	font-weight: bold;
 }
+/*paging을 위한  css*/
 #group_a{
 	display: flex;
 	height: 30px;
@@ -229,7 +230,6 @@ input[type=submti]{
 	font-size: 20px;
 	font-weight: bold;
 }
-#group_a>span{
-	padding-top: 4px;
+#group_a>span{s
 	align-self: center;
 }

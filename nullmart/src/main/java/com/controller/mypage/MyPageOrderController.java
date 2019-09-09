@@ -1,12 +1,16 @@
 package com.controller.mypage;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dto.EvalDTO;
@@ -21,12 +26,19 @@ import com.dto.MemberDTO;
 import com.dto.OrderDTO;
 import com.dto.OrderEvalListDTO;
 import com.model.service.MyPageService;
+import com.util.CreatePaging;
 import com.util.SearchOrderCalDate;
 
 @Controller
 public class MyPageOrderController {
+	
+	private static Logger logger = LoggerFactory.getLogger(MyPageService.class);
+	
 	@Autowired
 	private MyPageService service;
+
+//	@Autowired
+//	private ServletContext servletContext;
 	
 	/*
 	 * 주문한 상품에 대한 검색
@@ -35,48 +47,99 @@ public class MyPageOrderController {
 	 * selectDays: 검색한 날짜 반환 
 	 * */
 	@RequestMapping(value = "/mypage/orderInfo", method = RequestMethod.GET)
-	public ModelAndView goOrderInfo(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "day" ,required = false, defaultValue = "15일") String day) {
+	public ModelAndView goOrderInfo(HttpServletRequest request, HttpServletResponse response, 
+			@RequestParam(value = "searchDate" ,required = false, defaultValue = "15일") String searchDate,
+			@RequestParam(value = "cur",required = false, defaultValue = "1") int cur,
+			@RequestParam(value = "startCur",required = false, defaultValue = "1") int startCur,
+			@RequestParam(value = "endCur",required = false, defaultValue = "0") int endCur,
+			@RequestParam(value = "groupindecator", required = false, defaultValue = "0") String groupindecator) {
+		//이전 이후 그룹 선택용 
+		//String groupindecator = request.getParameter("groupindecator");
+		/*
+		 * int cur = Integer.parseInt(request.getParameter("cur")); int startCur =
+		 * Integer.parseInt(request.getParameter("startCur")); int endCur =
+		 * Integer.parseInt(request.getParameter("endCur"));
+		 */
+		
 		System.out.println("goOrderInfo");
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		String selectDays = "";
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		String userid = login.getUserid();
-		HashMap<String, String> map = new HashMap<String,String>();
-		System.out.println(day);
-		if(day==null ||day.equals("15일")) {
-			System.out.println(23123);
+		HashMap<String, String> map =null;
+		
+		System.out.println(selectDays);
+		if(searchDate==null ||searchDate.equals("15일")) {
 			map= SearchOrderCalDate.getDate("15", SearchOrderCalDate.DAYS);
 			selectDays="15일";
-		}else if(day.equals("오늘")) {
+		}else if(searchDate.equals("오늘")) {
 			map = SearchOrderCalDate.getDate("", SearchOrderCalDate.TODAY);
 			selectDays="오늘";
-		}else if((day.equals("1개월")||day.equals("3개월"))){
-				map = SearchOrderCalDate.getDate(day.substring(0,1),SearchOrderCalDate.MONTHS);
-				if(day.equals("1개월")) {
+		}else if((searchDate.equals("1개월")||searchDate.equals("3개월"))){
+				map = SearchOrderCalDate.getDate(searchDate.substring(0,1),SearchOrderCalDate.MONTHS);
+				if(searchDate.equals("1개월")) {
 					selectDays="1개월";
 				}else {
 					selectDays="3개월";
 				}
 		}else {
-			String[] values = day.split(":");
+			String[] values = searchDate.split(":");
 			map.put("start",values[0]);
 			map.put("end",values[1]);
 			selectDays="0";
 		}
-		
 		map.put("userid", userid);
-		System.out.println(map);
-		List<OrderDTO> list = service.getOrderList(map);
-		System.out.println(list);
+		//page 처리용 작업
+		int maxColumn = service.searchCount(map);
+		CreatePaging page = new CreatePaging(3, 4, maxColumn);
+		if(groupindecator.equals("0")) {
+			page.setCur(cur, startCur, endCur);
+		}else if(groupindecator.equals("1")) {
+			cur=startCur;
+			page.setCur(cur, startCur, endCur);
+		}else {
+			cur=endCur;
+			page.setCur(cur, startCur, endCur);
+		}
+		//rowbound 객체의 시작 인덱스 
+		String offset = String.valueOf(page.getCurColumn());
+		//roubound offset 
+		String limit = String.valueOf(page.getRows());
+				
+		//map 객체에 값 전달
+		map.put("offset", offset);
+		map.put("limit", limit);
 		
-		session.setAttribute("orderlist", list);
-		session.setAttribute("selectDays", selectDays);
+		
+		//System.out.println(servletContext.getRealPath("Content/img/"));
+		List<OrderDTO> list = service.getOrderList(map);
+		
+//		session.setAttribute("orderlist", list);
+//		session.setAttribute("selectDays", selectDays);
 		
 		mav.addObject("orderlist", list);
 		mav.addObject("selectDays", selectDays);
+		mav.addObject("page",page);
 		mav.setViewName("/Content/mypage/orderinfo");
 		return mav;
+	}
+	
+	/*
+	 * ajax 응답 요청
+	 * pcode 검색
+	 * pcode 반환
+	 * */
+	@RequestMapping(value = "/mypage/searchPcode",method = RequestMethod.POST)
+	@ResponseBody
+	public String searchPcode(String scode) {
+		String[] scodes = scode.split("/");
+		String pname = scodes[2];
+		String pcode= service.searchPcode(pname);
+		if(pcode==null) {
+			pcode="0";
+		}
+		return pcode;
 	}
 	
 	/*로그인 form으로 이동 */
@@ -91,11 +154,39 @@ public class MyPageOrderController {
 	 * orderevallist: 상품 구매 후기 리스트 페이지
 	 * */
 	@RequestMapping(value = "/mypage/orderEvalList")
-	public String orderEvalList(HttpSession session) {
+	public String orderEvalList(HttpSession session,
+			@RequestParam(value = "cur",required = false, defaultValue = "1") int cur,
+			@RequestParam(value = "startCur",required = false, defaultValue = "1") int startCur,
+			@RequestParam(value = "endCur",required = false, defaultValue = "0") int endCur,
+			@RequestParam(value = "groupindecator", required = false, defaultValue = "0") String groupindecator) {
 		MemberDTO member = (MemberDTO)session.getAttribute("login");
+		//페이징 처리 
 		String userid = member.getUserid();
-		List<OrderEvalListDTO> orderEvalList = service.getOrderEvalList(userid);
+		int maxColumn = service.searchCountEval(userid);
+		
+		CreatePaging page = new CreatePaging(3, 4, maxColumn);
+		if(groupindecator.equals("0")) {
+			page.setCur(cur, startCur, endCur);
+		}else if(groupindecator.equals("1")) {
+			cur=startCur;
+			page.setCur(cur, startCur, endCur);
+		}else {
+			cur=endCur;
+			page.setCur(cur, startCur, endCur);
+		}
+		//rowbound 객체의 시작 인덱스 
+		String offset = String.valueOf(page.getCurColumn());
+		//roubound offset 
+		String limit = String.valueOf(page.getRows());
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("offset", offset);
+		map.put("limit", limit);
+		map.put("userid",userid);
+		
+		List<OrderEvalListDTO> orderEvalList = service.getOrderEvalList(map);
 		session.setAttribute("orderevallist",orderEvalList);
+		session.setAttribute("page", page);
 		return "/Content/mypage/orderevallist";
 	}
 	

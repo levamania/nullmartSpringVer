@@ -72,8 +72,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by order_date desc
 	</select>
 	
-	<select id="getOrderEvalList" resultType="OrderEvalListDTO" parameterType="string">
+	<select id="searchCount" parameterType="hashmap"  resultType="int">
+		select count(*) from orders where userid=#{userid}
+		<if test="end!=null">
+		and
+			<if test="start==null">
+				to_char(order_date,'yyyy-MM-dd') = #{end}
+			</if>
+			<if test="start!=null">
+				to_char(order_date,'yyyy-MM-dd') between #{start} and #{end}
+			</if>
+		</if>
+		order by order_date desc
+	</select>
+	
+	<select id="getOrderEvalList" resultType="OrderEvalListDTO" parameterType="hashmap">
 		select order_date, scode, ono, order_name, evalno
+		from orders
+		left outer join eval
+		using(ono)
+		where userid=#{userid}
+		order by order_date
+	</select>
+	<select id="searchCountEval" parameterType="string" resultType="int">
+		select count(*)
 		from orders
 		left outer join eval
 		using(ono)
@@ -108,4 +130,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update account set passwd = #{passwd}
 		where userid = #{userid}
 	</update>
+	
+	<select id="searchPcode" resultType="string" parameterType="string">
+		select pcode from product where pname = #{pname}
+	</select>
 </mapper>

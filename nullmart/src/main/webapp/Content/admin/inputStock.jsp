@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,6 +120,6 @@
         </div>
     </div>
 </div>
-<script src="/null/Content/admin/js/inputStock.js?ver=15"></script>
+<script src="/null/Content/admin/js/inputStock.js?ver=11"></script>
 </body>
 </html>
