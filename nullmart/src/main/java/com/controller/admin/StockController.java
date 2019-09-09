@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dto.ProductDTO;
 import com.dto.StockDTO;
@@ -96,6 +97,7 @@ public class StockController {
 	 * 임시 페이지로 이동 
 	 */
 	@RequestMapping(value = "/admin/inputStock", method = RequestMethod.POST)
+	@ResponseBody
 	public String addStock(@RequestParam Map<String,String> map) {
 		String pName = map.get("pname");
 		String pCode = map.get("pcode");
@@ -106,8 +108,12 @@ public class StockController {
 		String deliverFee_YN = map.get("deliverfee_yn");
 		String sCode = pColor+"/"+pSize+"/"+pName;
 		StockDTO stock = new StockDTO(sCode, pCode, pSize, pColor, Integer.parseInt(pPrice), Integer.parseInt(pAmount), deliverFee_YN);
-		service.insertStock(stock);
-		return "redirect:/gostock";
+		int num = service.insertStock(stock);
+		if(num==0) {
+			return "0";
+		}else {
+			return "1";
+		}
 	}
 	
 	/*

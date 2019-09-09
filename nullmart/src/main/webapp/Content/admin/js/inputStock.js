@@ -48,7 +48,7 @@ function imageSet(product){
 	var image_mid = $("#image_mid");
 	var image_bot = $("#image_bot");
 	
-	var src ="/null/Content/img/shoes/"+response_stylemid+"/"+response_stylebot+"/"+response_pimage+".jpg";
+	var src ="/null/Content/img/shoes/"+response_stylemid+"/"+response_stylebot+"/"+response_pimage;
 	var init_explain = $("#init_explain");
 	var pImage = $("#pImage");
 	pImage.attr("src",src);
@@ -89,8 +89,12 @@ $(document).ready(function() {
 	var pcode = $("#pcode");
 	var pamount = $("#pamount");
 	var pprice = $("#pprice");
+	var pcolor=$("#pcolor")
+	var psize=$("#psize");
+	var deliverfee_yn=$(".deliverfee_yn");
+	
 	var checkpcode = $("#checkpcode");
-	var submitBtn = $("input[type=submit]");
+	var submitBtn = $("#submitbtn");
 	submitBtn.prop("disabled",true);
 	
 	var ppriceReg  = /^\d{1,12}$/;//숫자 1~12
@@ -215,16 +219,48 @@ $(document).ready(function() {
 			
 		});
 	});
-	
-	//submit event
-	
-	$("form").on("submit",function(){
+//	var pname = $("#pname");
+//	var pcode = $("#pcode");
+//	var pamount = $("#pamount");
+//	var pprice = $("#pprice");
+//	var pcolor = $("pcolor");
+//	var psize = $("#psize");
+//	var pcolor;
+//	var psize;
+//	var deliverfee_yn;
+	submitBtn.on("click",function(){
+		
 		if(checkReg(pamount, pcodeReg, "개수 입력 형식을 확인하세요")){
 			return false;
 		}
 		if(checkReg(pprice, ppriceReg, "가격 입력 형식을 확인하세요")){
 			return false;
 		}
+		$.ajax({
+			url:"/null/admin/inputStock",
+			type:"post",
+			dataType:"text",
+			data:{pname:pname.val(),pcode:pcode.val(),pamount:pamount.val(),
+				pprice:pprice.val(),pcolor:pcolor.val(),psize:psize.val(),
+				deliverfee_yn:deliverfee_yn.val()},
+			success:function(data,stauts,xhr){
+				if(data==0){
+					alert("저장 실패!!");
+				}else{
+					alert("저장 성공!!");
+					$("form").submit();
+				}
+			},
+			error:function(xhr,status,error){
+				console.log(status);
+				console.log(error);
+			}
+		});
+	});
+	//submit event
+	
+	$("form").on("submit",function(){
+		
 		
 	});
 	
@@ -282,9 +318,11 @@ $(document).ready(function(){
 // 가격 - 통화 처리 
 $(document).ready(function(){
 	var pprice = $("#pprice");
-	pprice.on("keyup",function(){
+	var tempPrice = $("#tempPrice");
+	tempPrice.on("keyup",function(){
 		  var temp = $(this).val().replace(/[^0-9]/g, '');
-		  pprice.val(temp.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+		  $(this).val(temp.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+		  pprice.val($(this).val().replace(",",""));
 	});
 	
 });
