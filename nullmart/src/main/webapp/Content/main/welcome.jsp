@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
+<script type="text/javascript"
+	src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 var address = "/null/productListing/work?source=input&refresh=true&searchedWord=공용:남성:여성";
 $().ready( function(){
@@ -23,9 +24,6 @@ $().ready( function(){
 	
 }); 
 </script>
-
 </head>
-<body>
-필요 이미지 다운로드 중...
-</body>
+
 </html>

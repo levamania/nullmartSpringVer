@@ -46,6 +46,7 @@
 				success:function(data,status,xhr){
 					ranking_list = data.split(":");
 					$("#search>#searched>span").text(1+" "+ranking_list[0]);
+					$("#input>input").attr("placeholder","\""+ranking_list[Math.floor(Math.random()*ranking_list.length)]+"\"를 입력해 보세요");
 					ranking_trigger();
 				},
 				error:function(error){
@@ -58,6 +59,7 @@
 			 	ranking_animation = setInterval(() => {
 														$("#search>#searched>span").text((ranking+1)+" "+ranking_list[ranking]);
 														ranking++;
+											
 														if(ranking==10||ranking==ranking_list.length)ranking = 0;
 								   				}, setting);
 			}
@@ -99,7 +101,7 @@
 											 })
 						      				 .on("mouseleave",function(event){
 						      					 	event.stopPropagation();
-						      					 	$(this).children("div").toggleClass("active")
+						      					 	$(this).children("div").toggleClass("active");
 						      				 });
 											 
 	});

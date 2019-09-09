@@ -51,12 +51,18 @@
 			<c:forEach var="COLOR" items="${PCOLOR}">
 				<c:choose>
 					<c:when test="${COLOR=='WHITE'}">
-					<div class="button"  style="color:black">${COLOR}</div>
+					<div class="button"  style="color:black" id="b_${COLOR}">${COLOR}</div>
 					</c:when>
 					<c:otherwise>
-					<div class="button"  style="color:${COLOR};">${COLOR}</div>
+					<div class="button"  style="color:${COLOR};" id="b_${COLOR}">${COLOR}</div>
 					</c:otherwise>
 				</c:choose>
+				<style>
+					#b_${COLOR}.pushed{
+						border: 3px dashed ${(COLOR=='WHITE')?BLACK:COLOR};
+						background: none;
+					}
+				</style>
 			</c:forEach>
 		</div>
 	</div>

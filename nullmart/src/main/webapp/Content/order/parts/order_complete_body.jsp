@@ -48,7 +48,7 @@ scroller();
 	</div>
 	
 	<script>
-		$("#mypag").on("click",()=>location.href="/null/maypage/orderInfo");
+		$("#mypag").on("click",()=>location.href="/null/mypage/orderInfo");
 		$("#mainpage").on("click",()=>location.href="/null/main");
 	</script>
 
