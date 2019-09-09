@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지</title>
-<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/inputStock.css?ver=6">
+<link rel="stylesheet" type="text/css" href="/null/Content/admin/css/inputStock.css?ver=8">
 </head>
 <script src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
 <body>
 <div><jsp:include page="top.jsp"/></div>
-<form action="/null/admin/inputStock" method="post" name="sus">
+<form action="#" method="post" name="sus">
 <div id="body">
 	<div id="body_left"><jsp:include page="left.jsp"/></div>
 	<div id="body_content">
@@ -74,21 +75,22 @@
 				<td ><div class="content_title">상품가격</div></td>
 				<td>
 					<div class="content_input">
-						<input type="text" id="pprice" name="pprice">
+						<input type="text" id="tempPrice" >
+						<input type="hidden" id="pprice" name="pprice">
 					</div>
 				</td>
 				<td><div class="content_title">배송비: </div></td>
 				<td colspan="3" align="center" >
 					<div class="content_input" style="justify-content: justify-content: space-between;">
-						<input type="radio" name="deliverfee_yn" value="Y" checked="checked">배송비 포함 
-						<input type="radio" name="deliverfee_yn" value="N" style="margin-left: 20px;"> 배송비 미포함
+						<input type="radio" class="deliverfee_yn" name="deliverfee_yn" value="Y" checked="checked">배송비 포함 
+						<input type="radio" class="deliverfee_yn" name="deliverfee_yn" value="N" style="margin-left: 20px;"> 배송비 미포함
 					</div>
 				</td>
 				
 			</tr>
 			<tr height="100px;">
 				<td colspan="6" align="center">
-					<div><input type="submit" value="저장" id="submitbtn"></div>
+					<div><input type="button" value="저장" id="submitbtn"></div>
 				</td>
 				
 			</tr>
@@ -120,6 +122,6 @@
         </div>
     </div>
 </div>
-<script src="/null/Content/admin/js/inputStock.js?ver=11"></script>
+<script src="/null/Content/admin/js/inputStock.js?ver=15"></script>
 </body>
 </html>

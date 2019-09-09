@@ -76,7 +76,7 @@ input[type=text],input[type=select],input[type=radio]{
 	width: 40pt;
 }
 
-input[type=submit]{
+#submitbtn{
 	width: 60pt;
 	height: 30pt;
 	font-size: 20px;
