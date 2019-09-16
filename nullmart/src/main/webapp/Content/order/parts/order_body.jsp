@@ -8,7 +8,7 @@
 <div class="body cart">
 	<div class="container" id="cart_logo">
 		<div class="content">
-			<div>장바구니</div>
+			<div>주문/결제</div>
 		</div>
 		<div class="content">
 			<div class="phase">

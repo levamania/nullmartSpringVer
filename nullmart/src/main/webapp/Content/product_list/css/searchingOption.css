@@ -79,6 +79,10 @@
 		color: red;
 		background-color: #ffe6e6;		
 	}
+	#pcolor>.value>div.pushed{
+		
+	}
+	
 /* 테마 설정 */
 #styletop>.head {  }
 #styletop>.value {  }

@@ -4,7 +4,7 @@
 
 /* top */
 html{
-
+	font-family: Maplestroy;
 }
 body {
 	width:1000px;
@@ -79,6 +79,8 @@ body {
 
 #search>#input>input {
 	position:relative;
+	
+	padding: 0 5% 0;
 	width: 100%;
 	line-height: 25px; /*높이값 초기화  */
 	border: 5px solid #e80000;
@@ -94,6 +96,7 @@ body {
 	position: relative;
 	left:-40px;
 	cursor: pointer;
+	width:7%;
 }
 
 /* 인기검색어: 인기 검색어 */
@@ -263,6 +266,10 @@ body {
 	}
 	.category >.view_all_menu>div#five{
 		border-left:none;
+	}
+	.category >.view_all_menu>div#five>img{
+		width: 100%;
+		height: auto;
 	}
 	
 /* 아이템 셋팅 */

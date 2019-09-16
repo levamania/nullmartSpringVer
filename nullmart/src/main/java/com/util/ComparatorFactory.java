@@ -1,5 +1,6 @@
 package com.util;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
@@ -67,12 +68,14 @@ public class ComparatorFactory {
 				result = tem1.compareTo(tem2);
 			}else if(alpha instanceof Integer || alpha instanceof Float || alpha instanceof Double) {
 				result = Integer.compare((Integer)alpha,(Integer)beta);
+			}else if(alpha instanceof BigDecimal) {
+				BigDecimal tem1= (BigDecimal)alpha; BigDecimal tem2 = (BigDecimal)beta;				
+				result = tem1.compareTo(tem2);
 			}else {
 				result = alpha.toString().compareTo(beta.toString());
 			}
 			
-			return result * reversal; 
-				
+			return result * reversal; 		
 		};
 		
 		return comparator;

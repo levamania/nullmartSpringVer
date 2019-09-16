@@ -44,8 +44,8 @@
 	</view-resolvers>
 	
 	<view-controller path="/login/UI" view-name="/Content/account/loginForm"/>
-	
-	
+	<view-controller path="/loading" view-name="/Content/main/welcome"/>
+		
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<context:component-scan base-package="com" /> 
 	

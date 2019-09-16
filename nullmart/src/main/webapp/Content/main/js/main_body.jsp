@@ -147,7 +147,6 @@ $().ready(()=>{
 									if(advertise_animation!=null)clearAnimation(advertise_animation); //타임 인터벌 제거
 								 })
 								 .on("mouseout",function(){
-									 console.log(advertise_animation);
 									 if(advertise_animation==null)advertise_trigger();//타임 인터벌 재셋팅
 								 });
 								  

@@ -344,13 +344,15 @@
 			
 			position: relative;
 			
-			height:100%;
-			
-			border: 1px solid gray;
+			height:100%;			
 		}
 		
 		#cart_total>.content:nth-child(1)>div:nth-child(1){width:30%}
-		#cart_total>.content:nth-child(1)>div:nth-child(2){width:30%}
+		#cart_total>.content:nth-child(1)>div:nth-child(2){
+			width:30%; 
+			border-right: 1px solid gray;
+			border-left: 1px solid gray;			
+		}
 		#cart_total>.content:nth-child(1)>div:nth-child(3){width:40%}
 		
 		#cart_total>.content:nth-child(1)>div>div{	
