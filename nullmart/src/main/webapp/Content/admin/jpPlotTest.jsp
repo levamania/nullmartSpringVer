@@ -1,22 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link class="include" href="/Content/api/jpPlot/jquery.jqplot.min.css"  rel="stylesheet" type="text/css"/>
-<script src="/null/Content/api/jpPlot/jquery.jqplot.min.js" type="text/javascript"></script>
-<script src="/Content/api/jpPlot/plugins/jquery.jqplot.highlighter.js"type="text/javascript"></script>
-<script src="/Content/api/jpPlot/plugins/jquery.jqplot.cursor.js"type="text/javascript"></script>
-<script src="/Content/api/jpPlot/plugins/jquery.jqplot.dateAxisRenderer.js"type="text/javascript"></script>
-<script src="/Content/api/jpPlot/plugins/jquery.jqplot.canvasAxisLabelRenderer.js"type="text/javascript"></script>
-<script src="/Content/api/jpPlot/plugins/jquery.jqplot.enhanceLegendRenderer.js"type="text/javascript"></script>
-<script src="/null/Content/api/jpPlot/plugins/jquery.jqplot.canvasAxisTickRenderer.js"type="text/javascript"></script>
-<script src="/Content/api/jpPlot/plugins/jquery.jqplot.min.js"type="text/javascript"></script>
-<script src="/Content/api/jpPlot/plugins/jquery.jqplot.min.js"type="text/javascript"></script>
+      <script src="/null/Content/account/jquery-3.4.1.js"></script>
+<!-- <link class="include" href="/null/Content/api/jqPlot/jquery.jqplot.min.css"  rel="stylesheet" type="text/css"/>
+<script src="/null/Content/api/jqPlot/jquery.jqplot.min.js" type="text/javascript"></script>
+<script src="/null/Content/api/jqPlot/plugins/jqplot.highlighter.js" type="text/javascript"></script>
+<script src="/null/Content/api/jqPlot/plugins/jqplot.cursor.js"type="text/javascript"></script>
+<script src="/null/Content/api/jqPlot/plugins/jqplot.dateAxisRenderer.js"type="text/javascript"></script>
+<script src="/null/Content/api/jqPlot/plugins/jqplot.canvasAxisLabelRenderer.js"type="text/javascript"></script>
+<script src="/null/Content/api/jqPlot/plugins/jqplot.enhancedLegendRenderer.js"type="text/javascript"></script>
+<script src="/null/Content/api/jqPlot/plugins/jqplot.canvasAxisTickRenderer.js"type="text/javascript"></script>
+ -->
+ <!-- JQ-PLOT의 CSS를 설정 -->
+  <link class="include" href='<c:url value="/null/Content/api/jqPlot/jquery.jqplot.min.css" />' rel="stylesheet" type="text/css" />
+  <!-- JQ-PLOT의 기본 설정 -->
+  <script src='<c:url value="/null/Content/api/jqPlot/jquery.min.js" />' type="text/javascript"></script>
+  <!-- Highlighter(마우스 접근시 데이터정보 표시) 설정 -->
+  <script src='<c:url value="/jqPlot/plugins/jqplot.highlighter.js"/>' type="text/javascript"></script>
+  <!-- 좌표에 관한 정보나 Zoom 기능 사용시 설정 -->
+  <script src='<c:url value="/jqPlot/plugins/jqplot.cursor.js"/>' type="text/javascript"></script>
+  <!-- 축의 데이터를 날짜형태로 입력하기 위해서 설정 -->
+  <script src='<c:url value="/jqPlot/plugins/jqplot.dateAxisRenderer.js"/>' type="text/javascript"></script>
+  <!-- 축의 데이터의 Label Option을 설정 -->
+  <script src='<c:url value="/jqPlot/plugins/jqplot.canvasAxisLabelRenderer.js"/>' type="text/javascript"></script>
+  <!-- Legend(Line에대한 간단한 범례)의 Option을 설정 -->
+  <script src='<c:url value="/jqPlot/plugins/jqplot.enhanceLegendRenderer.js"/>' type="text/javascript"></script>
+  <!-- 축의 데이터를 순서에 상관없이 자동정렬을 설정 -->
+  <script src='<c:url value="/jqPlot/plugins/jqplot.categoryAxisRenderer.js"/>' type="text/javascript"></script>
+  <!-- 축의 데이터 표현설정과 그래프위의 점의 Option을 설정 -->
+  <script src='<c:url value="/jqPlot/plugins/jqplot.canvasAxisTickRenderer.js"/>' type="text/javascript"></script> 
 
 
 
 
-
-
-  <script src="/null/Content/account/jquery-3.4.1.js"></script>
   <input type="button" id="btn" value="그리기" class="btn btn-default btn-sm">
 <div id="graph"></div>
 

@@ -34,7 +34,7 @@
 	<!-- HTTP GET requests connector -->
 	<beans:bean id="urlHanlderMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"/>
 	<resources mapping="/Content/**" location="/Content/" />
-	
+<resources mapping="/jqPlot/**" location="/api/jqPlot/plugins" />	
 	<!-- view connector -->
 	<view-resolvers>
 		<bean-name>
