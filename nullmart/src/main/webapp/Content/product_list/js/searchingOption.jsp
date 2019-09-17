@@ -151,7 +151,7 @@ function push_atom(ele){
 			container.append(min.prev());
 		}
 		
-		
+		 
 	}
 	
 	//삭제 기능 추가

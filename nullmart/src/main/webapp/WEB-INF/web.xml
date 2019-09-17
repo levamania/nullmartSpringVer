@@ -5,7 +5,7 @@
 
 	<welcome-file-list>
 		<welcome-file>loading.do</welcome-file>
-		<welcome-file>Content/main/welcome.html</welcome-file>
+		<welcome-file>Content/main/welcome.jsp</welcome-file>
 	</welcome-file-list>
 
 	<!-- The definition of the Root Spring Container shared by all Servlets 

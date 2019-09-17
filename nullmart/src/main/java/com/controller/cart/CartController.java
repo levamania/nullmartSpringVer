@@ -116,12 +116,15 @@ public class CartController {
 	
 	//STACK PRODUCT
 	@RequestMapping(value = "/stackProduct")
-	public void stackProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void stackProduct(HttpServletRequest request, HttpServletResponse response, 
+													   HttpSession session
+			) throws ServletException, IOException {
 		//셋팅
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		//세션 처리
-		String userid = LoginIndicator.check(request, response);
+		MemberDTO member = (MemberDTO)session.getAttribute("login");
+		String userid = member.getUserid();
 		//수용
 			//string to json
 		String temp = request.getParameter("list");

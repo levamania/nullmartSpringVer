@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -6,18 +7,16 @@
 <script type="text/javascript"
 	src="/null/Content/api/jquery/jquery-3.4.1.js"></script>
 <script type="text/javascript">
-var address = "/null/productListing/work?source=input&refresh=true&searchedWord=공용:남성:여성";
+var address = "/null/productListing/work?source=input&refresh=true&searchedWord=ê공용©:여성:남성";
 $().ready( function(){
-	console.log("ajax");
 	$.ajax({
-		url: address,
-		method: "get",
-		type:"text",
-		success: function(data, status, xhr){
-			console.log(status);
+		url : address,
+		method : "get",
+		type : "text",
+		success : function(data, status, xhr){
 			setTimeout(() => {location.href = "/null/main"}, 5000);
 		},
-		error: function(error){
+		error : function(error){
 			console.log(error);
 		}
 	})
@@ -25,5 +24,7 @@ $().ready( function(){
 }); 
 </script>
 </head>
-
+<body>
+	이미지 다운로드 중...
+</body>
 </html>

@@ -204,11 +204,10 @@ public class ProductListingController {
 
 				// 페이징 처리
 				pList = raw_list.stream().sorted(ComparatorFactory.generate(order_criteria, direction)) // 정렬
-						.skip((cur_page - 1) * paging_quantity).limit(paging_quantity).collect(Collectors.toList()); // 페이징->리스트
+						     .skip((cur_page - 1) * paging_quantity).limit(paging_quantity).collect(Collectors.toList()); // 페이징->리스트
 				// 페이지 갯수 저장
 				model.addAttribute("page_size",
-						(raw_list.size() % paging_quantity > 0) ? Math.floor((raw_list.size() / paging_quantity) + 1)
-								: raw_list.size() / paging_quantity);
+						(raw_list.size() % paging_quantity > 0) ? Math.floor((raw_list.size() / paging_quantity) + 1): raw_list.size() / paging_quantity);
 				model.addAttribute("items_size", raw_list.size());
 
 				Iterator<HashMap<String, Object>> ite = raw_list.iterator();
