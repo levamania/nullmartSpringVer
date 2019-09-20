@@ -6,5 +6,5 @@
 <jsp:include page="/Content/main/parts/advertise.jsp" flush="true" />
 <!-- 상품 코너1  -->
 <jsp:include page="/Content/main/parts/featured.jsp" flush="true" />
-<!-- 유저 안내 인포  -->
-<jsp:include page="/Content/main/parts/info_desk.jsp" flush="true" />
+<!--유저 안내 인포  --> 
+<%-- <jsp:include page="/Content/main/parts/info_desk.jsp" flush="true" /> --%>

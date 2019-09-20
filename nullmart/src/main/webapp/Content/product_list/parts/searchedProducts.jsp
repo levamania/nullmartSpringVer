@@ -23,7 +23,7 @@
 			</select>
 		</div>
 		<hr style="border: 1px black solid; margin: 0;">
-		<div id="other_info"></div>
+		<div id="other_info"></div> 
 		<hr style="border: 1px gray solid; margin: 0;">
 		<div id="searched_list" data-page="1">
 			<c:choose>
@@ -32,7 +32,8 @@
 					<c:forEach var="item" items="${pList}" varStatus="stat">
 						<div class="product">
 							<input type="hidden" name="pCode" value=" ${item.PCODE }">
-							<img src="/null/Content/img/shoes/${item.STYLEMID}/${item.STYLEBOT}/${item.PIMAGE}">
+							<img class="lich" src="/null/Content/img/common/loaded.gif"
+							  data-src = "/null/Content/img/shoes/${item.STYLEMID}/${item.STYLEBOT}/${item.PIMAGE}">
 							<br>
 							<div class="item name">${item.PNAME}</div>
 							<br>

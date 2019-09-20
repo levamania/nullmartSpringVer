@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.dto.ProductDTO;
 
+@Component
 public class QueryUtil {
 	
 	private Logger logger = LoggerFactory.getLogger(QueryUtil.class);
@@ -175,3 +177,4 @@ public class QueryUtil {
 		return map;
 	}
 }
+	

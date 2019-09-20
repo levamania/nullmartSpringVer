@@ -8,8 +8,15 @@
 		<a>개인정보처리 방침</a>
 		<a>이용약관</a>
 	</div>
-	<div id="corp_info">
-		<div><img src="/null/Content/img/main/logo_bot.png"></div>
+	<div id="corp_info">	
+		<div>
+			<img src="/null/Content/img/main/logo_bot.png">
+			<div id="art_box" style="display: none">
+				<audio id="player" controls ></audio>
+				<div id="audio_list"></div>
+				<div id="trig" onclick="go()">홍콩가기</div>
+			</div>
+		</div>
 		<div>
 			<span style="font-weight:bold">(주)널마트 코리아</span> <span>대표이사: 나사로</span><br>
 			주소: 암스테르담 아담 거리 100, B동 21층 (이브 41-2, 애플)<br>

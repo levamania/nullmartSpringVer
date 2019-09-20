@@ -1,21 +1,13 @@
 package com.util;
 
-import java.io.BufferedReader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -93,7 +85,7 @@ public class WordInspector {
 					}
 				}
 			}
-		}
+		}	
 
 		return MapParamInputer.set("searching", copy, "ranking", forRank);
 	}// end method
@@ -127,6 +119,7 @@ public class WordInspector {
 //				return replacment;
 //			};		
 		// function을 인자로 받는 메소드가 버젼이 달라 없으므로 대체한다.
+		
 		StringBuffer buffer = new StringBuffer();
 		while (matcher.find()) {
 			String atom = new String(draft.substring(matcher.start(), matcher.end()));

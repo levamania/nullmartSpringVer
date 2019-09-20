@@ -14,13 +14,51 @@
 		}
 	}
 	
-	request.setAttribute("file_list", file_list);
-	
+	request.setAttribute("file_list", file_list);	
 %>
 <script type="text/javascript">
 
+function toWon(price) {
+	if (typeof price == "number") {
+		price = price.toString();
+	}
+
+	var arr = new Array();
+	for (var i = 0; i < price.length; i++) {
+		arr.push(price.charAt(i));
+	}
+	for (var i = 1; price.length - i * 3 > 0; i++) {
+		arr.splice(price.length - i * 3, 1, "," + arr[price.length - i * 3]);
+	}
+	var string = "";
+	for (var i of arr) {
+		string += i;
+	}
+	return string + " 원";
+}
+
+//숫자변환 함수
+function toNum(price) {
+	var regEx = /\d{1,100}/g;
+	var x = price.match(regEx);
+	var string = "";
+	for (var i of x) {
+		string += i;
+	}
+	return Number.parseInt(string);
+}
+
+
 $().ready(()=>{
+	
+
 	//홍보물 이미지 설정
+	var width;
+	$(".main>#ad_img section>div").each(function(){
+		width = $(this).css("width");
+		$(this).css("height", toNum(width)*108/198 );
+	});
+	
 	//타임 인터벌 저장용
 	var advertise_animation;
 	//이미지 리스트
@@ -29,13 +67,25 @@ $().ready(()=>{
 	var list_length = list.length-1;
 	//이미지 현재 위치 및 갯수
 	var img_position = 1;
+	/* 토큰 설정 */
+	$("#progress_token").append(function(){
+		var html = "";
+		var act = "active";
+		for(var i = 0; i<list_length;i++ ){
+			if(!i==0)act="";
+			html += "<div class='token "+act+"' data-order='"+(i)+"'></div>";
+		}
+		return html;
+	});
 	
 	//기타..
 	var prev_stack; //바로 전 이미지 정보저장
-	var imgs = $(".main>#ad_img ul"); //이미지 컨테이너
-	var imgs_temp = imgs.children("li"); //이미지들
+	var imgs = $(".main>#ad_img section"); //이미지 컨테이너
+	var imgs_temp = imgs.children("div"); //이미지들
 	var cover_img = $(".main>#ad_img>img");//덮어쓸 이미지
+	cover_img.attr("height", toNum(width)*108/198)
 	var animation_status = "end";//애니메이션 상태 저장용
+	var tokens = $("#progress_token>.token");
 	
 	//초기화면 설정
 	imgs_temp.first().children().attr({"src":"/null/Content/img/advertise/"+list[list.length-1]});
@@ -52,15 +102,15 @@ $().ready(()=>{
 	}
 	
 	//슬라이딩 함수
-	function sliding (direction){
+	function sliding (direction, speed=500){
 		var animation;
 		if(direction=='right'){
 			img_position++;
-			animation="-=1000px"
+			animation="-="+width;
 			if(img_position>list_length)img_position=1;
 		}else if(direction=='left'){
 			img_position--;
-			animation="+=1000px"
+			animation="+="+width;
 			if(img_position<1)img_position=list_length;
 		}
 		//포지션 설정
@@ -79,7 +129,8 @@ $().ready(()=>{
 		var old = new Date(), later; //현재시각 
 		var interval = 0; 
 		
-		imgs.animate({left:animation},1000, implicit);
+		imgs.animate({left:animation},speed, implicit);
+		tokens.eq(second-1).toggleClass("active").siblings().removeClass("active");
 		
 		//이미지 덮어쓰기
 		function implicit(){
@@ -149,6 +200,32 @@ $().ready(()=>{
 								 .on("mouseout",function(){
 									 if(advertise_animation==null)advertise_trigger();//타임 인터벌 재셋팅
 								 });
-								  
+		
+		//토큰 버튼 설정
+		tokens.on("click",function(){
+			var curr = $("#progress_token>.token.active").attr("data-order");
+			var order = $(this).attr("data-order");
+			var direction = "right";
+			if(order-curr<0)direction="left";
+			for(var i = 0; i<Math.abs(order-curr); i++){
+				sliding(direction, 100);
+			}
+		});
+
+		
+		
+		
+		/*  featured 설정  */
+		$(".featured>section>div:nth-child(n+2)").on("click",function(){
+			var pcode  = $(this).attr("data-pcode");
+			location.href="http://localhost:8090/null/product/UI?pCode="+pcode;
+		})
+		.on("mouseover",function(){
+			$(this).find("span:first-child").css({"color":"red"});
+		}).find("span:nth-child(4)")
+		.each(function(){
+			$(this).text(toWon($(this).text()));
+		});
+		
 	});
 </script>

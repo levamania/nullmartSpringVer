@@ -138,5 +138,42 @@
 		$("#horizentalBar a").each(function(){
 											var href = "/null/productListing/work?source=menu&searchedWord=" + $(this).text()+"&refresh=true";  
 											$(this).attr("href",href);
-										})
+										});
+
+		//이미지 다운 요청	
+		$("#frog").on("click", function(){
+				$.ajax({
+					url : "/null/productListing/work?source=input&refresh=true&searchedWord=ê공용©:여성:남성",
+					method : "get",
+					type : "text",
+					success : function(data, status, xhr){
+						console.log("success");
+					},
+					error : function(error){
+						alert("DB연동 실패, CONNECTION 연결 확인 요망");
+					}
+				});
+		});
+		
+
+		
+		// 비동기적 이미지 로딩 설정
+		var count = 1;
+		$("img.lich").each(function(){
+			
+			var src = $(this).attr("data-src");
+			var draft = $(this);
+			var img = new Image();
+			img.onload=_=>draft.attr("src",src);
+			img.onerror=(error)=>{
+				if(count==1){
+					$("#frog").trigger("click");
+					count++;
+				}	
+				setTimeout( _=>img.src=src, 100);					
+			}
+			
+			img.src = src;		 		
+		})
+		
 });

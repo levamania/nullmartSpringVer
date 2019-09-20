@@ -47,7 +47,7 @@ body {
 }
 
 .static_menu:last-child::after {
-	content: "";
+	content: " ";
 }
 
 /* search menu: 로고와 검색창 */

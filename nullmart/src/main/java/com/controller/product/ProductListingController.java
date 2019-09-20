@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
@@ -32,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -55,6 +57,8 @@ public class ProductListingController {
 	private ProductService pService;
 	@Autowired
 	private RankingService rser;
+	
+	
 
 	@RequestMapping(value = "/specificFilter")
 	public String filterCondition(HttpServletRequest request, HttpServletResponse response)
@@ -217,8 +221,7 @@ public class ProductListingController {
 					while (ite.hasNext()) {
 						try {
 							HashMap<String, Object> product = ite.next();
-							if (product.get("PIMAGE_BYTES") == null)
-								throw new Exception("응 없어");
+							if (product.get("PIMAGE_BYTES") == null)throw new Exception("응 없어");
 
 							String stylemid = product.get("STYLEMID").toString();
 							String stylebot = product.get("STYLEBOT").toString();
@@ -257,6 +260,13 @@ public class ProductListingController {
 					tasks.add(run);
 				}
 				manager.invokeAll(tasks);
+				manager.shutdown();
+				if(!manager.awaitTermination(30, TimeUnit.SECONDS)) {
+					manager.shutdownNow();
+					throw new CustomException("이미지 다운로드 지연시간 초과");
+				}
+
+				
 				/* 상세 검색 관련 */
 
 				// extract column
@@ -334,4 +344,10 @@ public class ProductListingController {
 		return "/Content/product_list/productList";
 	}
 
+	@ExceptionHandler(CustomException.class)
+	public String dealCustomException(Exception e, Model model) {
+		model.addAttribute("error_message", e.getMessage());
+		return "/Content/error/custom_error";
+	}
+	
 }

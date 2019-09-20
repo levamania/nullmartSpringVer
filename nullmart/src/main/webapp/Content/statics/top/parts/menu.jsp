@@ -26,6 +26,7 @@
 		</c:otherwise>
 	</c:choose>
 	
-	<span class="static_menu" id="cart">장바구니</span> <span
-		class="static_menu" id="order">주문배송</span>
+	<div id="frog" style="display:none"></div>
+	<span class="static_menu" id="cart">장바구니</span> 
+	<span	class="static_menu" id="order">주문배송</span>
 </div>

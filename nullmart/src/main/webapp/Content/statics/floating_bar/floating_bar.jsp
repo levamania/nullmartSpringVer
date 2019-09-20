@@ -56,8 +56,8 @@
 	<c:if test="${! empty LIFO_COOKIES  }">
 		<c:forEach var="ITEM" items="${LIFO_COOKIES}">
 			<div>
-				<img
-					src="/null/Content/img/shoes/${ITEM.STYLEMID}/${ITEM.STYLEBOT}/${ITEM.PIMAGE}">
+				<img class="lich" src="/null/Content/img/common/loaded.gif"
+				data-src="/null/Content/img/shoes/${ITEM.STYLEMID}/${ITEM.STYLEBOT}/${ITEM.PIMAGE}">
 				<div class="noun">${ITEM.PNAME}</div>
 				<span style="display: none">${ITEM.PCODE}</span>
 			</div>

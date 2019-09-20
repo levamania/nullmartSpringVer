@@ -1,14 +1,16 @@
 @charset "UTF-8";
 /* 하단 고정 정보 */
 .body.bottom{
-	height:250px;
+	display:flex;
+	flex-direction:column;
+	
+	height:200px;
 }
 /* 개인정보 약관 */
 .body.bottom>#promise{
-	position:absolute;
-	height: 10%;
-	left: 10%;
-	top: 5%;
+	display:flex;
+	height: 15%;
+	align-items:center;	
 	
 	font-size: 13px;
 	font-weight:bold;
@@ -16,28 +18,46 @@
 	color: gray;
 }
 	/* 단어 간격 벌리기 */
-.body.bottom>#promise>a::after{
-	content: '    ';
-	margin:30px;
+.body.bottom>#promise>a{
+	margin: 0 5% 0;
 }
 /* 사업자정보 */
 .body.bottom>#corp_info{
-	position:relative;
-	height: 60%;
-	top:25%;;
-	left: 50px;
+	display:flex;
+	flex-direction:column;
+	height: 85%;
 	
 	font-size: 13px;
 	font-family: "Lucida Console", "fantasy" ;
 	color: #404040;
 }
+.body.bottom>#corp_info>div:first-child{
+	display: flex;
+	align-items: center;
+	
+	
+}
 	/* 로고 이미지 */
 	.body.bottom>#corp_info img{
 		width: 200px;
 		height: auto;
-		margin-bottom: 10px;
+		margin:5px 20px 5px 5px;
 	}
-
+	/*아트 박스 설정*/
+	.body.bottom>#corp_info #art_box{
+		position:relative;
+		
+		height: 80%;
+		width: 30%;
+	}
+	.body.bottom>#corp_info #art_box>audio{
+		height: 100%;
+		width: 100%;
+	}
+	.body.bottom>#corp_info #art_box>#audio_list{
+		position: absolute;
+	}
+	
 	/* 사업자정보 버튼 */
 	.body.bottom>#corp_info #specific_info{
 		border: 1px gray solid;
