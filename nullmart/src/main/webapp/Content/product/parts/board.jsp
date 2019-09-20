@@ -59,7 +59,7 @@
 				</div>
 			</c:forEach>
 			<c:if test="${empty eval_list}">
-				<div class="record" style="justify-content: center">상품의 후기가 없습니다.</div>
+				<div class="record" style="justify-content: center; border-top-width: 0;">상품의 후기가 없습니다.</div>
 			</c:if>
 		</div>
 		

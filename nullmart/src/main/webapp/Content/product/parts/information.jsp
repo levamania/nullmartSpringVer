@@ -8,7 +8,8 @@
 <form action="" method="post" onsubmit="return false">
 <div class="body" id="product_info">
 	<div id="product_img">
-		<img src="/null/Content/img/shoes/${product.STYLEMID}/${product.STYLEBOT}/${product.PIMAGE}">
+		<img class="lich" src="/null/Content/img/common/loaded.gif"
+		data-src="/null/Content/img/shoes/${product.STYLEMID}/${product.STYLEBOT}/${product.PIMAGE}">
 	</div>
 	<div id="option">
 		<div class="title">
