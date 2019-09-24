@@ -112,4 +112,7 @@
 			</if>
 		</trim>
 	</select>
+	<select id="adminMainChart" resultType="com.dto.StyleBotAndPamountDTO">
+  select  stylebot,sum(pamount) hap from stock s join product p on s.pcode=p.pcode group by stylebot
+	</select >
 </mapper>

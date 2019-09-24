@@ -19,23 +19,30 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.dto.ProductDTO;
 import com.dto.StockDTO;
 import com.dto.StockJoinProductDTO;
+import com.dto.Stock_ProductDTO;
+import com.dto.StyleBotAndPamountDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.service.AdminService;
 import com.util.CreatePaging;
 import com.util.SearchOrderCalDate;
 
 @Controller
 public class StockController {
+
 	@Autowired
 	AdminService service;
 
@@ -323,5 +330,24 @@ public class StockController {
 		System.out.println(jsonObject);
 		response.getWriter().print(jsonObject);
 	}
+
+	
+	@RequestMapping(value = "/admin/adminMainChart",method = RequestMethod.GET)
+	@ResponseBody
+	public String adminMainChart() {
+		List<StyleBotAndPamountDTO> list = service.adminMainChart();
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonList = "";
+		try {
+			jsonList = mapper.writeValueAsString(list);
+		} catch (IOException e) {
+			// TODO: handle exception
+		}
+
+		return jsonList;
+	}
+	
+
 }
+
 

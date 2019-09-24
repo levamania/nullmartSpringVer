@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dto.ProductDTO;
 import com.dto.StockDTO;
 import com.dto.StockJoinProductDTO;
+import com.dto.Stock_ProductDTO;
+import com.dto.StyleBotAndPamountDTO;
 import com.model.dao.AdminDAO;
 import com.util.CreatePaging;
 
@@ -89,5 +91,17 @@ public class AdminService {
 	public HashMap<String, String> searchProductToMap(String pcode) {
 		return adminDAO.searchProductToMap(pcode);
 	}
+
+	public List<StyleBotAndPamountDTO> adminMainChart() {
+		return adminDAO.adminMainChart();
+	}
+
+
+//	public Object adminMainChart(Stock_ProductDTO dto) {
+//		
+//		return adminDAO.adminMainChart(dto);
+//	}
+
+
 
 }

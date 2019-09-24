@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.dto.ProductDTO;
 import com.dto.StockDTO;
 import com.dto.StockJoinProductDTO;
+import com.dto.Stock_ProductDTO;
+import com.dto.StyleBotAndPamountDTO;
 import com.util.CreatePaging;
 import com.util.SessionCheckInterface;
 
@@ -84,9 +86,14 @@ public class AdminDAO {
 		return template.selectOne("com.dto.Admin.searchProductToMap", pcode);
 	}
 
-	
+	public List<StyleBotAndPamountDTO> adminMainChart() {
+		return template.selectList("com.dto.Admin.adminMainChart");
+	}
 
-	
+
+//	public Object adminMainChart(Stock_ProductDTO dto) {
+//		return template.selectList("com.dto.Admin.adminMainChart", dto);
+//	}
 
 	
 }
