@@ -279,7 +279,13 @@
     <artifactId>jqplot</artifactId>
     <version>1.0.9.d96a669-1</version>
 </dependency>
-		
+<!-- Google Api -->
+		<dependency> 
+		<groupId> com.google.cloud </groupId> 
+		<artifactId> google-cloud-translate </artifactId> 
+		<version> 1.75.0 </version> 
+		</dependency>
+		<!-- Google Api -->
 
 
 	</dependencies>
