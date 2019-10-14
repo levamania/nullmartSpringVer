@@ -79,10 +79,10 @@ $(document).ready(function(){
 
 				if ( data=="0") {
 
-				alert("올바른 정보를 입력해주세요.");
+				alert("正しい情報を入力してください。");
 					return false;
 				} else if(data=="1"){
-					alert("메일이전송되었습니다.")
+					alert("メールが転送されました。")
 				
 					$(location).attr("href","/null/Content/account/loginForm.jsp");
 					 
@@ -151,10 +151,10 @@ $("#btn2").on("click", function(event) {
 
 				if ( data=="0") {
 
-				alert("올바른 정보를 입력해주세요.");
+				alert("正しい情報を入力してください。");
 					return false;
 				} else if(data=="1"){
-					alert("문자가 전송이 되었습니다.")
+					alert("SMSで転送されました。")
 				
 					$(location).attr("href","/null/sendSms?phone1="+p1.val()+"&phone2="+p2.val()+"&phone3="+p3.val());
 					 
@@ -200,7 +200,7 @@ $("#btn2").on("click", function(event) {
 		<br>
 		
 			<br> 
-			<br> <a style="font-size: 80%;color: gray">비밀번호를 잊어버리셨나요?
+			<br> <a style="font-size: 80%;color: gray">비밀번호를 잊어버리셨습니까?
                         <br>
                         그럼 찾아보세요!</a>
 		<br> 
@@ -223,13 +223,13 @@ $("#btn2").on("click", function(event) {
 		<hr>
 		<table>
 <tr>
-<td width="100" height="35"><a  style="font-size:60%">아이디</a></td>
-<td  width="200" height="35" ><input type="text" style="width:200px;height:50%;font-size:60%" id="userid" placeholder="영문,숫자사용 4~20자" name="userid"></td>
+<td width="100" height="35"><a  style="font-size:60%">ID</a></td>
+<td  width="200" height="35" ><input type="text" style="width:200px;height:50%;font-size:60%" id="userid" placeholder="英文、数字の使用4〜12字" name="userid"></td>
 
 </tr>
  
  <tr>
-<td width="100" height="35"><a  style="font-size:60%">이름</a></td>
+<td width="100" height="35"><a  style="font-size:60%">お名前</a></td>
 <td width="200" height="35" colspan="0"><input type="text" style="width:200px;height:50%" id="username" name="username"></td>
 </tr>
 
@@ -255,7 +255,7 @@ $("#btn2").on("click", function(event) {
 </select>
 </td>
 <td><button type="submit"
-			style="width: 25pt; height: 10pt; font-size: 60%; background-color: red; border-color: red; color: white; border-style: hidden;"
+			style="width: 60pt; height: 10pt; font-size: 60%; background-color: red; border-color: red; color: white; border-style: hidden;"
 			id="btn1">요청</button> </td>
 </tr>
 
@@ -272,25 +272,25 @@ $("#btn2").on("click", function(event) {
 		<hr>
 		<table>
 <tr>
-<td width="100" height="35"><a  style="font-size:60%">아이디</a></td>
-<td  width="200" height="35" ><input type="text" style="width:200px;height:50%;font-size:60%" id="userid2" placeholder="영문,숫자사용 4~20자" name="userid"></td>
+<td width="100" height="35"><a  style="font-size:60%">ID</a></td>
+<td  width="200" height="35" ><input type="text" style="width:200px;height:50%;font-size:60%" id="userid2" placeholder="英文、数字の使用4〜12字" name="userid"></td>
 
 </tr>
  
  <tr>
-<td width="100" height="35"><a  style="font-size:60%">이름</a></td>
+<td width="100" height="35"><a  style="font-size:60%">お名前</a></td>
 <td width="200" height="35" colspan="0"><input type="text" style="width:200px;height:50%" id="username2" name="username"></td>
 </tr>
 
  <tr>
-<td width="100" height="35"><a  style="font-size:60%">핸드폰번호</a></td>
+<td width="100" height="35"><a  style="font-size:60%">전화번호</a></td>
 <td width="200" height="35" colspan="0"><input type="text" style="width:55px;height:50%;font-size:60%" id="phone1" name="phone1"><a>-</a>
 <input type="text" style="width:55px;height:50%;font-size:60%" id="phone2" name="phone2" ><a>-</a>
 <input type="text" style="width:55px;height:50%;font-size:60%" id="phone3" name="phone3" ></td>
 
 
 <td><button type="submit"
-			style="width: 25pt; height: 10pt; font-size: 60%; background-color: red; border-color: red; color: white; border-style: hidden;"
+			style="width: 60pt; height: 10pt; font-size: 60%; background-color: red; border-color: red; color: white; border-style: hidden;"
 			id="btn2">요청</button> </td>
 </tr>
 

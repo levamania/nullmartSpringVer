@@ -45,23 +45,23 @@
 					var pw = $("#passwd");
 
 					if (id.val() == "") {
-						alert("아이디를 입력하시오")
+						alert("ID를 입력해주세요.")
 						id.focus();
 						return ;
 					}
 					
 					if (pw.val() == "") {
-						alert("패스워드를 입력하시오")
+						alert("패스워드를 입력해주세요.")
 						pw.focus();
 						return ;
 					}
 
-					if (!check(re, id, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력하시오")) {
+					if (!check(re, id, "IDは4〜12字の英大文字・小文字と数字だけで入力してください。")) {
 						return ;
 
 					}
 
-					if (!check(re1, pw, "패스워드는 4~12자로 입력하시오")) {
+					if (!check(re1, pw, "パスワードは8~20字で入力してください。")) {
 						return ;
 					}
 
@@ -83,16 +83,16 @@
 					success : function(data, status, xhr) {
 						
 						if (data == "0") {
-							alert("아이디가 없습니다.");
+							alert("IDがありません。");
 							id.val("");
 							id.focus();
 							return false;
 						} else if(data =="1"){
-							alert("패스워드가 틀립니다.");
+							alert("パスワードが間違っています。");
 							pw.val("");
 							pw.focus();
 						} else{
-							alert("로그인이 되었습니다.")
+							alert("ログインされました。")
 							$("#memberLogin").submit();
 
 							
@@ -127,12 +127,12 @@
 							return false;
 						}
 
-						if (!check(mre, mid, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력하시오")) {
+						if (!check(mre, mid, "IDは4〜12字の英大文字・小文字と数字だけで入力してください。")) {
 							return false;
 
 						}
 
-						if (!check(mre1, mpw, "패스워드는 4~12자로 입력하시오")) {
+						if (!check(mre1, mpw, "パスワードは8~20字で入力してください。")) {
 							return false;
 						}
 					$.ajax({
@@ -146,16 +146,16 @@
 						success : function(data, status, xhr) {
 						
 							if (data == "0") {
-								alert("아이디가 없습니다.");
+								alert("IDがありません。");
 								mid.val("");
 								mid.focus();
 								return false;
 							} else if(data =="1"){
-								alert("패스워드가 틀립니다.");
+								alert("パスワードが間違っています。");
 								mpw.val("");
 								mpw.focus();
 							} else{
-								alert("로그인이 되었습니다.")
+								alert("ログインされました。")
 								$("#managerLogin").submit();
 
 							}
@@ -199,10 +199,10 @@
 				<tr>
 					<td width="100" height="35"><a
 						style="font-size: 60%; color: red">* </a><a
-						style="font-size: 60%">아이디</a></td>
+						style="font-size: 60%">ID</a></td>
 					<td width="200" height="35"><input type="text"
-						style="width: 150px; height: 80%; font-size: 70%" id="userid"
-						placeholder="영문,숫자사용 4~12자" name="userid" required></td>
+						style="width: 180px; height: 80%; font-size: 70%" id="userid"
+						placeholder="英文、数字の使用4〜12字" name="userid" required></td>
 					<br>
 				</tr>
 				<tr>
@@ -210,14 +210,14 @@
 						style="font-size: 60%; color: red">* </a><a
 						style="font-size: 60%">패스워드</a></td>
 					<td width="200" height="35"><input type="password"
-						style="width: 150px; height: 80%; font-size: 70%" id="passwd"
-						placeholder="영문,숫자,특수문자사용 4~12자" name="passwd" required></td>
+						style="width: 180px; height: 80%; font-size: 70%" id="passwd"
+						placeholder="英文、数字、特殊文字使用8〜20字" name="passwd" required></td>
 					<br>
 				</tr>
 			</table>
 			<br> <input type="button" value="  로그인 " id="memberBtn" class="test_btn1"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
-			<input type="reset" value="다시입력" class="test_btn1"
+			<input type="reset" value="キャンセル" class="test_btn1"
 				style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">
 			<br> <br>
 			<hr>
@@ -241,8 +241,8 @@
 						<a style="font-size: 60%">아이디</a></td>
 					<td width="200" height="35">
 						<c:if test="${empty managerLogin}">
-							<input type="text" style="width: 150px; height: 80%; font-size: 70%" id="masteruserid"
-							placeholder="영문,숫자사용 4~12자" name="masteruserid" >
+							<input type="text" style="width: 180px; height: 80%; font-size: 70%" id="masteruserid"
+							placeholder="英文、数字の使用4〜12字"" name="masteruserid" >
 						</c:if>
 						<c:if test="${!empty managerLogin}">
 							<span>${managerLogin.masteruserid}</span>
@@ -262,8 +262,8 @@
 						</td>
 					<td width="200" height="35">
 						<c:if test="${empty managerLogin}">
-							<input type="password" style="width: 150px; height: 80%; font-size: 70%" id="masterpasswd"
-							placeholder="영문,숫자,특수문자사용 4~12자" name="masterpasswd">
+							<input type="password" style="width: 180px; height: 80%; font-size: 70%" id="masterpasswd"
+							placeholder="英文、数字、特殊文字使用8〜20字" name="masterpasswd">
 						</c:if>
 						<c:if test="${!empty managerLogin}">
 							<span>관리자님 환영합니다.</span>
@@ -276,7 +276,7 @@
 				<c:if test="${empty managerLogin}">
 					<input type="button" value="  로그인 " class="test_btn1" id="managerBtn"
 					style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;" />
-					<input type="reset" value="다시입력" class="test_btn1"
+					<input type="reset" value="キャンセル" class="test_btn1"
 					style="width: 53pt; height: 15pt; font-size: 76%; background-color: red; border-color: red; color: white; border-style: hidden;">
 				</c:if>
 				<c:if test="${!empty managerLogin}">
@@ -292,11 +292,11 @@
 	<c:if test="${empty managerLogin}">
 	<div align="center">
 		<button type="button"
-			style="width: 68pt; height: 15pt; font-size: 76%; background-color: white; border-color: white; color: black; border-style: hidden;"
-			onclick="location.href='searchId.jsp' ">아이디찾기</button>
+			style="width: 120pt; height: 15pt; font-size: 76%; background-color: white; border-color: white; color: black; border-style: hidden;"
+			onclick="location.href='searchId.jsp' ">IDを忘れた時</button>
 		<button type="button"
-			style="width: 68pt; height: 15pt; font-size: 76%; background-color: white; border-color: white; color: black; border-style: hidden;"
-			onclick="location.href='/null/Content/account/searchPw.jsp' ">비밀번호찾기</button>
+			style="width: 120pt; height: 15pt; font-size: 76%; background-color: white; border-color: white; color: black; border-style: hidden;"
+			onclick="location.href='/null/Content/account/searchPw.jsp' ">パスワードを忘れた時</button>
 	</div>
 	</c:if>
 	

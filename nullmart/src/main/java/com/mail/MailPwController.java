@@ -54,8 +54,8 @@ public class MailPwController {
 		System.out.println("n값은?????"+n);
 		String setfrom = "nullmart@naver.com";
 		String tomail = mail1 + "@" + mail2;
-		String title = "nullmart 비밀번호 찾기 메일입니다.";
-		String content = username + "님의 임시 비밀번호는:&nbsp;["+tempPassword+"]&nbsp;입니다.";
+		String title = "nullmart パスワード検索メールです。　";
+		String content = username + "様の臨時パスワードは ["+tempPassword+"]です.";
 
 		try {
 			MimeMessage message = mailSender.createMimeMessage();

@@ -10,14 +10,14 @@ $('document').ready(function(){
 	console.log(1);
 	 $('#test_btn1').on("click",function(){
 	if(!$('#info1').prop("checked")){
-		alert("구매이용약관에 동의해주세요.");
+		alert("購買利用約款に同意してください。");
 		
 	}else if(!$('#info2').prop("checked")){
-		alert("전자금융거래 이용약관에 동의해주세요.");
+		alert("電子金融取引利用約款に同意してください。");
 	}else if(!$('#radio1yes').prop("checked")){
-		alert("NULL-MART 개인정보 수집 및 이용에 대한 안내에 동의해주세요.");
+		alert("NULL-MART の個人情報収集および利用についてご案内ください。");
 	}else if(!$('#radio2yes').prop("checked")){
-		alert("개인정보 수집 및 이용에 대한 안내에 동의해주세요.");
+		alert("個人情報の収集および利用についての案内に同意してください。");
 	}else if($('#checkall').prop("checked")){
 		
 		$(location).attr("href","signup_memberForm.jsp");	
@@ -128,9 +128,9 @@ $('document').ready(function(){
 <b   style="color:black">NULL-MART 온라인 회원가입</b><br>
 
 <b> </b><br>
-<img src="../img/account/signup(check)2.PNG" width="50" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > 약관동의 &nbsp;&nbsp;&nbsp;</a> 
-<img src="../img/account/Signup(complite).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > 회원정보입력&nbsp;&nbsp;&nbsp;</a> 
-<img src="../img/account/signup(userinfo).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > 가입완료&nbsp;&nbsp;&nbsp;</a> 
+<img src="../img/account/signup(check)2.PNG" width="50" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" >  &nbsp;&nbsp;&nbsp;</a> 
+<img src="../img/account/Signup(complite).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" >&nbsp;&nbsp;&nbsp;</a> 
+<img src="../img/account/signup(userinfo).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > &nbsp;&nbsp;&nbsp;</a> 
 <hr style="color:red">
 </div> 
 <input type="checkbox" name="info1" id="info1" class="group"><a style="font-size: 50%;color:gray">NULL-MART 구매이용약관</a><a style="font-size: 50%;color:lightgray">(필수)</a>

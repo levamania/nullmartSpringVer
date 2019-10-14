@@ -42,8 +42,8 @@ public class MailIdController {
 		
 		String setfrom = "nullmart@naver.com";
 		String tomail = mail1 + "@" + mail2;
-		String title = "nullmart 아이디찾기 메일입니다.";
-		String content = username + "님의 아이디는" + "\t" + userid + "\t" + "입니다.";
+		String title = "nullmart ID検索メールです。";
+		String content = username + "様の IDは" + "\t" + userid + "\t" + "です.";
 
 		try {
 			MimeMessage message = mailSender.createMimeMessage();

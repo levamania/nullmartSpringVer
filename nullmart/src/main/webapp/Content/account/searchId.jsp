@@ -64,12 +64,12 @@ $(document).ready(function(){
 				console.log(data);
 				if(un.val()||em1.val()||em2.val()!=null){
 					$(location).attr("href","/null/searchIdMail?email1="+em1.val()+"&email2="+em2.val()+"&username="+un.val());
-					alert("메일이전송되었습니다.")
+					alert("メールが転送されました。")
 
 				}
 			},
 			error : function(xhr, status, e) {
-				alert("올바른 정보를 입력해주세요.");
+				alert("正しい情報を入力してください。");
 				return false;
 			}
 	
@@ -101,12 +101,12 @@ $(document).ready(function(){
 <form action="/null/loginForm.jsp" method="get" id="search" >
 		<div align="center" style="display: block; width: 1500px;">
 			<br> 
-			<br> <b style="font-size: 200%">아이디 찾기</b>
+			<br> <b style="font-size: 200%">ID探し</b>
 		
 		<br>
 		
 			<br> 
-			<br> <a style="font-size: 80%;color: gray">아이디를 잊어버리셨나요?ㅋ
+			<br> <a style="font-size: 80%;color: gray">아이디를 잊어버리셨습니까?
                         <br>
                         그럼 찾아보세요!</a>
 		<br> 
@@ -118,7 +118,7 @@ $(document).ready(function(){
 
  
  <tr>
-<td width="100" height="35"><a  style="font-size:60%">이름</a></td>
+<td width="100" height="35"><a  style="font-size:60%">お名前</a></td>
 <td width="200" height="35" colspan="0"><input type="text" style="width:200px;height:50%" id="username" name="username"></td>
 </tr>
 
@@ -144,7 +144,7 @@ $(document).ready(function(){
 </select>
 </td>
 <td><button type="submit"
-			style="width: 25pt; height: 10pt; font-size: 60%; background-color: red; border-color: red; color: white; border-style: hidden;"
+			style="width: 60pt; height: 10pt; font-size: 60%; background-color: red; border-color: red; color: white; border-style: hidden;"
 			>요청</button> </td>
 </tr>
 

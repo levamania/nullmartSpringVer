@@ -31,11 +31,11 @@
 				success : function (data,status,xhr){
 
 					if(data=="1"&&id.val("nullmart")){
-						alert("아이디 중복입니다.");
+						alert("ID重複です。");
 						$("#userid").focus();
 						return false;
 					}else{
-                        alert("사용가능입니다.");
+                        alert("使用可能です。");
 						$("#userid").focus();
 						return false;
 						
@@ -61,14 +61,14 @@
 				success : function (data,status,xhr){
 					
 					if(data=="1"){
-						alert("이메일 중복입니다.");
+						alert("メール重複です。");
 						
 
 						$("#email1").focus();
 						return false;
 					}else {
 						
-                        alert("사용가능입니다.");
+                        alert("使用可能です。");
 						$("#email1").focus();
 						return false;
 						
@@ -116,19 +116,19 @@
 				var pw = $("#passwd");
 				var pw2 =$("#passwd2");
 			
-				if (!check(re, id, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+				if (!check(re, id, "IDは4~12字の英大文字・小文字と数字で入力してください。")) {
 					return false;
 
 				}
 				
 	
 
-				if (!check(re5, pw, "패스워드는 숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력")) {
+				if (!check(re5, pw, "パスワードは、数字、特殊文字1回以上、英文は2つ以上使用して8桁以上入力してください。")) {
 					return false;
 				}
 
 				if (pw.val() != pw2.val()) {
-					alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+					alert("パスワードが違います。 もう一度確認をお願いします。");
 					
 					pw2.focus();
 					return false;
@@ -137,18 +137,18 @@
 				var username = $("#username");
 
 				if(username.val()==""){
-					alert("이름을 입력하지 않았습니다.")
+					alert("名前を入力していません。")
 					username.focus();
 					return false;
 				}
-				if (!check(re3, username, "한글 또는 영문만 입력 가능합니다.")) {
+				if (!check(re3, username, "ハングルまたは英文のみ入力できます。")) {
 					return false;
 				}
 				
 				
 				 var radio = $(".radio");
 				if($(':radio[name="sex"]:checked').length<1){
-					alert('성별을 선택해주세요');
+					alert('性別を選んでください。');
 					radio.focus();
 					return false;
 				}
@@ -158,16 +158,16 @@
 				var email2 = $("#email2");
 				
 				if (email1.val()=="") {
-					alert("이메일을 입력해 주세요");
+					alert("メールを入力してください。");
 					email1.focus();
 					return false;
 				}
 				if (email2.val()=="") {
-					alert("이메일을 입력해 주세요");
+					alert("メールを入力してください。");
 					email2.focus();
 					return false;
 				}
-				 if (!check(re4,email2, "email 형식에 맞게 작성해주세요")) {
+				 if (!check(re4,email2, "メールの形式に合わせて作成してください。")) {
 					return false;
 
 				 }
@@ -176,22 +176,22 @@
 				var ad2 = $("#sample4_jibunAddress");
 				var ad3 = $("#addr3");
 				if (po.val() == "") {
-					alert("우편번호 상실했습니다");
+					alert("郵便番号を喪失しました。");
 					po.focus();
 					return false;
 				}
 				if (ad1.val() == "") {
-					alert("정확한 주소를 입력해주세요");
+					alert("正確な住所を入力してください。");
 					ad1.focus();
 					return false;
 				}
 				if (ad2.val() == "") {
-					alert("정확한 주소를 입력해주세요");
+					alert("正確な住所を入力してください。");
 					ad2.focus();
 					return false;
 				}
 				if (ad3.val() == "") {
-					alert("상세주소를 입력하세요. ");
+					alert("詳細住所を入力してください。");
 					ad3.focus();
 					return false;
 				}
@@ -200,43 +200,43 @@
 				var phone2 = $("#phone2");
 				var phone3 = $("#phone3");
 				if (phone1.val()=="") {
-					alert("전화번호 입력하시오");
+					alert("電話番号を入力してください。");
 					phone1.focus();
 					return false;
 				}
 				if (phone2.val()=="") {
-					alert("전화번호 입력하시오");
+					alert("電話番号を入力してください。");
 					phone2.focus();
 					return false;
 				}
 				if (phone3.val()=="") {
-					alert("전화번호 입력하시오");
+					alert("電話番号を入力してください。");
 					phone3.focus();
 					return false;
 				}
 				if(phone2.val().length<3){
-					alert("4자리로 입력하시오")
+					alert("4座で入力してください。")
 					phone2.focus();
 					return false;
 				}
 				if(phone3.val().length<3){
-					alert("4자리로 입력하시오")
+					alert("4座で入力してください。")
 					phone3.focus();
 					return false;
 				}
 				
-				if (!check(re2, phone2, "숫자만 입력가능합니다.")) {
+				if (!check(re2, phone2, "数字だけ入力できます。")) {
 					return false;
 
 				}
-				if (!check(re2, phone3, "숫자만 입력가능합니다.")) {
+				if (!check(re2, phone3, "数字だけ入力できます。")) {
 					return false;
 
 				} 
 				 var answer = $('#answer');
 				 var reload = $('#reLoad');
 				  if(answer.val()==""){
-						alert("보안문자를 입력하지 않았습니다.")
+						alert("セキュリティ文字を入力していません。")
 						answer.focus();
 						return false;
 					}
@@ -301,7 +301,7 @@
 		  var answer = $('#answer');
 		  
 	      if ( !answer.val() ) {
-	           alert('이미지에 보이는 숫자를 입력해 주세요.');
+	           alert('イメージに見える数字を入力してください。');
 	      } else {
 	    	  $.ajax({
 	               url: '/null/captchaConfirm',
@@ -312,11 +312,11 @@
 	               success: function(data) {
 	            	   console.log(data);
 	            	   if(data=="0"){
-	            		   alert("입력값이 일치합니다.");    
+	            		   alert("入力値が一致します。");    
 	            		  return false
 	            	   }else if(data=="1"){            		   
 	            		  
-	                       alert("입력값이 일치하지않습니다. 다시 입력하셔야합니다.");
+	                       alert("入力値が一致しません。 もう一度入力しなければなりません。");
 	                        reload.click();
 	                       answer.val(''); 
 	                       return false
@@ -713,10 +713,10 @@ function check(re3, what, message) {
 <b> </b><br>
 <b   style="color:black">NULL-MART 온라인 회원가입</b><br>
 
-<b> </b><br>
-<img src="../img/account/signup(check).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > 약관동의 &nbsp;&nbsp;&nbsp;</a> 
-<img src="../img/account/Signup(complite)2.PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > 회원정보입력&nbsp;&nbsp;&nbsp;</a> 
-<img src="../img/account/signup(userinfo).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > 가입완료&nbsp;&nbsp;&nbsp;</a> 
+<b> </b><br><br>
+<img src="../img/account/signup(check).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:30%;" >  &nbsp;&nbsp;&nbsp;</a> 
+<img src="../img/account/Signup(complite)2.PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:30%;" > &nbsp;&nbsp;&nbsp;</a> 
+<img src="../img/account/signup(userinfo).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:30%;" > &nbsp;&nbsp;&nbsp;</a> 
 </div> <br>
 <br>
 <b style="font-size:80%">회원기본정보</b><div align="right"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">필수 입력정보</a></div>
@@ -724,27 +724,26 @@ function check(re3, what, message) {
 <br>
 <table border="0" id="btn_group" style="text-align: left;align-self: left" >
 <tr>
-<td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">아이디</a></td>
-<td  width="200" height="35" ><input type="text" style="width:200px;height:50%;font-size:60%" id="userid" placeholder="영문,숫자사용 4~20자" name="userid"></td>
+<td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">ID</a></td>
+<td  width="200" height="35" ><input type="text" style="width:200px;height:50%;font-size:60%" id="userid" placeholder="英文、数字の使用4〜12字" name="userid"></td>
 <td  width="100" height="35"><button class="test_btn1" style="width:33pt;height:11pt;font-size:56%" id="idcheck" type="button">중복확인</button></td>
 </tr>
  <tr>
 <td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">비밀번호</a></td>
-<td width="200" height="35" colspan="0"><input type="password" style="width:200px;height:50%;font-size:60%" id="passwd"  placeholder="영문,숫자사용,특수문자 사용
- 4~20자" name="passwd"></td>
+<td width="200" height="35" colspan="0"><input type="password" style="width:200px;height:50%;font-size:60%" id="passwd"  placeholder="英文、数字、特殊文字使用、8〜20字" name="passwd"></td>
 </tr>
 <tr>
 <td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">비밀번호확인</a></td>
 <td width="200" height="35" ><input type="password" style="width:200px;height:50%" id="passwd2"></td>
 </tr>
  <tr>
-<td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">이름</a></td>
+<td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">お名前</a></td>
 <td width="200" height="35" colspan="0"><input type="text" style="width:200px;height:50%" id="username" name="username"></td>
 </tr>
 <tr>
 <td width="100" height="35"><a  style="font-size:60%;color:white" >*  </a><a  style="font-size:60%">성별</a></td>
-<td width="100" height="35"><a style="font-size:60%">남</a><input type="radio" id="check1"style="height: 15px" name="sex" value="XY" class="radio">
-<a style="font-size:60%">여</a><input type="radio" id="check2" style="height: 15px;"name="sex" value="XX" class="radio"></td>
+<td width="100" height="35"><a style="font-size:60%">男</a><input type="radio" id="check1"style="height: 15px" name="sex" value="XY" class="radio">
+<a style="font-size:60%">女</a><input type="radio" id="check2" style="height: 15px;"name="sex" value="XX" class="radio"></td>
 </tr>
  <tr>
 <td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">이메일</a></td>
@@ -760,16 +759,16 @@ function check(re3, what, message) {
 <tr>
 <td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">우편번호</a></td>
 <td width="200"height:50%" >
-<input style="width:70px;height:50%;font-size: 70%" type="text" name="post" id="sample4_postcode" placeholder="우편번호">
-<button class="test_btn1" style="width:45pt;height:11pt;font-size:56%" id="post"  onclick="sample4_execDaumPostcode()" type="button">우편번호찾기</button></td></tr>
+<input style="width:70px;height:50%;font-size: 70%" type="text" name="post" id="sample4_postcode" placeholder="郵便番号">
+<button class="test_btn1" style="width:55pt;height:11pt;font-size:56%" id="post"  onclick="sample4_execDaumPostcode()" type="button">우편번호찾기</button></td></tr>
 <tr>
 <td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">주소</a></td>
-<td width="200" height="35"><input style="width: 80%;height:50%;font-size:60%" type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소"></td>
-<td width="200" height="35"><input style="width: 80%;height:50%;font-size:60%" type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" >
+<td width="200" height="35"><input style="width: 80%;height:50%;font-size:60%" type="text" name="addr1" id="sample4_roadAddress" placeholder="道路名住所"></td>
+<td width="200" height="35"><input style="width: 80%;height:50%;font-size:60%" type="text" name="addr2" id="sample4_jibunAddress" placeholder="地番住所" >
 <span id="guide" style="color:#999"></span></td></tr>
 <tr>
 <td width="100" height="35"></td>
-<td width="200" height="35"><input style="width: 80%;height:50%;font-size:60%" type="text" name="addr3" id="sample4_jibunAddress" placeholder="상세주소"></td>
+<td width="200" height="35"><input style="width: 80%;height:50%;font-size:60%" type="text" name="addr3" id="sample4_jibunAddress" placeholder="詳細住所"></td>
 </tr>
 <tr>
 <td width="100" height="35"><a  style="font-size:60%;color:red" >* </a><a  style="font-size:60%">전화번호</a></td>
@@ -789,7 +788,7 @@ function check(re3, what, message) {
 <div id="catpcha">Wait...</div>
   <div id="audiocatpch" style="display: none;"></div>
 
-  <input id="reLoad" type="button" value="새로고침" class="test_btn1" style="width:45pt;height:11pt;font-size:56%;background-color: white;border: 1px solid lightgray;"/>
+  <input id="reLoad" type="button" value="새로고침" class="test_btn1" style="width:45pt;height:11pt;font-size:40%;background-color: white;border: 1px solid lightgray;"/>
   <input id="soundOn" type="button" value="음성듣기" class="test_btn1" style="width:45pt;height:11pt;font-size:56%;background-color: white;border: 1px solid lightgray;"/> 
   <br />
   <input type="text" id="answer" name="answer" value="" class="test_btn1" style="width:45pt;height:11pt;font-size:56%;background-color: white;border: 1px solid lightgray;"/>
@@ -801,8 +800,8 @@ function check(re3, what, message) {
 <hr>
 <br>
 <div id="btn_group" class="align-center vi">
-<button style="width: 120px;height: 40px;font-size: 20px;border: 1px solid red;background-color: red;color: white;font-weight:600" type="submit" id="btn">회원가입</button>
-<button style="width: 120px;height: 40px;font-size: 20px;border: 1px solid red;background-color: white;color: red;font-weight:600" onclick="location.href='/null/MainServlet'">취소</button>
+<button style="width: 110px;height: 38px;font-size: 18px;border: 1px solid red;background-color: red;color: white;font-weight:40" type="submit" id="btn">회원가입</button>
+<button style="width: 110px;height: 38px;font-size: 18px;border: 1px solid red;background-color: white;color: red;font-weight:40" onclick="location.href='/null/MainServlet'">취소</button>
 <br>
 <br>
 </div>

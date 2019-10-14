@@ -56,7 +56,7 @@ map.put("tempPassword", tempPassword);
        set.put("to", p1+p2+p3); // 수신번호
 
        set.put("from", "01097961116"); // 발신번호, jsp에서 전송한 발신번호를 받아 map에 저장한다.
-       set.put("text", "nullmart입니다. 귀하의 임시비밀번호는 ["+tempPassword+"]입니다."); // 문자내용, jsp에서 전송한 문자내용을 받아 map에 저장한다.
+       set.put("text", "nullmartです。お客様の臨時パスワードは ["+tempPassword+"]です。"); // 문자내용, jsp에서 전송한 문자내용을 받아 map에 저장한다.
        set.put("type", "sms"); // 문자 타입
 
         System.out.println(set);

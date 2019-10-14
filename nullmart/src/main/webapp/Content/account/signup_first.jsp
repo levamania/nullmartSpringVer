@@ -82,7 +82,7 @@
 </tr>
 <tr>
 <td bgColor=#ffffff width=400 height=210 id="table" >혜택</td>
-<td bgColor=#ffffff width=1000 height=210 background="../img/account/signup(background).png" style="color:red;" id="table" ><b>있을것 같은데 없음</b></td>
+<td bgColor=#ffffff width=1000 height=210 background="../img/account/signup(background).png" style="color:red;" id="table" ><b>ありません</b></td>
 
 </tr>
 </table>

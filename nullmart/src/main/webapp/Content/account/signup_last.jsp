@@ -89,12 +89,12 @@
 <b> </b><br>
 
 <b> </b><br>
-<img src="/null/Content/img/account/signup(check).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > 약관동의 &nbsp;&nbsp;&nbsp;</a> 
-<img src="/null/Content/img/account/Signup(complite).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > 회원정보입력&nbsp;&nbsp;&nbsp;</a> 
-<img src="/null/Content/img/account/signup(userinfo)2.PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > 가입완료&nbsp;&nbsp;&nbsp;</a> 
+<img src="/null/Content/img/account/signup(check).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" >  &nbsp;&nbsp;&nbsp;</a> 
+<img src="/null/Content/img/account/Signup(complite).PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > &nbsp;&nbsp;&nbsp;</a> 
+<img src="/null/Content/img/account/signup(userinfo)2.PNG" width="45" height="auto;" id="ver4">&nbsp;&nbsp;&nbsp;<a style="font-size:50%;" > &nbsp;&nbsp;&nbsp;</a> 
 <br>
 <br>
-<b>즐거운 쇼핑 되시기 바랍니다.</b><br>
+<br>
 <br>
 <hr style="color:red">
 </div> 
