@@ -273,6 +273,7 @@
 			<version>1.2.5</version>
 		</dependency>
 		
+		
 		<!-- jqPlot -->
 	<dependency>
     <groupId>org.webjars</groupId>
